@@ -5,7 +5,7 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
-import superttdd.producto.Producto;
+import superttdd.comprobante.Producto;
 
 public class ProductoTest {
 

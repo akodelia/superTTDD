@@ -8,21 +8,21 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import superttdd.comprobante.Producto;
 import superttdd.ofertas.OfertaMarca;
-import superttdd.producto.Producto;
-import superttdd.producto.producto.Marca;
+import superttdd.producto.MarcaProducto;
 
 public class OfertaMarcaTest {
 
 	OfertaMarca oferta;
 	List<Producto> productos;
-	Marca marcaOferta;
-	Marca marcaOtraOferta;
+	MarcaProducto marcaOferta;
+	MarcaProducto marcaOtraOferta;
 
 	@Before
 	public void setUp() {
-		marcaOferta = new Marca("Coca Cola");
-		marcaOtraOferta = new Marca("Pepsi");
+		marcaOferta = new MarcaProducto("Coca Cola");
+		marcaOtraOferta = new MarcaProducto("Pepsi");
 		oferta = new OfertaMarca(marcaOferta, 10.0);
 		productos = new ArrayList<Producto>();
 	}

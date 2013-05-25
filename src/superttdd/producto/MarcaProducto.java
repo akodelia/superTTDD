@@ -1,10 +1,10 @@
-package superttdd.producto.producto;
+package superttdd.producto;
 
-public class Marca {
+public class MarcaProducto {
 
 	private String nombre;
 
-	public Marca(String nombre) {
+	public MarcaProducto(String nombre) {
 		this.nombre = nombre;
 	}
 	
@@ -12,7 +12,7 @@ public class Marca {
 		return nombre;
 	}
 
-	public boolean sonIguales(Marca marca) {
+	public boolean sonIguales(MarcaProducto marca) {
 		return (this.nombre.equals(marca.getNombre())); 
 	}
 

@@ -2,17 +2,17 @@ package superttdd.ofertas;
 
 import java.util.List;
 
-import superttdd.producto.Producto;
-import superttdd.producto.producto.Marca;
+import superttdd.comprobante.Producto;
+import superttdd.producto.MarcaProducto;
 
 
 public class OfertaMarca implements Oferta {
 
 	private Double porcentajeDescuento;
-	private Marca marca;
+	private MarcaProducto marca;
 	
 	
-	public OfertaMarca(Marca marca, Double porcentajeDescuento) {
+	public OfertaMarca(MarcaProducto marca, Double porcentajeDescuento) {
 		this.marca = marca;
 		this.porcentajeDescuento = porcentajeDescuento;
 	}
@@ -21,7 +21,7 @@ public class OfertaMarca implements Oferta {
 		return porcentajeDescuento;
 	}
 
-	public Marca getMarca() {
+	public MarcaProducto getMarca() {
 		return marca;
 	}
 

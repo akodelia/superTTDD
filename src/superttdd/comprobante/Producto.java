@@ -1,16 +1,17 @@
-package superttdd.producto;
+package superttdd.comprobante;
 
-import superttdd.producto.producto.Marca;
+import superttdd.producto.MarcaProducto;
+
 
 public class Producto {
 	
 	private String nombre;
-	private Marca marca;
+	private MarcaProducto marca;
 	private Double precioBase;
 	private Double porcentajeDescuento;
 	private final Double PORCENTAJE_MAX = 100.0;
 	
-	public Producto(String nombre, Marca marca, Double precioBase) {
+	public Producto(String nombre, MarcaProducto marca, Double precioBase) {
 		this.nombre = nombre;
 		this.precioBase = precioBase;
 		this.porcentajeDescuento = 0.0;
@@ -21,7 +22,7 @@ public class Producto {
 		return porcentajeDescuento;
 	}
 	
-	public Marca getMarca() {
+	public MarcaProducto getMarca() {
 		return this.marca;
 	}
 

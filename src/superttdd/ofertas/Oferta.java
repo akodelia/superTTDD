@@ -2,7 +2,7 @@ package superttdd.ofertas;
 
 import java.util.List;
 
-import superttdd.producto.Producto;
+import superttdd.comprobante.Producto;
 
 public interface Oferta {
 
