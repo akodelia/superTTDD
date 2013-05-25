@@ -2,8 +2,8 @@ package superttdd.ofertas;
 
 import java.util.List;
 
-import superttdd.comprobante.Producto;
 import superttdd.producto.MarcaProducto;
+import superttdd.producto.Producto;
 
 
 public class OfertaMarca implements Oferta {

@@ -1,6 +1,5 @@
-package superttdd.comprobante;
+package superttdd.producto;
 
-import superttdd.producto.MarcaProducto;
 
 
 public class Producto {

@@ -8,9 +8,9 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import superttdd.comprobante.Producto;
 import superttdd.ofertas.OfertaMarca;
 import superttdd.producto.MarcaProducto;
+import superttdd.producto.Producto;
 
 public class OfertaMarcaTest {
 
