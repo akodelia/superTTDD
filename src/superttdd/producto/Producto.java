@@ -1,20 +1,28 @@
 package superttdd.producto;
 
+import superttdd.producto.producto.Marca;
+
 public class Producto {
 	
 	private String nombre;
+	private Marca marca;
 	private Double precioBase;
 	private Double porcentajeDescuento;
 	private final Double PORCENTAJE_MAX = 100.0;
 	
-	public Producto(String nombre, Double precioBase) {
+	public Producto(String nombre, Marca marca, Double precioBase) {
 		this.nombre = nombre;
 		this.precioBase = precioBase;
 		this.porcentajeDescuento = 0.0;
+		this.marca = marca;
 	}
 	
 	public Double getPorcentajeDescuento() {
 		return porcentajeDescuento;
+	}
+	
+	public Marca getMarca() {
+		return this.marca;
 	}
 
 	public void setPorcentajeDescuento(Double porcentajeDescuento) {
