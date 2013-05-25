@@ -5,6 +5,7 @@ public class Producto {
 	private String nombre;
 	private Double precioBase;
 	private Double porcentajeDescuento;
+	private final Double PORCENTAJE_MAX = 100.0;
 	
 	public Producto(String nombre, Double precioBase) {
 		this.nombre = nombre;
@@ -17,9 +18,20 @@ public class Producto {
 	}
 
 	public void setPorcentajeDescuento(Double porcentajeDescuento) {
-		this.porcentajeDescuento = porcentajeDescuento;
+		this.porcentajeDescuento =+ porcentajeDescuento ;
+		if(!superaPorcentajeMaximo(porcentajeDescuento)) {
+			this.porcentajeDescuento = PORCENTAJE_MAX;
+		}
 	}
 
+	private Boolean superaPorcentajeMaximo(Double porcentajeAInc ) {
+		Double porcentanjeAValidar = porcentajeAInc + this.porcentajeDescuento;
+		if(porcentanjeAValidar > PORCENTAJE_MAX) {
+			return true;
+		}
+		return false;
+	}
+	
 	public String getNombre() {
 		return nombre;
 	}
