@@ -42,12 +42,26 @@ public class ProductoTest {
 	}
 	
 	@Test
-	public void precioFinalConDescuentoSuperiorAlMaximo() {
+	public void precioFinalConSumaDescuentoTotalSuperiorAlMaximo() {
 		producto.setPorcentajeDescuento(80.0);
 		producto.setPorcentajeDescuento(30.0);
 		Double precioFinalEsperado = 0.0;
 		
 		assertEquals(precioFinalEsperado, producto.generarPrecioFinal());
+	}
+	
+	@Test
+	public void precioFinalConMasDeUnDescuentoMenorAlMax() {
+		Double primerDesc = 40.0;
+		Double segundoDesc = 25.5;
+		Double montoDescuento = producto.getPrecioBase() * (primerDesc + segundoDesc) / 100;  
+		Double precioFinalEsperado = producto.getPrecioBase() - montoDescuento;
+		
+		
+		producto.setPorcentajeDescuento(primerDesc);
+		producto.setPorcentajeDescuento(segundoDesc);
+		
+		assertEquals(precioFinalEsperado , producto.generarPrecioFinal());
 	}
 }
 

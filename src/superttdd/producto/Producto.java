@@ -18,15 +18,14 @@ public class Producto {
 	}
 
 	public void setPorcentajeDescuento(Double porcentajeDescuento) {
-		this.porcentajeDescuento =+ porcentajeDescuento ;
-		if(!superaPorcentajeMaximo(porcentajeDescuento)) {
+		this.porcentajeDescuento += porcentajeDescuento ;
+		if(porcentajeMaximoSuperado()) {
 			this.porcentajeDescuento = PORCENTAJE_MAX;
 		}
 	}
 
-	private Boolean superaPorcentajeMaximo(Double porcentajeAInc ) {
-		Double porcentanjeAValidar = porcentajeAInc + this.porcentajeDescuento;
-		if(porcentanjeAValidar > PORCENTAJE_MAX) {
+	private Boolean porcentajeMaximoSuperado() {
+		if(this.porcentajeDescuento >= PORCENTAJE_MAX) {
 			return true;
 		}
 		return false;
