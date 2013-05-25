@@ -43,7 +43,8 @@ public class ProductoTest {
 	
 	@Test
 	public void precioFinalConDescuentoSuperiorAlMaximo() {
-		producto.setPorcentajeDescuento(100.0);
+		producto.setPorcentajeDescuento(80.0);
+		producto.setPorcentajeDescuento(30.0);
 		Double precioFinalEsperado = 0.0;
 		
 		assertEquals(precioFinalEsperado, producto.generarPrecioFinal());
