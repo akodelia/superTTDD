@@ -1,14 +1,9 @@
-package superttdd.test.producto;
-
-import static org.junit.Assert.*;
-
+package superttdd.test.promociones;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
-
-
 
 import superttdd.caja.MedioPago;
 import superttdd.ofertas.Oferta;
@@ -39,7 +34,6 @@ public class PromoMedioPagoCompuestaANDTest {
 		marca = new MarcaProducto(NOMBRE_MARCA_TEST);
 		OfertaMarca ofertaMarca = new OfertaMarca(marca, DESCUENTO_OFERTA);
 		ofertas.add(ofertaMarca);
-
 	}
 
 	@Test
