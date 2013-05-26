@@ -5,18 +5,24 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
+import superttdd.producto.CategoriaProducto;
+import superttdd.producto.MarcaProducto;
 import superttdd.producto.Producto;
 
 public class ProductoTest {
 
 	Producto producto;
+	MarcaProducto marca;
+	CategoriaProducto categoria;
 	
 	@Before
 	public void setUp() {
 		String nombre = "ProductoTest";
 		Double precioBase = 100.0;
+		marca = new MarcaProducto("Pepsi");
+		categoria = new CategoriaProducto("Categoria");
 		
-		this.producto = new Producto(nombre , null, precioBase);	
+		this.producto = new Producto(nombre , marca, categoria, precioBase);	
 	}
 	
 	@Test

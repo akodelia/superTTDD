@@ -4,7 +4,7 @@ import java.util.List;
 
 import superttdd.producto.Producto;
 
-public class OfertaMedioPago implements Oferta {
+public class OfertaMedioPago extends Oferta {
 	
 	
 
