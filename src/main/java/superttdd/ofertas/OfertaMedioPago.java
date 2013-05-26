@@ -4,7 +4,9 @@ import java.util.List;
 
 import superttdd.producto.Producto;
 
-public class OfertaConjuntoProds implements Oferta {
+public class OfertaMedioPago extends Oferta {
+	
+	
 
 	@Override
 	public void aplicarOferta(List<Producto> productos) {

@@ -6,7 +6,7 @@ import superttdd.producto.MarcaProducto;
 import superttdd.producto.Producto;
 
 
-public class OfertaMarca implements Oferta {
+public class OfertaMarca extends Oferta {
 
 	private Double porcentajeDescuento;
 	private MarcaProducto marca;

@@ -4,14 +4,13 @@ import java.util.List;
 
 import superttdd.producto.Producto;
 
-public class OfertaMedioPago implements Oferta {
+public class OfertaProducto extends Oferta {
 	
 	
 
 	@Override
 	public void aplicarOferta(List<Producto> productos) {
 		// TODO Auto-generated method stub
-		
 	}
 
 }

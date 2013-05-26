@@ -1,11 +1,9 @@
-package superttdd.test.producto;
+package superttdd.producto;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
-
-import superttdd.producto.Producto;
 
 public class ProductoTest {
 
@@ -15,8 +13,10 @@ public class ProductoTest {
 	public void setUp() {
 		String nombre = "ProductoTest";
 		Double precioBase = 100.0;
+		CategoriaProducto categoria = new CategoriaProducto("");
+		MarcaProducto marca = new MarcaProducto("");
 		
-		this.producto = new Producto(nombre , null, precioBase);	
+		this.producto = new Producto(nombre , marca, categoria, precioBase);	
 	}
 	
 	@Test

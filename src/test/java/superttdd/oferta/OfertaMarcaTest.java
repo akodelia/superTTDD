@@ -1,6 +1,6 @@
-package superttdd.test.oferta;
+package superttdd.oferta;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import superttdd.ofertas.OfertaMarca;
+import superttdd.producto.CategoriaProducto;
 import superttdd.producto.MarcaProducto;
 import superttdd.producto.Producto;
 
@@ -18,11 +19,13 @@ public class OfertaMarcaTest {
 	List<Producto> productos;
 	MarcaProducto marcaOferta;
 	MarcaProducto marcaOtraOferta;
+	CategoriaProducto categoria;
 
 	@Before
 	public void setUp() {
 		marcaOferta = new MarcaProducto("Coca Cola");
 		marcaOtraOferta = new MarcaProducto("Pepsi");
+		categoria = new CategoriaProducto("Categoria");
 		oferta = new OfertaMarca(marcaOferta, 10.0);
 		productos = new ArrayList<Producto>();
 	}
@@ -30,9 +33,10 @@ public class OfertaMarcaTest {
 	@Test
 	public void aplicarDescuentoAProducto() {
 		Double precioBase = 150.0;
-		Double descuentoEsperado = oferta.getPorcentajeDescuento(); 
+		Producto producto = new Producto("Producto", marcaOferta, categoria, precioBase);
+		productos.add(producto);
+		Double descuentoEsperado = producto.getPorcentajeDescuento() + oferta.getPorcentajeDescuento(); 
 				
-		productos.add(new Producto("Producto", marcaOferta, precioBase));
 		oferta.aplicarOferta(productos);
 		
 		assertEquals(descuentoEsperado, oferta.getPorcentajeDescuento()); 
@@ -41,12 +45,13 @@ public class OfertaMarcaTest {
 	@Test
 	public void noAplicarDescuentoAProducto() {
 		Double precioBase = 150.0;
-		Double descuentoEsperado = oferta.getPorcentajeDescuento(); 
+		Producto producto = new Producto("Producto", marcaOtraOferta, categoria, precioBase);
+		productos.add(producto);
+		Double descuentoEsperado = producto.getPorcentajeDescuento(); 
 				
-		productos.add(new Producto("Producto", marcaOtraOferta, precioBase));
 		oferta.aplicarOferta(productos);
 		
-		assertEquals(descuentoEsperado, oferta.getPorcentajeDescuento()); 
+		assertEquals(descuentoEsperado, producto.getPorcentajeDescuento()); 
 	}
 
 }
