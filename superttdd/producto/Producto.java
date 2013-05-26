@@ -1,24 +1,18 @@
 package superttdd.producto;
 
 public class Producto {
-	
-	private String nombre;
-	private MarcaProducto marca;
-	private Double precioBase;
-	private CategoriaProducto categoria;
+	private RegistroProducto registroProducto;
+
 	private Double porcentajeDescuento;
 	private final Double PORCENTAJE_MAX = 100.0;
 	
-	public Producto(String nombre, MarcaProducto marca, CategoriaProducto categoria, Double precioBase) {
-		this.nombre = nombre;
-		this.precioBase = precioBase;
+	public Producto(RegistroProducto registroProducto) {
+		this.registroProducto=registroProducto;
 		this.porcentajeDescuento = 0.0;
-		this.marca = marca;
-		this.categoria = categoria;
 	}
 	
 	public CategoriaProducto getCategoriaProducto() {
-		return categoria;
+		return registroProducto.getCategoria();
 	}
 	
 	public Double getPorcentajeDescuento() {
@@ -26,7 +20,7 @@ public class Producto {
 	}
 	
 	public MarcaProducto getMarca() {
-		return this.marca;
+		return registroProducto.getMarca();
 	}
 
 	public void setPorcentajeDescuento(Double porcentajeDescuento) {
@@ -44,17 +38,21 @@ public class Producto {
 	}
 	
 	public String getNombre() {
-		return nombre;
+		return registroProducto.getNombre();
 	}
 
 	public Double getPrecioBase() {
-		return precioBase; 
+		return registroProducto.getPrecio(); 
 	}
 
 	public Double generarPrecioFinal() {
-		Double descuento = precioBase * porcentajeDescuento / 100;
+		Double descuento = registroProducto.getPrecio() * porcentajeDescuento / 100;
 		
-		return (this.precioBase - descuento);
+		return (registroProducto.getPrecio() - descuento);
+	}
+	
+	public RegistroProducto getRegistroProducto() {
+		return registroProducto;
 	}
 
 }
