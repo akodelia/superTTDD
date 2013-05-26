@@ -15,7 +15,4 @@ public class MarcaProducto {
 	public boolean sonIguales(MarcaProducto marca) {
 		return (this.nombre.equals(marca.getNombre())); 
 	}
-
-	
-	
 }

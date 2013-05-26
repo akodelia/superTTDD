@@ -5,8 +5,6 @@ import java.util.List;
 import superttdd.producto.Producto;
 
 public class OfertaProducto extends Oferta {
-	
-	
 
 	@Override
 	public void aplicarOferta(List<Producto> productos) {
