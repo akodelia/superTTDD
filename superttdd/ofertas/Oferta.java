@@ -8,8 +8,8 @@ public abstract class Oferta {
 
 	protected Double porcentajeDescuento;
 	
-	public Oferta(){
-		this.porcentajeDescuento=0.0;
+	public Oferta(Double porcentajeDescuento){
+		this.porcentajeDescuento=porcentajeDescuento;
 	}
 
 	public abstract void aplicarOferta(List<Producto> productos);

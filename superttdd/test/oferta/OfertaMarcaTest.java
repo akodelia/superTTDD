@@ -15,6 +15,7 @@ import superttdd.ofertas.OfertaMarca;
 import superttdd.producto.CategoriaProducto;
 import superttdd.producto.MarcaProducto;
 import superttdd.producto.Producto;
+import superttdd.producto.RegistroProducto;
 
 public class OfertaMarcaTest {
 
@@ -35,7 +36,8 @@ public class OfertaMarcaTest {
 	
 	@Test
 	public void aplicarDescuentoAProducto() {
-		Producto mockProd = spy(new Producto("Producto", marcaOferta, categoria, 9.0));
+		RegistroProducto registro=new RegistroProducto(categoria, marcaOferta, "Producto", 9.0);
+		Producto mockProd = spy(new Producto(registro));
 		productos.add(mockProd);
 
 		oferta.aplicarOferta(productos);
@@ -45,7 +47,8 @@ public class OfertaMarcaTest {
 
 	@Test
 	public void noAplicarDescuentoAProducto() {
-		Producto mockProd = spy(new Producto("Producto", marcaNoEnOferta, categoria, 9.0));
+		RegistroProducto registro=new RegistroProducto(categoria, marcaNoEnOferta, "Producto", 9.0);
+		Producto mockProd = spy(new Producto(registro));
 		productos.add(mockProd);
 		oferta.aplicarOferta(productos);
 		verify(mockProd, times(0)).setPorcentajeDescuento(anyDouble());

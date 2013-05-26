@@ -11,6 +11,7 @@ import superttdd.ofertas.OfertaMarca;
 import superttdd.producto.CategoriaProducto;
 import superttdd.producto.MarcaProducto;
 import superttdd.producto.Producto;
+import superttdd.producto.RegistroProducto;
 import superttdd.promociones.PromoMedioPagoCompuestaAND;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
@@ -39,7 +40,8 @@ public class PromoMedioPagoCompuestaANDTest {
 	@Test
 	public void PromoAplicaParaProductoQueAplicaASusOfertasYFacturaConMismoMedioPago() {
 		productos=new ArrayList<Producto>();
-		Producto producto = spy(new Producto("Producto", marca, mock(CategoriaProducto.class), PRECIO_PRODUCTO));
+		RegistroProducto registro=new RegistroProducto(mock(CategoriaProducto.class), marca, "Producto", PRECIO_PRODUCTO);
+		Producto producto = spy(new Producto(registro));
 		productos.add(producto);	
 		
 		promoCompuestaAND = new PromoMedioPagoCompuestaAND(MEDIO_PAGO_PROMO, ofertas);
@@ -52,7 +54,8 @@ public class PromoMedioPagoCompuestaANDTest {
 	@Test
 	public void PromoNOAplicaParaProductoQueAplicaASusOfertasYNOFacturaConMismoMedioPago() {
 		productos=new ArrayList<Producto>();
-		Producto producto = spy(new Producto("Producto", marca, mock(CategoriaProducto.class), PRECIO_PRODUCTO));
+		RegistroProducto registro=new RegistroProducto(mock(CategoriaProducto.class), marca, "Producto", PRECIO_PRODUCTO);
+		Producto producto = spy(new Producto(registro));
 		productos.add(producto);
 		
 		promoCompuestaAND = new PromoMedioPagoCompuestaAND(MEDIO_PAGO_PROMO, ofertas);
@@ -66,7 +69,8 @@ public class PromoMedioPagoCompuestaANDTest {
 	public void PromoNOAplicaParaProductoQueNOAplicaASusOfertasYFacturaConMismoMedioPago() {
 		marca = new MarcaProducto(NOMBRE_MARCA_DISTINTA_TEST);
 		productos=new ArrayList<Producto>();
-		Producto producto = spy(new Producto("Producto", marca, mock(CategoriaProducto.class), PRECIO_PRODUCTO));
+		RegistroProducto registro = new RegistroProducto(mock(CategoriaProducto.class), marca, "Producto", PRECIO_PRODUCTO);
+		Producto producto = spy(new Producto(registro));
 		productos.add(producto);
 		
 		promoCompuestaAND = new PromoMedioPagoCompuestaAND(MEDIO_PAGO_PROMO, ofertas);

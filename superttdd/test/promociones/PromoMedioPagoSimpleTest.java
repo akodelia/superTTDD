@@ -15,6 +15,7 @@ import superttdd.caja.MedioPago;
 import superttdd.producto.CategoriaProducto;
 import superttdd.producto.MarcaProducto;
 import superttdd.producto.Producto;
+import superttdd.producto.RegistroProducto;
 import superttdd.promociones.PromoMedioPagoSimple;
 
 
@@ -30,7 +31,8 @@ public class PromoMedioPagoSimpleTest {
 
 	@Before
 	public void setUp() throws Exception {
-		mockProd = spy(new Producto("Producto", mock(MarcaProducto.class), mock(CategoriaProducto.class), PRECIO_PRODUCTO));
+		RegistroProducto registro = new RegistroProducto(mock(CategoriaProducto.class), mock(MarcaProducto.class), "Producto", PRECIO_PRODUCTO );
+		mockProd = spy(new Producto(registro));
 		productos = new ArrayList<Producto>();
 		productos.add(mockProd);
 	}
