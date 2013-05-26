@@ -4,8 +4,13 @@ import java.util.List;
 
 import superttdd.producto.Producto;
 
-public interface Oferta {
+public abstract class Oferta {
 
-	public void aplicarOferta(List<Producto> productos);
+	protected Double porcentajeDescuento;
+
+	public abstract void aplicarOferta(List<Producto> productos);
 	
+	public Double getPorcentajeDescuento() {
+		return this.porcentajeDescuento;
+	}	
 }
