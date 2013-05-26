@@ -1,6 +1,9 @@
 package superttdd.test.oferta;
 
-import static org.junit.Assert.assertEquals;
+import static org.mockito.Matchers.anyDouble;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,26 +35,22 @@ public class OfertaCategoriaTest {
 
 	@Test
 	public void  aplicarDescuentoAProducto() {
-		Double precioBase = 150.0;
-		Producto producto = new Producto("Producto", marca, categoria, precioBase);
-		productos.add(producto);
-		Double descuentoEsperado = producto.getPorcentajeDescuento() + oferta.getPorcentajeDescuento(); 
-				
+		Producto mockProd = spy(new Producto("Producto", marca, categoria, 150.0));
+		productos.add(mockProd);
+
 		oferta.aplicarOferta(productos);
 		
-		assertEquals(descuentoEsperado, producto.getPorcentajeDescuento()); 
+		verify(mockProd, times(1)).setPorcentajeDescuento(anyDouble());
 	}
 
 	@Test
 	public void noAplicarDescuentoAProducto() {
-		Double precioBase = 150.0;
-		Producto producto = new Producto("Producto", marca, otraCategoria, precioBase);
-		productos.add(producto);
-		Double descuentoEsperado = producto.getPorcentajeDescuento(); 
-				
+		Producto mockProd = spy(new Producto("Producto", marca, otraCategoria, 150.0));
+		productos.add(mockProd);
+
 		oferta.aplicarOferta(productos);
 		
-		assertEquals(descuentoEsperado, producto.getPorcentajeDescuento()); 
+		verify(mockProd, times(0)).setPorcentajeDescuento(anyDouble());
 	}
 
 
