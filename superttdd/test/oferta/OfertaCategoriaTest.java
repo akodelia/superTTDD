@@ -11,31 +11,31 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import superttdd.ofertas.OfertaMarca;
+import superttdd.ofertas.OfertaCategoria;
 import superttdd.producto.CategoriaProducto;
 import superttdd.producto.MarcaProducto;
 import superttdd.producto.Producto;
 
-public class OfertaMarcaTest {
+public class OfertaCategoriaTest {
 
-	OfertaMarca oferta;
-	List<Producto> productos;
-	MarcaProducto marcaOferta;
-	MarcaProducto marcaNoEnOferta;
 	CategoriaProducto categoria;
+	CategoriaProducto otraCategoria;
+	OfertaCategoria oferta;
+	MarcaProducto marca;
+	List<Producto> productos;
 
 	@Before
 	public void setUp() {
-		marcaOferta = new MarcaProducto("Coca Cola");
-		marcaNoEnOferta = new MarcaProducto("Pepsi");
-		categoria = new CategoriaProducto("Categoria");
-		oferta = new OfertaMarca(marcaOferta, 10.0);
+		categoria = new CategoriaProducto("Farmacia");
+		otraCategoria = new CategoriaProducto("Almacén");
+		marca = new MarcaProducto("Marca");
+		oferta = new OfertaCategoria(categoria, 15.0);
 		productos = new ArrayList<Producto>();
 	}
-	
+
 	@Test
-	public void aplicarDescuentoAProducto() {
-		Producto mockProd = spy(new Producto("Producto", marcaOferta, categoria, 9.0));
+	public void  aplicarDescuentoAProducto() {
+		Producto mockProd = spy(new Producto("Producto", marca, categoria, 150.0));
 		productos.add(mockProd);
 
 		oferta.aplicarOferta(productos);
@@ -45,10 +45,14 @@ public class OfertaMarcaTest {
 
 	@Test
 	public void noAplicarDescuentoAProducto() {
-		Producto mockProd = spy(new Producto("Producto", marcaNoEnOferta, categoria, 9.0));
+		Producto mockProd = spy(new Producto("Producto", marca, otraCategoria, 150.0));
 		productos.add(mockProd);
+
 		oferta.aplicarOferta(productos);
+		
 		verify(mockProd, times(0)).setPorcentajeDescuento(anyDouble());
 	}
 
+
 }
+
