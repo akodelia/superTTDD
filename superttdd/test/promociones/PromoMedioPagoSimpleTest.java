@@ -11,12 +11,12 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import promociones.PromoMedioPagoSimple;
+import superttdd.caja.MedioPago;
 import superttdd.producto.CategoriaProducto;
 import superttdd.producto.MarcaProducto;
 import superttdd.producto.Producto;
+import superttdd.promociones.PromoMedioPagoSimple;
 
-import caja.MedioPago;
 
 public class PromoMedioPagoSimpleTest {
 	

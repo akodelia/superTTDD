@@ -8,15 +8,15 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import caja.MedioPago;
 
-import promociones.PromoMedioPagoCompuestaAND;
 
+import superttdd.caja.MedioPago;
 import superttdd.ofertas.Oferta;
 import superttdd.ofertas.OfertaMarca;
 import superttdd.producto.CategoriaProducto;
 import superttdd.producto.MarcaProducto;
 import superttdd.producto.Producto;
+import superttdd.promociones.PromoMedioPagoCompuestaAND;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
