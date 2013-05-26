@@ -8,6 +8,7 @@ import org.junit.Test;
 import superttdd.producto.CategoriaProducto;
 import superttdd.producto.MarcaProducto;
 import superttdd.producto.Producto;
+import superttdd.producto.RegistroProducto;
 
 public class ProductoTest {
 
@@ -21,8 +22,8 @@ public class ProductoTest {
 		Double precioBase = 100.0;
 		marca = new MarcaProducto("Pepsi");
 		categoria = new CategoriaProducto("Categoria");
-		
-		this.producto = new Producto(nombre , marca, categoria, precioBase);	
+		RegistroProducto registro = new RegistroProducto(categoria, marca, nombre, precioBase);
+		this.producto = new Producto(registro);	
 	}
 	
 	@Test

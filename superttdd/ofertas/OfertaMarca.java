@@ -13,8 +13,9 @@ public class OfertaMarca extends Oferta {
 	
 	
 	public OfertaMarca(MarcaProducto marca, Double porcentajeDescuento) {
+		super(porcentajeDescuento);
 		this.marca = marca;
-		this.porcentajeDescuento = porcentajeDescuento;
+		
 	}
 	
 	public Double getPorcentajeDescuento() {

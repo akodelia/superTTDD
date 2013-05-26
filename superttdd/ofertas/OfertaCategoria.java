@@ -10,8 +10,8 @@ public class OfertaCategoria extends Oferta {
 	CategoriaProducto categoria;
 
 	public OfertaCategoria(CategoriaProducto categoria, Double porcentajeDescuento) {
-		this.categoria = categoria;
-		this.porcentajeDescuento = porcentajeDescuento;
+		super(porcentajeDescuento);
+		this.categoria = categoria;	
 	}
 
 	@Override
