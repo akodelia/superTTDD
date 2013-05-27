@@ -1,6 +1,5 @@
 package superttdd.test.oferta;
 
-import static org.junit.Assert.*;
 import static org.mockito.Matchers.anyDouble;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
@@ -12,7 +11,6 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import superttdd.ofertas.OfertaMarca;
 import superttdd.ofertas.OfertaProducto;
 import superttdd.producto.CategoriaProducto;
 import superttdd.producto.MarcaProducto;

@@ -8,10 +8,8 @@ import superttdd.producto.Producto;
 
 public class OfertaMarca extends Oferta {
 
-	private Double porcentajeDescuento;
 	private MarcaProducto marca;
-	
-	
+		
 	public OfertaMarca(MarcaProducto marca, Double porcentajeDescuento) {
 		super(porcentajeDescuento);
 		this.marca = marca;
