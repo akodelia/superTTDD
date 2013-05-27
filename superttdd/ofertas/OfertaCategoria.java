@@ -3,7 +3,7 @@ package superttdd.ofertas;
 import java.util.List;
 
 import superttdd.producto.CategoriaProducto;
-import superttdd.producto.Producto;
+import superttdd.producto.IProducto;
 
 public class OfertaCategoria extends Oferta {
 	
@@ -15,23 +15,18 @@ public class OfertaCategoria extends Oferta {
 	}
 
 	@Override
-	public void aplicarOferta(List<Producto> productos) {
-		for(Producto producto: productos) {
+	public void aplicarOferta(List<IProducto> productos) {
+		for(IProducto producto: productos) {
 			if(perteneceACategoria(producto)) {
-				producto.setPorcentajeDescuento(porcentajeDescuento);
-			}
-		}
-		for(Producto producto: lista_productos_final) {
-			if(perteneceACategoria(producto)) {
-				producto.setPorcentajeDescuento(porcentajeDescuento);
+				producto.addPorcentajeDescuento(porcentajeDescuento);
 			}
 		}
 	}
 
-	private Boolean perteneceACategoria(Producto producto) {
+	private Boolean perteneceACategoria(IProducto producto) {
 		Boolean pertenece = false;
 		if(producto != null) {
-			pertenece = (categoria.sonIguales(producto.getCategoriaProducto()));
+			pertenece = (producto.validarCategoria(categoria));
 		}
 		return pertenece;
 	}

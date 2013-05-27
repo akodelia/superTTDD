@@ -13,6 +13,7 @@ import org.junit.Test;
 
 import superttdd.ofertas.OfertaMarca;
 import superttdd.producto.CategoriaProducto;
+import superttdd.producto.IProducto;
 import superttdd.producto.MarcaProducto;
 import superttdd.producto.Producto;
 import superttdd.producto.RegistroProducto;
@@ -20,7 +21,7 @@ import superttdd.producto.RegistroProducto;
 public class OfertaMarcaTest {
 
 	OfertaMarca oferta;
-	List<Producto> productos;
+	List<IProducto> productos;
 	MarcaProducto marcaOferta;
 	MarcaProducto marcaNoEnOferta;
 	CategoriaProducto categoria;
@@ -31,7 +32,7 @@ public class OfertaMarcaTest {
 		marcaNoEnOferta = new MarcaProducto("Pepsi");
 		categoria = new CategoriaProducto("Categoria");
 		oferta = new OfertaMarca(marcaOferta, 10.0);
-		productos = new ArrayList<Producto>();
+		productos = new ArrayList<IProducto>();
 	}
 	
 	@Test
@@ -42,7 +43,7 @@ public class OfertaMarcaTest {
 
 		oferta.aplicarOferta(productos);
 		
-		verify(mockProd, times(1)).setPorcentajeDescuento(anyDouble());
+		verify(mockProd, times(1)).addPorcentajeDescuento(anyDouble());
 	}
 
 	@Test
@@ -51,7 +52,7 @@ public class OfertaMarcaTest {
 		Producto mockProd = spy(new Producto(registro));
 		productos.add(mockProd);
 		oferta.aplicarOferta(productos);
-		verify(mockProd, times(0)).setPorcentajeDescuento(anyDouble());
+		verify(mockProd, times(0)).addPorcentajeDescuento(anyDouble());
 	}
 
 }

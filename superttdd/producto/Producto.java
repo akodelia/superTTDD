@@ -1,6 +1,6 @@
 package superttdd.producto;
 
-public class Producto {
+public class Producto implements IProducto {
 	private RegistroProducto registroProducto;
 
 	private Double porcentajeDescuento;
@@ -23,7 +23,7 @@ public class Producto {
 		return registroProducto.getMarca();
 	}
 
-	public void setPorcentajeDescuento(Double porcentajeDescuento) {
+	public void addPorcentajeDescuento(Double porcentajeDescuento) {
 		this.porcentajeDescuento += porcentajeDescuento ;
 		if(porcentajeMaximoSuperado()) {
 			this.porcentajeDescuento = PORCENTAJE_MAX;
@@ -45,14 +45,31 @@ public class Producto {
 		return registroProducto.getPrecio(); 
 	}
 
-	public Double generarPrecioFinal() {
+
+	@Override
+	public Double getPrecioFinal() {
 		Double descuento = registroProducto.getPrecio() * porcentajeDescuento / 100;
 		
 		return (registroProducto.getPrecio() - descuento);
 	}
 	
-	public RegistroProducto getRegistroProducto() {
+	protected RegistroProducto getRegistroProducto() {
 		return registroProducto;
+	}
+
+	@Override
+	public boolean validarCategoria(CategoriaProducto categoria) {
+		return this.registroProducto.getCategoria()==categoria;
+	}
+
+	@Override
+	public boolean validarMarca(MarcaProducto marca) {
+		return this.registroProducto.getMarca()==marca;
+	}
+
+	@Override
+	public boolean validarRegistroProducto(RegistroProducto registro) {
+		return this.registroProducto.equals(registro);
 	}
 
 }
