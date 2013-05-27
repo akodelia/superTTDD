@@ -33,6 +33,11 @@ public class OfertaMarca extends Oferta {
 				producto.setPorcentajeDescuento(porcentajeDescuento);
 			}
 		}
+		for(Producto producto: lista_productos_final) {
+			if(esProductoMarcaEnPromo(producto)) {
+				producto.setPorcentajeDescuento(porcentajeDescuento);
+			}
+		}
 	}
 
 	private Boolean esProductoMarcaEnPromo(Producto producto) {
