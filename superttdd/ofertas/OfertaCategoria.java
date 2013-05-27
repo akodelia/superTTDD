@@ -21,6 +21,11 @@ public class OfertaCategoria extends Oferta {
 				producto.setPorcentajeDescuento(porcentajeDescuento);
 			}
 		}
+		for(Producto producto: lista_productos_final) {
+			if(perteneceACategoria(producto)) {
+				producto.setPorcentajeDescuento(porcentajeDescuento);
+			}
+		}
 	}
 
 	private Boolean perteneceACategoria(Producto producto) {

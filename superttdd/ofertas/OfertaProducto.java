@@ -22,6 +22,11 @@ public class OfertaProducto extends Oferta {
 				producto.setPorcentajeDescuento(porcentajeDescuento);
 			}
 		}
+		for(Producto producto : lista_productos_final) {
+			if(producto.getRegistroProducto().equals(registro)) {
+				producto.setPorcentajeDescuento(porcentajeDescuento);
+			}
+		}
 	}
 
 }
