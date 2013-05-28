@@ -16,5 +16,7 @@ public abstract class Oferta {
 	public Double getPorcentajeDescuento() {
 		return this.porcentajeDescuento;
 	}	
-	
+
+	public abstract List<IProducto> obtenerProductosQueAplican(List<IProducto> productos);
+
 }
