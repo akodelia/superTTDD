@@ -1,6 +1,5 @@
 package superttdd.test.oferta;
 
-import static org.junit.Assert.*;
 import static org.mockito.Matchers.anyDouble;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
@@ -16,20 +15,21 @@ import org.junit.Test;
 
 import superttdd.ofertas.OfertaConjuntoProds;
 import superttdd.producto.CategoriaProducto;
+import superttdd.producto.IProducto;
 import superttdd.producto.MarcaProducto;
 import superttdd.producto.Producto;
 import superttdd.producto.RegistroProducto;
 
 public class OfertaConjuntoProdsTest {
 	private OfertaConjuntoProds ofertaConjuntoProds;
-	private ArrayList<Producto> productos;
+	private ArrayList<IProducto> productos;
 	private ArrayList<RegistroProducto> registros_oferta;
 	private RegistroProducto registro_producto1, registro_producto2;
 	
 	
 	@Before
 	public void setUp() throws Exception {
-		productos = new ArrayList<Producto>();
+		productos = new ArrayList<IProducto>();
 		registros_oferta=new ArrayList<RegistroProducto>();
 		CategoriaProducto categoria = mock(CategoriaProducto.class);
 		MarcaProducto marca =mock(MarcaProducto.class);
@@ -50,10 +50,11 @@ public class OfertaConjuntoProdsTest {
 		registros_oferta.add(registro_producto2);
 		ofertaConjuntoProds=new OfertaConjuntoProds(registros_oferta, 10.0);
 		
-		ofertaConjuntoProds.aplicarOferta(productos);
+		ArrayList<IProducto> productos_modificados_oferta = new ArrayList<IProducto>(productos);
+		ofertaConjuntoProds.aplicarOferta(productos_modificados_oferta);
 		
-		for(Producto p: productos) {
-			verify(p, times(1)).setPorcentajeDescuento(anyDouble());
+		for(IProducto p: productos) {
+			verify(p, times(1)).addPorcentajeDescuento(anyDouble());
 		}		
 	}
 	
@@ -66,33 +67,26 @@ public class OfertaConjuntoProdsTest {
 		registros_oferta.add(registro_producto3);
 		ofertaConjuntoProds=new OfertaConjuntoProds(registros_oferta, 10.0);
 		
-		ofertaConjuntoProds.aplicarOferta(productos);
+		ArrayList<IProducto> productos_copia = new ArrayList<IProducto>(productos);
+		ofertaConjuntoProds.aplicarOferta(productos_copia);
 		
-		for(Producto p: productos) {
-			verify(p, times(0)).setPorcentajeDescuento(anyDouble());
+		for(IProducto p: productos) {
+			verify(p, times(0)).addPorcentajeDescuento(anyDouble());
 		}		
 	}
 	
 	@Test
-	public void ProductosQueAplicanPasanAListaFinal() {
+	public void ProductosQueAplicanSeBorran() {
 		registros_oferta.add(registro_producto1);
 		registros_oferta.add(registro_producto2);
 		ofertaConjuntoProds=new OfertaConjuntoProds(registros_oferta, 10.0);
 		
-		ofertaConjuntoProds.aplicarOferta(productos);
-		for(Producto p: productos) {
-			Assert.assertTrue(OfertaConjuntoProds.getListaProductosFinal().contains(p));
-		}		
-	}
-	
-	@Test
-	public void ProductosQueAplicanSeBorranListaProductos() {
-		registros_oferta.add(registro_producto1);
-		registros_oferta.add(registro_producto2);
-		ofertaConjuntoProds=new OfertaConjuntoProds(registros_oferta, 10.0);
+		ArrayList<IProducto> productos_modificados_por_oferta = new ArrayList<IProducto>(productos);
+		ofertaConjuntoProds.aplicarOferta(productos_modificados_por_oferta);
 		
-		ofertaConjuntoProds.aplicarOferta(productos);
-		Assert.assertTrue(productos.isEmpty());		
+		for(IProducto p : productos) {
+			Assert.assertFalse(productos_modificados_por_oferta.contains(p));
+		}
 	}
 
 }

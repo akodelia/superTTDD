@@ -3,7 +3,7 @@ package superttdd.promociones;
 import java.util.List;
 
 import superttdd.caja.MedioPago;
-import superttdd.producto.Producto;
+import superttdd.producto.IProducto;
 
 
 public abstract class PromoMedioPago {
@@ -17,5 +17,5 @@ public abstract class PromoMedioPago {
 		return this.medioPago==medioPagoCompra;
 	}
 	
-	public abstract void aplicarPromo(List<Producto> productos, MedioPago medioPagoCompra);
+	public abstract void aplicarPromo(List<IProducto> productos, MedioPago medioPagoCompra);
 }

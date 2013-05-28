@@ -13,12 +13,13 @@ import org.junit.Test;
 
 import superttdd.ofertas.OfertaProducto;
 import superttdd.producto.CategoriaProducto;
+import superttdd.producto.IProducto;
 import superttdd.producto.MarcaProducto;
 import superttdd.producto.Producto;
 import superttdd.producto.RegistroProducto;
 
 public class OfertaProductoTest {
-	List<Producto> productos;
+	List<IProducto> productos;
 	MarcaProducto marca_producto, marca_oferta;
 	CategoriaProducto categoria_producto, categoria_oferta;
 	RegistroProducto registro_producto, registro_oferta;
@@ -31,7 +32,7 @@ public class OfertaProductoTest {
 		categoria_oferta = new CategoriaProducto("Gaseosas");
 		registro_oferta = new RegistroProducto(categoria_oferta, marca_oferta, "Producto 2", 20.0);
 		ofertaProducto=new OfertaProducto(registro_oferta, porcentajeDescuento);
-		productos=new ArrayList<Producto>();
+		productos=new ArrayList<IProducto>();
 	}
 
 	@Test
@@ -44,7 +45,7 @@ public class OfertaProductoTest {
 		
 		ofertaProducto.aplicarOferta(productos);
 		
-		verify(mockProd, times(0)).setPorcentajeDescuento(anyDouble());		
+		verify(mockProd, times(0)).addPorcentajeDescuento(anyDouble());		
 	}
 	
 	@Test
@@ -54,7 +55,7 @@ public class OfertaProductoTest {
 		
 		ofertaProducto.aplicarOferta(productos);
 		
-		verify(mockProd, times(1)).setPorcentajeDescuento(anyDouble());		
+		verify(mockProd, times(1)).addPorcentajeDescuento(anyDouble());		
 	}
 	
 	@Test
@@ -70,9 +71,9 @@ public class OfertaProductoTest {
 		
 		ofertaProducto.aplicarOferta(productos);
 		
-		verify(mockProd1, times(0)).setPorcentajeDescuento(anyDouble());	
+		verify(mockProd1, times(0)).addPorcentajeDescuento(anyDouble());	
 		
-		verify(mockProd2, times(1)).setPorcentajeDescuento(anyDouble());		
+		verify(mockProd2, times(1)).addPorcentajeDescuento(anyDouble());		
 	}
 
 }

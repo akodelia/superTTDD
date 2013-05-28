@@ -9,6 +9,7 @@ import superttdd.caja.MedioPago;
 import superttdd.ofertas.Oferta;
 import superttdd.ofertas.OfertaMarca;
 import superttdd.producto.CategoriaProducto;
+import superttdd.producto.IProducto;
 import superttdd.producto.MarcaProducto;
 import superttdd.producto.Producto;
 import superttdd.producto.RegistroProducto;
@@ -25,7 +26,7 @@ public class PromoMedioPagoCompuestaANDTest {
 	private static final double DESCUENTO_OFERTA = 5.0;
 	private static final MedioPago MEDIO_PAGO_PROMO = MedioPago.TARJETA;
 	private List<Oferta> ofertas;
-	private List<Producto> productos;
+	private List<IProducto> productos;
 	private MarcaProducto marca;
 	PromoMedioPagoCompuestaAND promoCompuestaAND;
 	
@@ -35,11 +36,12 @@ public class PromoMedioPagoCompuestaANDTest {
 		marca = new MarcaProducto(NOMBRE_MARCA_TEST);
 		OfertaMarca ofertaMarca = new OfertaMarca(marca, DESCUENTO_OFERTA);
 		ofertas.add(ofertaMarca);
+		
+		productos=new ArrayList<IProducto>();
 	}
 
 	@Test
 	public void PromoAplicaParaProductoQueAplicaASusOfertasYFacturaConMismoMedioPago() {
-		productos=new ArrayList<Producto>();
 		RegistroProducto registro=new RegistroProducto(mock(CategoriaProducto.class), marca, "Producto", PRECIO_PRODUCTO);
 		Producto producto = spy(new Producto(registro));
 		productos.add(producto);	
@@ -48,12 +50,11 @@ public class PromoMedioPagoCompuestaANDTest {
 		
 		promoCompuestaAND.aplicarPromo(productos,MEDIO_PAGO_PROMO);
 		
-		verify(productos.get(0), times(1)).setPorcentajeDescuento(DESCUENTO_OFERTA);
+		verify(productos.get(0), times(1)).addPorcentajeDescuento(DESCUENTO_OFERTA);
 	}
 	
 	@Test
 	public void PromoNOAplicaParaProductoQueAplicaASusOfertasYNOFacturaConMismoMedioPago() {
-		productos=new ArrayList<Producto>();
 		RegistroProducto registro=new RegistroProducto(mock(CategoriaProducto.class), marca, "Producto", PRECIO_PRODUCTO);
 		Producto producto = spy(new Producto(registro));
 		productos.add(producto);
@@ -62,13 +63,13 @@ public class PromoMedioPagoCompuestaANDTest {
 		
 		promoCompuestaAND.aplicarPromo(productos, MedioPago.EFECTIVO);
 		
-		verify(productos.get(0), times(0)).setPorcentajeDescuento(DESCUENTO_OFERTA);
+		verify(productos.get(0), times(0)).addPorcentajeDescuento(DESCUENTO_OFERTA);
 	}
 	
 	@Test
 	public void PromoNOAplicaParaProductoQueNOAplicaASusOfertasYFacturaConMismoMedioPago() {
 		marca = new MarcaProducto(NOMBRE_MARCA_DISTINTA_TEST);
-		productos=new ArrayList<Producto>();
+		
 		RegistroProducto registro = new RegistroProducto(mock(CategoriaProducto.class), marca, "Producto", PRECIO_PRODUCTO);
 		Producto producto = spy(new Producto(registro));
 		productos.add(producto);
@@ -77,7 +78,7 @@ public class PromoMedioPagoCompuestaANDTest {
 		
 		promoCompuestaAND.aplicarPromo(productos, MEDIO_PAGO_PROMO);
 		
-		verify(productos.get(0), times(0)).setPorcentajeDescuento(DESCUENTO_OFERTA);
+		verify(productos.get(0), times(0)).addPorcentajeDescuento(DESCUENTO_OFERTA);
 	}
 
 }
