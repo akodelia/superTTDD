@@ -1,5 +1,6 @@
 package superttdd.ofertas;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import superttdd.producto.CategoriaProducto;
@@ -29,6 +30,18 @@ public class OfertaCategoria extends Oferta {
 			pertenece = (producto.validarCategoria(categoria));
 		}
 		return pertenece;
+	}
+
+	@Override
+	public List<IProducto> obtenerProductosQueAplican(List<IProducto> productos) {
+		// TODO: TemplateMethod?
+		List<IProducto> prodsAplican = new ArrayList<IProducto>(productos); 
+		for(IProducto producto: productos) {
+			if(perteneceACategoria(producto)) {
+				prodsAplican.add(producto);
+			}
+		}
+		return prodsAplican;
 	}
 	
 }

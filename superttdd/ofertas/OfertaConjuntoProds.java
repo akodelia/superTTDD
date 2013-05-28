@@ -47,4 +47,32 @@ public class OfertaConjuntoProds extends Oferta {
 			productos.add(combo);
 		}
 	}
+
+	@Override
+	public List<IProducto> obtenerProductosQueAplican(List<IProducto> productos) {
+		List<IProducto> prodsAplican = new ArrayList<IProducto>(productos);
+		
+		//productos que coinciden con un registro de la oferta
+		List<IProducto> productos_encontrados = new ArrayList<IProducto>();
+		
+		//copia de los registros de la oferta
+		List<RegistroProducto> copia_registros = new ArrayList<RegistroProducto>(registro_productos);
+		/*
+		 * Por cada registro de la oferta, busca en todos los productos si alguno coincide. Si encuentra
+		 * uno, lo agrega a los productos encontrados y saca ese registro de la lista copia de registros
+		 */
+		for (RegistroProducto registro : registro_productos) {
+			for (IProducto producto : productos) {
+				if (producto.validarRegistroProducto(registro)) {
+					productos_encontrados.add(producto);
+					copia_registros.remove(registro);
+				}
+			}
+		}
+
+		ProductoCombo combo = new ProductoCombo(productos_encontrados);
+		prodsAplican.add(combo);
+		
+		return prodsAplican;
+	}
 }
