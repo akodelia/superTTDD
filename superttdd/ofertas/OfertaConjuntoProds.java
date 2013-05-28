@@ -3,7 +3,8 @@ package superttdd.ofertas;
 import java.util.ArrayList;
 import java.util.List;
 
-import superttdd.producto.Producto;
+import superttdd.producto.IProducto;
+import superttdd.producto.ProductoCombo;
 import superttdd.producto.RegistroProducto;
 
 public class OfertaConjuntoProds extends Oferta {
@@ -15,9 +16,9 @@ public class OfertaConjuntoProds extends Oferta {
 	}
 
 	@Override
-	public void aplicarOferta(List<Producto> productos) {
+	public void aplicarOferta(List<IProducto> productos) {
 		//productos que coinciden con un registro de la oferta
-		List<Producto> productos_encontrados = new ArrayList<Producto>();
+		List<IProducto> productos_encontrados = new ArrayList<IProducto>();
 		//copia de los registros de la oferta
 		List<RegistroProducto> copia_registros = new ArrayList<RegistroProducto>(registro_productos);
 		/*
@@ -25,8 +26,8 @@ public class OfertaConjuntoProds extends Oferta {
 		 * uno, lo agrega a los productos encontrados y saca ese registro de la lista copia de registros
 		 */
 		for (RegistroProducto registro : registro_productos) {
-			for (Producto producto : productos) {
-				if (producto.getRegistroProducto().equals(registro)) {
+			for (IProducto producto : productos) {
+				if (producto.validarRegistroProducto(registro)) {
 					productos_encontrados.add(producto);
 					copia_registros.remove(registro);
 				}
@@ -34,15 +35,16 @@ public class OfertaConjuntoProds extends Oferta {
 		}
 		/*
 		 * Si se encontraron todos los registros de la oferta (lista copia vacia), se aplica el
-		 * descuento a los productos que coinciden. Se quitan de la lista de productos y se agregan
-		 * a la lista final
+		 * descuento a los productos que coinciden. Se quitan de la lista de productos y se arma el
+		 * producto combo que almacena ambos pero comparte la misma interfaz.
 		 */
 		if(copia_registros.isEmpty()) {
-			for(Producto producto : productos_encontrados) {
-				producto.setPorcentajeDescuento(porcentajeDescuento);
-				lista_productos_final.add(producto);
+			for(IProducto producto : productos_encontrados) {
+				producto.addPorcentajeDescuento(porcentajeDescuento);				
 				productos.remove(producto);
 			}
+			ProductoCombo combo = new ProductoCombo(productos_encontrados);
+			productos.add(combo);
 		}
 	}
 }

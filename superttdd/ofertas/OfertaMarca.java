@@ -2,8 +2,8 @@ package superttdd.ofertas;
 
 import java.util.List;
 
+import superttdd.producto.IProducto;
 import superttdd.producto.MarcaProducto;
-import superttdd.producto.Producto;
 
 
 public class OfertaMarca extends Oferta {
@@ -25,21 +25,17 @@ public class OfertaMarca extends Oferta {
 	}
 
 	@Override
-	public void aplicarOferta(List<Producto> productos) {
-		for(Producto producto: productos) {
+	public void aplicarOferta(List<IProducto> productos) {
+		for(IProducto producto: productos) {
 			if(esProductoMarcaEnPromo(producto)) {
-				producto.setPorcentajeDescuento(porcentajeDescuento);
+				producto.addPorcentajeDescuento(porcentajeDescuento);
 			}
 		}
-		for(Producto producto: lista_productos_final) {
-			if(esProductoMarcaEnPromo(producto)) {
-				producto.setPorcentajeDescuento(porcentajeDescuento);
-			}
-		}
+
 	}
 
-	private Boolean esProductoMarcaEnPromo(Producto producto) {
-		return (this.marca.sonIguales(producto.getMarca())); 
+	private Boolean esProductoMarcaEnPromo(IProducto producto) {
+		return (producto.validarMarca(marca)); 
 	}
 	
 }

@@ -3,7 +3,7 @@ package superttdd.promociones;
 import java.util.List;
 
 import superttdd.caja.MedioPago;
-import superttdd.producto.Producto;
+import superttdd.producto.IProducto;
 
 public class PromoMedioPagoSimple extends PromoMedioPago{
 	
@@ -15,10 +15,10 @@ public class PromoMedioPagoSimple extends PromoMedioPago{
 	}
 
 	@Override
-	public void aplicarPromo(List<Producto> productos, MedioPago medioPagoCompra) {
+	public void aplicarPromo(List<IProducto> productos, MedioPago medioPagoCompra) {
 		if(esMedioPagoPromo(medioPagoCompra)) {
-			for(Producto producto: productos) {
-				producto.setPorcentajeDescuento(descuento);
+			for(IProducto producto: productos) {
+				producto.addPorcentajeDescuento(descuento);
 			}
 		}
 	}

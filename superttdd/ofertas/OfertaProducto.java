@@ -2,7 +2,7 @@ package superttdd.ofertas;
 
 import java.util.List;
 
-import superttdd.producto.Producto;
+import superttdd.producto.IProducto;
 import superttdd.producto.RegistroProducto;
 
 public class OfertaProducto extends Oferta {
@@ -16,17 +16,13 @@ public class OfertaProducto extends Oferta {
 	
 
 	@Override
-	public void aplicarOferta(List<Producto> productos) {
-		for(Producto producto : productos) {
-			if(producto.getRegistroProducto().equals(registro)) {
-				producto.setPorcentajeDescuento(porcentajeDescuento);
+	public void aplicarOferta(List<IProducto> productos) {
+		for(IProducto producto : productos) {
+			if(producto.validarRegistroProducto(registro)) {
+				producto.addPorcentajeDescuento(porcentajeDescuento);
 			}
 		}
-		for(Producto producto : lista_productos_final) {
-			if(producto.getRegistroProducto().equals(registro)) {
-				producto.setPorcentajeDescuento(porcentajeDescuento);
-			}
-		}
+
 	}
 
 }
