@@ -7,14 +7,13 @@ import superttdd.producto.IProducto;
 import superttdd.producto.RegistroProducto;
 
 public class OfertaProducto extends Oferta {
-	
+
 	RegistroProducto registro;
-	
+
 	public OfertaProducto(RegistroProducto registro, Double porcentajeDescuento) {
 		super(porcentajeDescuento);
-		this.registro=registro;
+		this.registro = registro;
 	}
-	
 
 	@Override
 	public void aplicarOferta(List<IProducto> productos) {
@@ -32,10 +31,10 @@ public class OfertaProducto extends Oferta {
 	@Override
 	public List<IProducto> obtenerProductosQueAplican(List<IProducto> productos) {
 		// TODO: TemplateMethod?
-		List<IProducto> prodsAplican = new ArrayList<IProducto>(productos); 
-		for(IProducto producto: productos) {
-			if(esProductoEnOferta(producto)) {
-				prodsAplican.add(producto);	
+		List<IProducto> prodsAplican = new ArrayList<IProducto>(productos);
+		for (IProducto producto : productos) {
+			if (esProductoEnOferta(producto)) {
+				prodsAplican.add(producto);
 			}
 		}
 		return prodsAplican;
