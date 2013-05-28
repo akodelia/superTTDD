@@ -21,7 +21,7 @@ public class OfertaConjuntoProds extends Oferta {
 		Boolean hubo_coincidencias = true;
 		List<IProducto> productos_encontrados;
 		List<RegistroProducto> copia_registros;
-		
+
 		while (hubo_coincidencias) {
 			// productos que coinciden con un registro de la oferta
 			productos_encontrados = new ArrayList<IProducto>();
@@ -36,14 +36,17 @@ public class OfertaConjuntoProds extends Oferta {
 			for (RegistroProducto registro : registro_productos) {
 				for (IProducto producto : productos) {
 					if (producto.validarRegistroProducto(registro)) {
-						productos_encontrados.add(producto);
-						copia_registros.remove(registro);
+						if (copia_registros.contains(registro)) {
+							productos_encontrados.add(producto);
+							copia_registros.remove(registro);
+						}
 					}
 				}
 			}
-			
-			if(productos_encontrados.isEmpty()) {
-				hubo_coincidencias=false;
+
+			//Termina si no encuentra combos
+			if (!copia_registros.isEmpty()) {
+				hubo_coincidencias = false;
 			}
 			/*
 			 * Si se encontraron todos los registros de la oferta (lista copia
@@ -59,6 +62,9 @@ public class OfertaConjuntoProds extends Oferta {
 				ProductoCombo combo = new ProductoCombo(productos_encontrados);
 				productos.add(combo);
 			}
+
+			productos_encontrados.clear();
+			copia_registros.clear();
 		}
 	}
 }
