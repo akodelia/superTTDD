@@ -17,4 +17,6 @@ public abstract class Oferta {
 		return this.porcentajeDescuento;
 	}	
 	
+	public abstract List<IProducto> obtenerProductosQueAplican(List<IProducto> productos);
+	
 }
