@@ -18,6 +18,10 @@ public interface IProducto {
 	 */
 	Double getPrecioFinal();
 	/*
+	 * retona el precio base
+	 */
+	Double getPrecioBase();
+	/*
 	 * Agrega el descuento al producto
 	 */
 	void addPorcentajeDescuento(Double descuento);

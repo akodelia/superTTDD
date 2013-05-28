@@ -1,16 +1,11 @@
 package superttdd.test.comprobante;
 
-import static org.junit.Assert.*;
-
-import java.util.ArrayList;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import superttdd.comprobante.OrdenDeCompra;
 import superttdd.producto.Producto;
-import superttdd.promociones.PromoMedioPago;
-import superttdd.promociones.PromoMedioPagoSimple;
 
 public class OrdenDeCompraTest {
 	

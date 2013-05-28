@@ -3,11 +3,12 @@ import java.util.ArrayList;
 
 import superttdd.caja.MedioPago;
 import superttdd.ofertas.Oferta;
+import superttdd.producto.IProducto;
 import superttdd.producto.Producto;
 
 public class OrdenDeCompra {
 	
-	private ArrayList<Producto> listaDeProductos;
+	private ArrayList<IProducto> listaDeProductos;
 	private ArrayList<Oferta> listaDeOfertas;
 	private EstadoOrdenDeCompra estado;
 	
@@ -17,7 +18,7 @@ public class OrdenDeCompra {
 	
 	public OrdenDeCompra(ArrayList<Oferta> listadoDeOfertas) {
 		this.listaDeOfertas = listadoDeOfertas;
-		this.listaDeProductos = new ArrayList<Producto>();
+		this.listaDeProductos = new ArrayList<IProducto>();
 		this.estado = EstadoOrdenDeCompra.CERRADA;
 	}
 
@@ -27,11 +28,11 @@ public class OrdenDeCompra {
 	
 	public void aplicarOfertas() {	
 		
-		for (Producto producto: this.listaDeProductos) {
+		for (IProducto producto: this.listaDeProductos) {
 			// Esto no sé si está bien, pero antes de aplicarse las ofertas, deberían 
 			// borrarse ofertas previamente aplicadas para que una oferta no esté
 			// dos veces aplicadas al mismo producto
-			producto.setPorcentajeDescuento(0.0);
+			producto.addPorcentajeDescuento(0.0);
 		}
 		
 		for (Oferta oferta: this.listaDeOfertas) {
@@ -42,8 +43,8 @@ public class OrdenDeCompra {
 	public Double obtenerSubtotalConDescuentos() {
 		Double subtotal = 0.0;
 		
-		for (Producto producto: this.listaDeProductos) {
-			subtotal += producto.generarPrecioFinal();
+		for (IProducto producto: this.listaDeProductos) {
+			subtotal += producto.getPrecioFinal();
 		}
 		return subtotal;
 	}
@@ -51,7 +52,7 @@ public class OrdenDeCompra {
 	public Double obtenerSubtotalSinDescuentos() {
 		Double subtotal = 0.0;
 		
-		for (Producto producto: this.listaDeProductos) {
+		for (IProducto producto: this.listaDeProductos) {
 			subtotal += producto.getPrecioBase();
 		}
 		return subtotal;

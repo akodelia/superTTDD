@@ -67,4 +67,13 @@ public class ProductoCombo implements IProducto {
 		}
 		return nombre;
 	}
+
+	@Override
+	public Double getPrecioBase() {
+		Double sumatoria = 0.0;
+		for(IProducto p : productos) {
+			sumatoria+=p.getPrecioBase();
+		}
+		return sumatoria;
+	}
 }
