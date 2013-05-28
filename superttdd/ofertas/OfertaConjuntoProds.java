@@ -44,27 +44,33 @@ public class OfertaConjuntoProds extends Oferta {
 				}
 			}
 
-			//Termina si no encuentra combos
+			// Termina si no encuentra combos
 			if (!copia_registros.isEmpty()) {
 				hubo_coincidencias = false;
 			}
-			/*
-			 * Si se encontraron todos los registros de la oferta (lista copia
-			 * vacia), se aplica el descuento a los productos que coinciden. Se
-			 * quitan de la lista de productos y se arma el producto combo que
-			 * almacena ambos pero comparte la misma interfaz.
-			 */
-			if (copia_registros.isEmpty()) {
-				for (IProducto producto : productos_encontrados) {
-					producto.addPorcentajeDescuento(porcentajeDescuento);
-					productos.remove(producto);
-				}
-				ProductoCombo combo = new ProductoCombo(productos_encontrados);
-				productos.add(combo);
-			}
+			generarCombos(productos, productos_encontrados, copia_registros);
 
 			productos_encontrados.clear();
 			copia_registros.clear();
+		}
+	}
+
+	private void generarCombos(List<IProducto> productos,
+			List<IProducto> productos_encontrados,
+			List<RegistroProducto> copia_registros) {
+		/*
+		 * Si se encontraron todos los registros de la oferta (lista copia
+		 * vacia), se aplica el descuento a los productos que coinciden. Se
+		 * quitan de la lista de productos y se arma el producto combo que
+		 * almacena ambos pero comparte la misma interfaz.
+		 */
+		if (copia_registros.isEmpty()) {
+			for (IProducto producto : productos_encontrados) {
+				producto.addPorcentajeDescuento(porcentajeDescuento);
+				productos.remove(producto);
+			}
+			ProductoCombo combo = new ProductoCombo(productos_encontrados);
+			productos.add(combo);
 		}
 	}
 }
