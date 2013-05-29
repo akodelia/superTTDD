@@ -7,7 +7,7 @@ public class Producto implements IProducto {
 	private final Double PORCENTAJE_MAX = 100.0;
 	
 	public Producto(RegistroProducto registroProducto) {
-		this.registroProducto=registroProducto;
+		this.registroProducto = registroProducto;
 		this.porcentajeDescuento = 0.0;
 	}
 	
@@ -59,12 +59,18 @@ public class Producto implements IProducto {
 
 	@Override
 	public boolean validarCategoria(CategoriaProducto categoria) {
-		return this.registroProducto.getCategoria().sonIguales(categoria);
+		if(this.registroProducto.getCategoria() != null) {
+			return this.registroProducto.getCategoria().sonIguales(categoria);
+		}
+		return false;
 	}
 
 	@Override
 	public boolean validarMarca(MarcaProducto marca) {
-		return this.registroProducto.getMarca().sonIguales(marca);
+		if(this.registroProducto.getMarca() != null) {
+			return this.registroProducto.getMarca().sonIguales(marca);
+		}
+		return false;
 	}
 
 	@Override

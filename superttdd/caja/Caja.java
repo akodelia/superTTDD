@@ -1,12 +1,12 @@
 package superttdd.caja;
 import java.util.ArrayList;
+
 import superttdd.comprobante.Factura;
 import superttdd.comprobante.OrdenDeCompra;
 import superttdd.ofertas.Oferta;
-import superttdd.ofertas.OfertaCategoria;
-//import superttdd.producto.CategoriaProducto;
 import superttdd.producto.Producto;
 import superttdd.promociones.PromoMedioPago;
+//import superttdd.producto.CategoriaProducto;
 
 public class Caja {
 

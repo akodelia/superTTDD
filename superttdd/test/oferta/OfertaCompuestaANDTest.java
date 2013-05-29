@@ -1,5 +1,6 @@
 package superttdd.test.oferta;
 
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.anyDouble;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
@@ -10,6 +11,7 @@ import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.ArgumentCaptor;
 
 import superttdd.ofertas.Oferta;
 import superttdd.ofertas.OfertaCategoria;
@@ -40,8 +42,11 @@ public class OfertaCompuestaANDTest {
 	CategoriaProducto categoria;
 	MarcaProducto marca;
 	Double porcentajeDescuento;
+	Double precioFinal;
 	RegistroProducto regProd1, regProd2, regProd3; 
 	List<IProducto> prodsEspiados;
+	
+	
 	
 	@Before 
 	public void setUp() {
@@ -68,20 +73,10 @@ public class OfertaCompuestaANDTest {
 	@Test 
 	public void ofertaMarcaANDConjProds() {
 		prepararEscenarioMarcaANDConjProds();
-//		ArgumentCaptor<Double> prodCaptor = ArgumentCaptor.forClass(Double.class);
-//		RegistroProducto registro = new RegistroProducto(categoria, marca, "Producto", 150.0);
-//		IProducto mockProd = spy(new Producto(registro));
-//		
-//		productos.add(mockProd);
+
 		oferta.aplicarOferta(productos);
 		
-		for(IProducto prod: prodsEspiados ) {
-			verify(prod, times(1)).addPorcentajeDescuento(anyDouble());
-		}
-		
-//		List<Double> descuentos = prodCaptor.getAllValues();
-		
-//		assertEquals();
+		assertEquals(precioFinal, productos.get(0).getPrecioFinal());
 		
 	}
 
@@ -96,21 +91,19 @@ public class OfertaCompuestaANDTest {
 	}
 	
 	private void prepararEscenarioMarcaANDConjProds() {
-		ofertas.add(new OfertaMarca(new MarcaProducto(MARCA1), 0.0));
 		List<RegistroProducto> registros = new ArrayList<RegistroProducto>();
 		registros.add(regProd1);
 		registros.add(regProd1);
 		
-		ofertas.add(new OfertaCategoria(new CategoriaProducto(CATEGORIA1), 0.0));
+		ofertas.add(new OfertaMarca(new MarcaProducto(MARCA1), 0.0));
 		ofertas.add(new OfertaConjuntoProds(registros, 0.0));
 		
 		oferta = new OfertaCompuestaAND(ofertas, 25.0);
+				
+		productos.add(new Producto(regProd1));
+		productos.add(new Producto(regProd1));
 		
-		
-		productos.add(spy(new Producto(regProd1)));
-		productos.add(spy(new Producto(regProd1)));
-		
-		prodsEspiados.addAll(productos);
+		precioFinal = (2.0 * productos.get(0).getPrecioBase()) * oferta.getPorcentajeDescuento() / 100.0; 
 	}
 	
 }

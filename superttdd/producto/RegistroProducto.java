@@ -8,8 +8,8 @@ public class RegistroProducto {
 
 	public RegistroProducto(CategoriaProducto categoria, MarcaProducto marca,
 			String nombre, Double precio) {
-		this.marca = marca;
-		this.categoria = categoria;
+		this.marca = (marca != null)? marca: new MarcaProducto("");
+		this.categoria = (categoria != null)? categoria: new CategoriaProducto("");
 		this.nombre = nombre;
 		this.precio = precio;
 	}
