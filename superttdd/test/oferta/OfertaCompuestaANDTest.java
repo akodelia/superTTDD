@@ -103,7 +103,9 @@ public class OfertaCompuestaANDTest {
 		productos.add(new Producto(regProd1));
 		productos.add(new Producto(regProd1));
 		
-		precioFinal = (2.0 * productos.get(0).getPrecioBase()) * oferta.getPorcentajeDescuento() / 100.0; 
+		Double precioBaseConj = productos.get(0).getPrecioBase() + productos.get(0).getPrecioBase();  
+		
+		precioFinal = precioBaseConj  - (precioBaseConj  * oferta.getPorcentajeDescuento()) / 100.0; 
 	}
 	
 }
