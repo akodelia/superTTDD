@@ -24,9 +24,9 @@ public class OfertaCompuestaAND extends Oferta {
 
 	@Override
 	public List<IProducto> obtenerProductosQueAplican(List<IProducto> productos) {
-		List<IProducto> prodsAplican = new ArrayList<IProducto>(productos);
+		List<IProducto> prodsAplican = new ArrayList<IProducto>();
 		for(Oferta oferta: ofertas) {
-			prodsAplican = oferta.obtenerProductosQueAplican(prodsAplican);
+			prodsAplican = oferta.obtenerProductosQueAplican(productos);
 		}
 		return prodsAplican;
 	}

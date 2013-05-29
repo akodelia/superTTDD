@@ -30,7 +30,7 @@ public class OfertaMarca extends Oferta {
 			if (esProductoMarcaEnPromo(producto)) {
 				producto.addPorcentajeDescuento(porcentajeDescuento);
 			}
-		}
+		}		
 
 	}
 
@@ -41,7 +41,7 @@ public class OfertaMarca extends Oferta {
 	@Override
 	public List<IProducto> obtenerProductosQueAplican(List<IProducto> productos) {
 		// TODO: TemplateMethod?
-		List<IProducto> prodsAplican = new ArrayList<IProducto>(productos);
+		List<IProducto> prodsAplican = new ArrayList<IProducto>();
 		for (IProducto producto : productos) {
 			if (esProductoMarcaEnPromo(producto)) {
 				prodsAplican.add(producto);

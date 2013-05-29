@@ -35,7 +35,7 @@ public class OfertaCategoria extends Oferta {
 	@Override
 	public List<IProducto> obtenerProductosQueAplican(List<IProducto> productos) {
 		// TODO: TemplateMethod?
-		List<IProducto> prodsAplican = new ArrayList<IProducto>(productos); 
+		List<IProducto> prodsAplican = new ArrayList<IProducto>(); 
 		for(IProducto producto: productos) {
 			if(perteneceACategoria(producto)) {
 				prodsAplican.add(producto);

@@ -29,4 +29,5 @@ public interface IProducto {
 	 * nombre del producto
 	 */
 	String getNombre();
+	
 }
