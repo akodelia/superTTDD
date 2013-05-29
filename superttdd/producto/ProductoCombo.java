@@ -11,31 +11,16 @@ public class ProductoCombo implements IProducto {
 
 	@Override
 	public boolean validarCategoria(CategoriaProducto categoria) {
-//		for(Producto p: productos) {
-//			if(p.getRegistroProducto().getCategoria()==categoria) {
-//				return true;
-//			}
-//		}
 		return false;
 	}
 
 	@Override
 	public boolean validarMarca(MarcaProducto marca) {
-//		for(Producto p: productos) {
-//			if(p.getRegistroProducto().getMarca()==marca) {
-//				return true;
-//			}
-//		}
 		return false;
 	}
 
 	@Override
 	public boolean validarRegistroProducto(RegistroProducto registro) {
-//		for(Producto p: productos) {
-//			if(p.getRegistroProducto().equals(registro)) {
-//				return true;
-//			}
-//		}
 		return false;
 	}
 
@@ -54,9 +39,6 @@ public class ProductoCombo implements IProducto {
 	 */
 	@Override
 	public void addPorcentajeDescuento(Double descuento) {
-//		for(IProducto p: productos) {
-//			p.addPorcentajeDescuento(descuento);
-//		}		
 	}
 
 	@Override
