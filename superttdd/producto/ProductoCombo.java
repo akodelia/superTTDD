@@ -39,6 +39,9 @@ public class ProductoCombo implements IProducto {
 	 */
 	@Override
 	public void addPorcentajeDescuento(Double descuento) {
+		for(IProducto producto: productos) {
+			producto.addPorcentajeDescuento(descuento);
+		}
 	}
 
 	@Override

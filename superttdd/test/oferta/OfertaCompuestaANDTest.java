@@ -11,13 +11,13 @@ import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.ArgumentCaptor;
 
 import superttdd.ofertas.Oferta;
 import superttdd.ofertas.OfertaCategoria;
 import superttdd.ofertas.OfertaCompuestaAND;
 import superttdd.ofertas.OfertaConjuntoProds;
 import superttdd.ofertas.OfertaMarca;
+import superttdd.ofertas.OfertaProducto;
 import superttdd.producto.CategoriaProducto;
 import superttdd.producto.IProducto;
 import superttdd.producto.MarcaProducto;
@@ -69,15 +69,22 @@ public class OfertaCompuestaANDTest {
 		}
 		
 	}
+
+	@Test 
+	public void ofertaCategoriaANDProducto() {
+		prepararEscenarioCategoriaANDProducto();
+		oferta.aplicarOferta(productos);
+		
+		for(IProducto prod: prodsEspiados ) {
+			verify(prod, times(1)).addPorcentajeDescuento(anyDouble());
+		}
+	}
 	
 	@Test 
 	public void ofertaMarcaANDConjProds() {
 		prepararEscenarioMarcaANDConjProds();
-
 		oferta.aplicarOferta(productos);
-		
-		assertEquals(precioFinal, productos.get(0).getPrecioFinal());
-		
+		assertEquals(precioFinal, productos.get(0).getPrecioFinal()); 
 	}
 
 	
@@ -88,6 +95,16 @@ public class OfertaCompuestaANDTest {
 		
 		productos.add(spy(new Producto(regProd1)));
 		prodsEspiados.addAll(productos);
+	}
+	
+	private void prepararEscenarioCategoriaANDProducto() {
+		ofertas.add(new OfertaCategoria(new CategoriaProducto(CATEGORIA3), 0.0));
+		ofertas.add(new OfertaProducto(regProd3, 0.0));
+		
+		porcentajeDescuento = 50.0;
+		oferta = new OfertaCompuestaAND(ofertas, porcentajeDescuento);
+
+		productos.add(new Producto(regProd3));
 	}
 	
 	private void prepararEscenarioMarcaANDConjProds() {
