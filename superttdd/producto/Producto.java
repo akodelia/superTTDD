@@ -59,12 +59,12 @@ public class Producto implements IProducto {
 
 	@Override
 	public boolean validarCategoria(CategoriaProducto categoria) {
-		return this.registroProducto.getCategoria()==categoria;
+		return this.registroProducto.getCategoria().sonIguales(categoria);
 	}
 
 	@Override
 	public boolean validarMarca(MarcaProducto marca) {
-		return this.registroProducto.getMarca()==marca;
+		return this.registroProducto.getMarca().sonIguales(marca);
 	}
 
 	@Override

@@ -50,7 +50,7 @@ public class OfertaConjuntoProds extends Oferta {
 
 	@Override
 	public List<IProducto> obtenerProductosQueAplican(List<IProducto> productos) {
-		List<IProducto> prodsAplican = new ArrayList<IProducto>(productos);
+		List<IProducto> prodsAplican = new ArrayList<IProducto>();
 		
 		//productos que coinciden con un registro de la oferta
 		List<IProducto> productos_encontrados = new ArrayList<IProducto>();

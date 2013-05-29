@@ -56,10 +56,7 @@ public class OfertaCompuestaANDTest {
 	@Test 
 	public void ofertaMarcaANDCategoria() {
 		prepararEscenarioMarcaANDCategoria();
-		RegistroProducto registro = new RegistroProducto(categoria, marca, "Producto", 150.0);
-		IProducto mockProd = spy(new Producto(registro));
-		
-		productos.add(mockProd);
+
 		oferta.aplicarOferta(productos);
 		
 		for(IProducto prod: prodsEspiados ) {
@@ -71,15 +68,20 @@ public class OfertaCompuestaANDTest {
 	@Test 
 	public void ofertaMarcaANDConjProds() {
 		prepararEscenarioMarcaANDConjProds();
-		RegistroProducto registro = new RegistroProducto(categoria, marca, "Producto", 150.0);
-		IProducto mockProd = spy(new Producto(registro));
-		
-		productos.add(mockProd);
+//		ArgumentCaptor<Double> prodCaptor = ArgumentCaptor.forClass(Double.class);
+//		RegistroProducto registro = new RegistroProducto(categoria, marca, "Producto", 150.0);
+//		IProducto mockProd = spy(new Producto(registro));
+//		
+//		productos.add(mockProd);
 		oferta.aplicarOferta(productos);
 		
 		for(IProducto prod: prodsEspiados ) {
 			verify(prod, times(1)).addPorcentajeDescuento(anyDouble());
 		}
+		
+//		List<Double> descuentos = prodCaptor.getAllValues();
+		
+//		assertEquals();
 		
 	}
 
