@@ -10,6 +10,15 @@ public class ProductoCombo implements IProducto {
 		this.productos=new ArrayList<IProducto>();
 		this.productos.addAll(productos);
 	}
+	
+	public IProducto clonar() {
+		List<IProducto> productos_clonados = new ArrayList<IProducto>();
+		for(IProducto producto : productos) {
+			productos_clonados.add(producto.clonar());
+		}
+		IProducto producto_copia = new ProductoCombo(productos_clonados);
+		return producto_copia;
+	}
 
 	@Override
 	public boolean validarCategoria(CategoriaProducto categoria) {
@@ -63,7 +72,4 @@ public class ProductoCombo implements IProducto {
 		}
 		return sumatoria;
 	}
-
-	@Override
-	public void borrarDescuentos() {}
 }

@@ -4,6 +4,11 @@ public interface IProducto {
 	
 	public static final Double PORCENTAJE_MAX = 100.0;
 	
+	
+	/*
+	 * Crea una copia de si mismo
+	 */
+	public IProducto clonar();
 	/*
 	 * indica si el producto es de la categoria pasada por parametro
 	 */
@@ -32,11 +37,5 @@ public interface IProducto {
 	 * nombre del producto
 	 */
 	public String getNombre();
-	
-	/**
-	 *  Borra todos los descuentos que se le aplicaron al producto
-	 *  
-	 * */
-	public void borrarDescuentos(); 
 	
 }

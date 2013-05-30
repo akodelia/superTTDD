@@ -83,7 +83,7 @@ public class PruebaIntegracion1 {
 		ArrayList<Oferta> ofertas_promo = new ArrayList<Oferta>();
 		OfertaDia ofertaDia = crearOfertaDia();
 		ofertas_promo.add(ofertaDia);
-		PromoMedioPago promoXYZ = new PromoMedioPagoCompuestaAND(MedioPago.TARJETA_XYZ,ofertas_promo);
+		PromoMedioPago promoXYZ = new PromoMedioPagoCompuestaAND(MedioPago.TARJETA_XYZ,ofertas_promo, DESCUENTO_TARJETA);
 		promos.add(promoXYZ);
 		//--Orden De Compra--\\
 		ordenDeCompra = new OrdenDeCompra(ofertas);
@@ -93,7 +93,7 @@ public class PruebaIntegracion1 {
 	private OfertaDia crearOfertaDia() {
 		ArrayList<DiaSemana> diasSemana = new ArrayList<DiaSemana>();
 		diasSemana.add(DiaSemana.HOY);	
-		OfertaDia ofertaDia = new OfertaDia(DESCUENTO_TARJETA,diasSemana);
+		OfertaDia ofertaDia = new OfertaDia(5.0,diasSemana);
 		return ofertaDia;
 	}
 	

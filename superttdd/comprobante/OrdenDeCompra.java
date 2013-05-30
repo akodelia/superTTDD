@@ -9,6 +9,7 @@ import superttdd.producto.Producto;
 public class OrdenDeCompra {
 	
 	private ArrayList<IProducto> listaDeProductos;
+	private ArrayList<IProducto> copiaListaDeProductos;
 	private ArrayList<Oferta> listaDeOfertas;
 	private EstadoOrdenDeCompra estado;
 	
@@ -16,21 +17,30 @@ public class OrdenDeCompra {
 		return (this.estado == EstadoOrdenDeCompra.CERRADA && this.listaDeProductos.size() > 0);
 	}
 	
+	private void borrarDescuentosEnListaDeProductos() {
+		this.listaDeProductos.clear();
+		
+		for (IProducto producto: this.copiaListaDeProductos) {
+			this.listaDeProductos.add( producto.clonar()); 	
+		}
+		
+	}
+	
 	public OrdenDeCompra(ArrayList<Oferta> listadoDeOfertas) {
 		this.listaDeOfertas = listadoDeOfertas;
 		this.listaDeProductos = new ArrayList<IProducto>();
+		this.copiaListaDeProductos = new ArrayList<IProducto>();
 		this.estado = EstadoOrdenDeCompra.CERRADA;
 	}
 
 	public void agregarProducto(Producto producto) {
 		listaDeProductos.add(producto);
+		copiaListaDeProductos.add(producto);
 	}
 	
 	public void aplicarOfertas() {	
-		
-//		for (IProducto producto: this.listaDeProductos) {
-//			producto.addPorcentajeDescuento(0.0);
-//		}
+		this.borrarDescuentosEnListaDeProductos();
+
 		
 		for (Oferta oferta: this.listaDeOfertas) {
 			oferta.aplicarOferta(this.listaDeProductos);

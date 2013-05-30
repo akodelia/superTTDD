@@ -34,7 +34,7 @@ public class PromoMedioPagoCompuestaANDTest {
 	public void setUp() throws Exception {
 		ofertas=new ArrayList<Oferta>();
 		marca = new MarcaProducto(NOMBRE_MARCA_TEST);
-		OfertaMarca ofertaMarca = new OfertaMarca(marca, DESCUENTO_OFERTA);
+		OfertaMarca ofertaMarca = new OfertaMarca(marca, 0.0);
 		ofertas.add(ofertaMarca);
 		
 		productos=new ArrayList<IProducto>();
@@ -46,7 +46,7 @@ public class PromoMedioPagoCompuestaANDTest {
 		Producto producto = spy(new Producto(registro));
 		productos.add(producto);	
 		
-		promoCompuestaAND = new PromoMedioPagoCompuestaAND(MEDIO_PAGO_PROMO, ofertas);
+		promoCompuestaAND = new PromoMedioPagoCompuestaAND(MEDIO_PAGO_PROMO, ofertas, DESCUENTO_OFERTA);
 		
 		promoCompuestaAND.aplicarPromo(productos,MEDIO_PAGO_PROMO);
 		
@@ -59,7 +59,7 @@ public class PromoMedioPagoCompuestaANDTest {
 		Producto producto = spy(new Producto(registro));
 		productos.add(producto);
 		
-		promoCompuestaAND = new PromoMedioPagoCompuestaAND(MEDIO_PAGO_PROMO, ofertas);
+		promoCompuestaAND = new PromoMedioPagoCompuestaAND(MEDIO_PAGO_PROMO, ofertas, DESCUENTO_OFERTA);
 		
 		promoCompuestaAND.aplicarPromo(productos, MedioPago.EFECTIVO);
 		
@@ -74,7 +74,7 @@ public class PromoMedioPagoCompuestaANDTest {
 		Producto producto = spy(new Producto(registro));
 		productos.add(producto);
 		
-		promoCompuestaAND = new PromoMedioPagoCompuestaAND(MEDIO_PAGO_PROMO, ofertas);
+		promoCompuestaAND = new PromoMedioPagoCompuestaAND(MEDIO_PAGO_PROMO, ofertas, DESCUENTO_OFERTA);
 		
 		promoCompuestaAND.aplicarPromo(productos, MEDIO_PAGO_PROMO);
 		
