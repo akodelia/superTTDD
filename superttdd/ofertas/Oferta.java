@@ -1,25 +1,22 @@
 package superttdd.ofertas;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import superttdd.producto.Producto;
+import superttdd.producto.IProducto;
 
 public abstract class Oferta {
-	protected static ArrayList<Producto> lista_productos_final = new ArrayList<Producto>();
 	protected Double porcentajeDescuento;
 	
 	public Oferta(Double porcentajeDescuento){
 		this.porcentajeDescuento=porcentajeDescuento;
 	}
 
-	public abstract void aplicarOferta(List<Producto> productos);
+	public abstract void aplicarOferta(List<IProducto> productos);
 	
 	public Double getPorcentajeDescuento() {
 		return this.porcentajeDescuento;
 	}	
-	
-	public static ArrayList<Producto> getListaProductosFinal() {
-		return lista_productos_final;
-	}
+
+	public abstract List<IProducto> filtrarProductos(List<IProducto> productos);
+
 }

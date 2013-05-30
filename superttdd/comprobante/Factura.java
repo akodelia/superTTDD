@@ -3,7 +3,7 @@ import java.util.ArrayList;
 // import java.util.Date;
 
 import superttdd.caja.MedioPago;
-import superttdd.producto.Producto;
+import superttdd.producto.IProducto;
 import superttdd.promociones.PromoMedioPago;
 
 
@@ -13,20 +13,20 @@ public class Factura {
 	private Double montoTotalConDescuentos;
 	private MedioPago medioDePago;
 	// private Date fecha;
-	private ArrayList<Producto> listaDeProductos;
+	private ArrayList<IProducto> listaDeProductos;
 	private ArrayList<PromoMedioPago> listaDePromociones;
 		
 	private void generarMontoTotalSinDescuentos() {
 		this.montoTotalSinDescuentos = 0.0;
-		for (Producto producto : listaDeProductos) {
+		for (IProducto producto : listaDeProductos) {
 			this.montoTotalSinDescuentos += producto.getPrecioBase();
 		}
 	}
 	
 	private void generarMontoTotalConDescuentos() {
 		this.montoTotalConDescuentos = 0.0;
-		for (Producto producto : listaDeProductos) {
-			this.montoTotalConDescuentos += producto.generarPrecioFinal();
+		for (IProducto producto : listaDeProductos) {
+			this.montoTotalConDescuentos += producto.getPrecioFinal();
 		}		
 	}
 	
@@ -37,7 +37,7 @@ public class Factura {
 		}
 	}
 	
-	public Factura(long numeroDeFactura, MedioPago medioDePago, ArrayList<Producto> listaDeProductos) {
+	public Factura(long numeroDeFactura, MedioPago medioDePago, ArrayList<IProducto> listaDeProductos) {
 		this.numeroDeFactura = numeroDeFactura;
 		this.medioDePago = medioDePago;
 		this.listaDeProductos = listaDeProductos;	

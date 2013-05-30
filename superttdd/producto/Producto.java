@@ -1,14 +1,24 @@
 package superttdd.producto;
 
-public class Producto {
+public class Producto implements IProducto {
+	
 	private RegistroProducto registroProducto;
 
 	private Double porcentajeDescuento;
-	private final Double PORCENTAJE_MAX = 100.0;
+
+	private Producto(Producto unProducto) {
+		this.registroProducto = unProducto.registroProducto;
+		this.porcentajeDescuento = unProducto.porcentajeDescuento;
+	}
 	
 	public Producto(RegistroProducto registroProducto) {
-		this.registroProducto=registroProducto;
+		this.registroProducto = registroProducto;
 		this.porcentajeDescuento = 0.0;
+	}
+	
+	
+	public IProducto clonar() {
+		return new Producto(this);
 	}
 	
 	public CategoriaProducto getCategoriaProducto() {
@@ -22,8 +32,8 @@ public class Producto {
 	public MarcaProducto getMarca() {
 		return registroProducto.getMarca();
 	}
-
-	public void setPorcentajeDescuento(Double porcentajeDescuento) {
+	@Override
+	public void addPorcentajeDescuento(Double porcentajeDescuento) {
 		this.porcentajeDescuento += porcentajeDescuento ;
 		if(porcentajeMaximoSuperado()) {
 			this.porcentajeDescuento = PORCENTAJE_MAX;
@@ -36,23 +46,46 @@ public class Producto {
 		}
 		return false;
 	}
-	
+	@Override
 	public String getNombre() {
 		return registroProducto.getNombre();
 	}
-
+	@Override
 	public Double getPrecioBase() {
 		return registroProducto.getPrecio(); 
 	}
 
-	public Double generarPrecioFinal() {
+
+	@Override
+	public Double getPrecioFinal() {
 		Double descuento = registroProducto.getPrecio() * porcentajeDescuento / 100;
 		
 		return (registroProducto.getPrecio() - descuento);
 	}
 	
-	public RegistroProducto getRegistroProducto() {
+	protected RegistroProducto getRegistroProducto() {
 		return registroProducto;
+	}
+
+	@Override
+	public boolean validarCategoria(CategoriaProducto categoria) {
+		if(this.registroProducto.getCategoria() != null) {
+			return this.registroProducto.getCategoria().sonIguales(categoria);
+		}
+		return false;
+	}
+
+	@Override
+	public boolean validarMarca(MarcaProducto marca) {
+		if(this.registroProducto.getMarca() != null) {
+			return this.registroProducto.getMarca().sonIguales(marca);
+		}
+		return false;
+	}
+
+	@Override
+	public boolean validarRegistroProducto(RegistroProducto registro) {
+		return this.registroProducto.equals(registro);
 	}
 
 }

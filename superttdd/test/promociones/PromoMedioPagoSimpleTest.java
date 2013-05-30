@@ -13,6 +13,7 @@ import org.junit.Test;
 
 import superttdd.caja.MedioPago;
 import superttdd.producto.CategoriaProducto;
+import superttdd.producto.IProducto;
 import superttdd.producto.MarcaProducto;
 import superttdd.producto.Producto;
 import superttdd.producto.RegistroProducto;
@@ -26,14 +27,14 @@ public class PromoMedioPagoSimpleTest {
 	private static final MedioPago MEDIO_PAGO_FACTURA = MedioPago.EFECTIVO;
 	private PromoMedioPagoSimple promoMedioPagoSimple;
 	Producto mockProd;
-	List<Producto> productos;
+	List<IProducto> productos;
 	
 
 	@Before
 	public void setUp() throws Exception {
 		RegistroProducto registro = new RegistroProducto(mock(CategoriaProducto.class), mock(MarcaProducto.class), "Producto", PRECIO_PRODUCTO );
 		mockProd = spy(new Producto(registro));
-		productos = new ArrayList<Producto>();
+		productos = new ArrayList<IProducto>();
 		productos.add(mockProd);
 	}
 
@@ -41,14 +42,14 @@ public class PromoMedioPagoSimpleTest {
 	public void PromoMedioPagoSimpleAplicaDescuentoParaCompraConMismoMedioPago() {
 		promoMedioPagoSimple=new PromoMedioPagoSimple(MedioPago.EFECTIVO, DESCUENTO_PROMO);		
 		promoMedioPagoSimple.aplicarPromo(productos, MEDIO_PAGO_FACTURA);		
-		verify(mockProd, times(1)).setPorcentajeDescuento(DESCUENTO_PROMO);
+		verify(mockProd, times(1)).addPorcentajeDescuento(DESCUENTO_PROMO);
 	}
 	
 	@Test
 	public void PromoMedioPagoSimpleNoAplicaDescuentoParaCompraConDistintoMedioPago() {
-		promoMedioPagoSimple=new PromoMedioPagoSimple(MedioPago.TARJETA, DESCUENTO_PROMO);		
+		promoMedioPagoSimple=new PromoMedioPagoSimple(MedioPago.TARJETA_XYZ, DESCUENTO_PROMO);		
 		promoMedioPagoSimple.aplicarPromo(productos, MEDIO_PAGO_FACTURA);
-		verify(mockProd, times(0)).setPorcentajeDescuento(DESCUENTO_PROMO);
+		verify(mockProd, times(0)).addPorcentajeDescuento(DESCUENTO_PROMO);
 	}
 
 }

@@ -7,35 +7,37 @@ import org.junit.Test;
 
 import superttdd.producto.CategoriaProducto;
 import superttdd.producto.MarcaProducto;
-import superttdd.producto.Producto;
+import superttdd.producto.ProductoCuantificable;
 import superttdd.producto.RegistroProducto;
 
-public class ProductoTest {
-
-	Producto producto;
+public class ProductoCuantificableTest {
+	
+	ProductoCuantificable producto;
 	MarcaProducto marca;
 	CategoriaProducto categoria;
+	String NOMBRE_PROD = "Papa";
+	Double cantidad = 1.5;
 	
 	@Before
 	public void setUp() {
-		String nombre = "ProductoTest";
-		Double precioBase = 100.0;
-		marca = new MarcaProducto("Pepsi");
-		categoria = new CategoriaProducto("Categoria");
-		RegistroProducto registro = new RegistroProducto(categoria, marca, nombre, precioBase);
-		this.producto = new Producto(registro);	
+		Double precioBase = 10.0;
+		marca = new MarcaProducto("Papa rica");
+		categoria = new CategoriaProducto("Verdulería");
+		RegistroProducto registro = new RegistroProducto(categoria, marca, NOMBRE_PROD, precioBase);
+		producto = new ProductoCuantificable(registro, cantidad);	
 	}
 	
 	@Test
 	public void precioFinalSinDescuento() {
-		assertEquals(producto.getPrecioBase(), producto.getPrecioFinal());
+		Double precioEsperado = producto.getPrecioBase() * cantidad; 
+		assertEquals(precioEsperado, producto.getPrecioFinal());
 	}
 	
 	@Test
 	public void precioFinalConUnDescuento() {
 		Double precioInicial = producto.getPrecioBase();
 		Double importeDescuento = precioInicial * producto.getPorcentajeDescuento() / 100;
-		Double precioFinalEsperado = precioInicial - importeDescuento;
+		Double precioFinalEsperado = (precioInicial - importeDescuento) * cantidad;
 		
 		assertEquals(precioFinalEsperado, producto.getPrecioFinal());
 	}
@@ -62,7 +64,7 @@ public class ProductoTest {
 		Double primerDesc = 40.0;
 		Double segundoDesc = 25.5;
 		Double montoDescuento = producto.getPrecioBase() * (primerDesc + segundoDesc) / 100;  
-		Double precioFinalEsperado = producto.getPrecioBase() - montoDescuento;
+		Double precioFinalEsperado = (producto.getPrecioBase() - montoDescuento) * cantidad;
 		
 		
 		producto.addPorcentajeDescuento(primerDesc);
@@ -70,5 +72,5 @@ public class ProductoTest {
 		
 		assertEquals(precioFinalEsperado , producto.getPrecioFinal());
 	}
-}
 
+}

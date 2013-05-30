@@ -3,11 +3,13 @@ import java.util.ArrayList;
 
 import superttdd.caja.MedioPago;
 import superttdd.ofertas.Oferta;
+import superttdd.producto.IProducto;
 import superttdd.producto.Producto;
 
 public class OrdenDeCompra {
 	
-	private ArrayList<Producto> listaDeProductos;
+	private ArrayList<IProducto> listaDeProductos;
+	private ArrayList<IProducto> copiaListaDeProductos;
 	private ArrayList<Oferta> listaDeOfertas;
 	private EstadoOrdenDeCompra estado;
 	
@@ -15,24 +17,30 @@ public class OrdenDeCompra {
 		return (this.estado == EstadoOrdenDeCompra.CERRADA && this.listaDeProductos.size() > 0);
 	}
 	
+	private void borrarDescuentosEnListaDeProductos() {
+		this.listaDeProductos.clear();
+		
+		for (IProducto producto: this.copiaListaDeProductos) {
+			this.listaDeProductos.add( producto.clonar()); 	
+		}
+		
+	}
+	
 	public OrdenDeCompra(ArrayList<Oferta> listadoDeOfertas) {
 		this.listaDeOfertas = listadoDeOfertas;
-		this.listaDeProductos = new ArrayList<Producto>();
+		this.listaDeProductos = new ArrayList<IProducto>();
+		this.copiaListaDeProductos = new ArrayList<IProducto>();
 		this.estado = EstadoOrdenDeCompra.CERRADA;
 	}
 
 	public void agregarProducto(Producto producto) {
 		listaDeProductos.add(producto);
+		copiaListaDeProductos.add(producto);
 	}
 	
 	public void aplicarOfertas() {	
-		
-		for (Producto producto: this.listaDeProductos) {
-			// Esto no sé si está bien, pero antes de aplicarse las ofertas, deberían 
-			// borrarse ofertas previamente aplicadas para que una oferta no esté
-			// dos veces aplicadas al mismo producto
-			producto.setPorcentajeDescuento(0.0);
-		}
+		this.borrarDescuentosEnListaDeProductos();
+
 		
 		for (Oferta oferta: this.listaDeOfertas) {
 			oferta.aplicarOferta(this.listaDeProductos);
@@ -42,8 +50,8 @@ public class OrdenDeCompra {
 	public Double obtenerSubtotalConDescuentos() {
 		Double subtotal = 0.0;
 		
-		for (Producto producto: this.listaDeProductos) {
-			subtotal += producto.generarPrecioFinal();
+		for (IProducto producto: this.listaDeProductos) {
+			subtotal += producto.getPrecioFinal();
 		}
 		return subtotal;
 	}
@@ -51,7 +59,7 @@ public class OrdenDeCompra {
 	public Double obtenerSubtotalSinDescuentos() {
 		Double subtotal = 0.0;
 		
-		for (Producto producto: this.listaDeProductos) {
+		for (IProducto producto: this.listaDeProductos) {
 			subtotal += producto.getPrecioBase();
 		}
 		return subtotal;

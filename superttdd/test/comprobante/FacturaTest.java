@@ -1,14 +1,10 @@
 package superttdd.test.comprobante;
 
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.when;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -17,6 +13,7 @@ import superttdd.caja.MedioPago;
 import superttdd.comprobante.Factura;
 import superttdd.ofertas.OfertaProducto;
 import superttdd.producto.CategoriaProducto;
+import superttdd.producto.IProducto;
 import superttdd.producto.MarcaProducto;
 import superttdd.producto.Producto;
 import superttdd.producto.RegistroProducto;
@@ -31,7 +28,7 @@ public class FacturaTest {
 	private static final Double PRECIO_BASE_PRODUCTO_1 = 10.0;
 	private static final Double PRECIO_BASE_PRODUCTO_2 = 20.0;
 	private static final Double DESCUENTO_PRODUCTO_1 = 10.0;
-	private ArrayList<Producto> listaDeProductos;
+	private ArrayList<IProducto> listaDeProductos;
 	private PromoMedioPagoSimple mockPromoSimple;
 	private Producto mockProd1;
 	private Producto mockProd2;
@@ -44,21 +41,17 @@ public class FacturaTest {
 
 	@Before
 	public void setUp() throws Exception {
-		/* Creo los mocks a utilizar */
-		
 		// TODO: Esto debería ser un Mock, pero no sé como hacer un Mock tan complejo :S
 		mockPromoSimple = new PromoMedioPagoSimple(MedioPago.TARJETA, 20.0);
 		listaPromociones = new ArrayList<PromoMedioPago>();
 		listaPromociones.add(mockPromoSimple);
 		
-		// Mock Productos
-		//ofertaProducto= new OfertaProducto(registro_oferta, porcentajeDescuento);
 		RegistroProducto registro1 = new RegistroProducto(mock(CategoriaProducto.class), mock(MarcaProducto.class), NOMBRE_PRODUCTO_1, PRECIO_BASE_PRODUCTO_1 );
 		RegistroProducto registro2 = new RegistroProducto(mock(CategoriaProducto.class), mock(MarcaProducto.class), NOMBRE_PRODUCTO_2, PRECIO_BASE_PRODUCTO_2 );
 		mockProd1 = spy(new Producto(registro1));
-		mockProd1.setPorcentajeDescuento(DESCUENTO_PRODUCTO_1);
+		mockProd1.addPorcentajeDescuento(DESCUENTO_PRODUCTO_1);
 		mockProd2 = spy(new Producto(registro2));
-		listaDeProductos = new ArrayList<Producto>();
+		listaDeProductos = new ArrayList<IProducto>();
 		listaDeProductos.add(mockProd1);
 		listaDeProductos.add(mockProd2);
 	}
