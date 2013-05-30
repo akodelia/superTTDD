@@ -1,12 +1,14 @@
 package superttdd.producto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProductoCombo implements IProducto {
 	List<IProducto> productos;
 	
 	public ProductoCombo(List<IProducto> productos) {
-		this.productos=productos;
+		this.productos=new ArrayList<IProducto>();
+		this.productos.addAll(productos);
 	}
 
 	@Override

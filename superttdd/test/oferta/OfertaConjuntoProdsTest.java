@@ -32,8 +32,11 @@ public class OfertaConjuntoProdsTest {
 	public void setUp() throws Exception {
 		productos = new ArrayList<IProducto>();
 		registros_oferta=new ArrayList<RegistroProducto>();
-		CategoriaProducto categoria = mock(CategoriaProducto.class);
-		MarcaProducto marca =mock(MarcaProducto.class);
+//		CategoriaProducto categoria = mock(CategoriaProducto.class);
+//		MarcaProducto marca =mock(MarcaProducto.class);
+		
+		CategoriaProducto categoria = new CategoriaProducto("Gaseosas");
+		MarcaProducto marca =new MarcaProducto("CocaCola");
 		
 		registro_producto1 = new RegistroProducto(categoria, marca, "Coca Cola", 20.0);
 		registro_producto2 = new RegistroProducto(categoria, marca, "Fanta", 20.0);	
