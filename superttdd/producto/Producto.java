@@ -32,7 +32,7 @@ public class Producto implements IProducto {
 	public MarcaProducto getMarca() {
 		return registroProducto.getMarca();
 	}
-
+	@Override
 	public void addPorcentajeDescuento(Double porcentajeDescuento) {
 		this.porcentajeDescuento += porcentajeDescuento ;
 		if(porcentajeMaximoSuperado()) {
@@ -46,11 +46,11 @@ public class Producto implements IProducto {
 		}
 		return false;
 	}
-	
+	@Override
 	public String getNombre() {
 		return registroProducto.getNombre();
 	}
-
+	@Override
 	public Double getPrecioBase() {
 		return registroProducto.getPrecio(); 
 	}

@@ -13,7 +13,11 @@ public class OfertaConjuntoProds extends Oferta {
 	public OfertaConjuntoProds(List<RegistroProducto> registro_productos,
 			Double porcentajeDescuento) {
 		super(porcentajeDescuento);
-		this.registro_productos = registro_productos;
+		if (registro_productos != null) {
+			this.registro_productos = registro_productos;
+		} else {
+			this.registro_productos = new ArrayList<RegistroProducto>();
+		}
 	}
 
 	@Override
@@ -25,6 +29,9 @@ public class OfertaConjuntoProds extends Oferta {
 		// productos que coinciden con un registro de la oferta
 		productos_encontrados = new ArrayList<IProducto>();
 		copia_registros = new ArrayList<RegistroProducto>(registro_productos);
+		if (registro_productos.isEmpty()) {
+			return;
+		}
 
 		while (hubo_coincidencias) {
 			/*
