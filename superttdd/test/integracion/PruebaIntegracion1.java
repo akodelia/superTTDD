@@ -22,7 +22,6 @@ import superttdd.producto.Producto;
 import superttdd.producto.RegistroProducto;
 import superttdd.promociones.PromoMedioPago;
 import superttdd.promociones.PromoMedioPagoCompuestaAND;
-import superttdd.promociones.PromoMedioPagoSimple;
 
 public class PruebaIntegracion1 {
 	private static final double DESCUENTO_TARJETA = 10.0;
@@ -98,7 +97,7 @@ public class PruebaIntegracion1 {
 	}
 	
 	@Test
-	public void pruebaIntegracion1() {
+	public void pruebaIntegracion1_totalDescuento() {
 		ordenDeCompra.abrirOrdenDeCompra();
 		for(Producto producto: productos) {
 			ordenDeCompra.agregarProducto(producto);
@@ -109,8 +108,25 @@ public class PruebaIntegracion1 {
 		factura.cargarPromocionesPorMedioDePago(promos);
 		factura.procesarFactura();
 		Double total_obtenido = factura.getMontoTotalConDescuentos();
-		Double total_esperado = (PRECIO_COCA_COLA+PRECIO_CEPILLO+PRECIO_MACETA)*(100-DESCUENTO_TARJETA)/100;
-		Assert.assertEquals(total_esperado,total_obtenido);
+		Double aux=PRECIO_COCA_COLA+PRECIO_CEPILLO+PRECIO_MACETA;
+		Double total_esperado = aux - (PRECIO_COCA_COLA+PRECIO_CEPILLO+PRECIO_MACETA)*(DESCUENTO_TARJETA)/100;
+		Assert.assertEquals(total_esperado,total_obtenido);	
+	}
+	
+	@Test
+	public void pruebaIntegracion1_totalSinDescuento() {
+		ordenDeCompra.abrirOrdenDeCompra();
+		for(Producto producto: productos) {
+			ordenDeCompra.agregarProducto(producto);
+		}
+		ordenDeCompra.aplicarOfertas();
+		ordenDeCompra.cerrarOrdenDeCompra();
+		Factura factura = ordenDeCompra.generarFactura(MedioPago.TARJETA_XYZ, 25);
+		factura.cargarPromocionesPorMedioDePago(promos);
+		factura.procesarFactura();
+		Double total_sin_descuento=2*PRECIO_COCA_COLA+PRECIO_CEPILLO+PRECIO_MACETA;
+		Double aux=PRECIO_COCA_COLA+PRECIO_CEPILLO+PRECIO_MACETA;
+		Assert.assertEquals(total_sin_descuento, factura.getMontoTotalSinDescuentos());
 		
 	}
 
