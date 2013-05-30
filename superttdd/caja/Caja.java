@@ -1,12 +1,12 @@
 package superttdd.caja;
 import java.util.ArrayList;
+
 import superttdd.comprobante.Factura;
 import superttdd.comprobante.OrdenDeCompra;
 import superttdd.ofertas.Oferta;
-import superttdd.ofertas.OfertaCategoria;
-//import superttdd.producto.CategoriaProducto;
 import superttdd.producto.Producto;
 import superttdd.promociones.PromoMedioPago;
+//import superttdd.producto.CategoriaProducto;
 
 public class Caja {
 
@@ -15,6 +15,7 @@ public class Caja {
 	private ArrayList<Oferta> listaDeOfertas;
 	private ArrayList<Factura> listaDeFacturas;
 	private ArrayList<PromoMedioPago> listaDePromos;
+	private Factura facturaCompraActual;
 	private long contadorNumerosDeFactura;
 	
 	private void agregarFactura(Factura unaFactura) {
@@ -24,6 +25,7 @@ public class Caja {
 	public Caja() {
 		estadoCaja = EstadoCaja.CERRADA;
 		ordenDeCompra = null;
+		facturaCompraActual = null;
 		listaDeOfertas = new ArrayList<Oferta>();
 		listaDePromos = new ArrayList<PromoMedioPago>();
 		contadorNumerosDeFactura = 0;
@@ -61,21 +63,49 @@ public class Caja {
 	
 	public void confirmarCompra(MedioPago medioDePago) {
 		this.ordenDeCompra.cerrarOrdenDeCompra();
-		this.agregarFactura(this.ordenDeCompra.generarFactura(medioDePago, ++contadorNumerosDeFactura));
-		this.ordenDeCompra = null;	
+		this.facturaCompraActual = this.ordenDeCompra.generarFactura(medioDePago, ++contadorNumerosDeFactura);
+		this.facturaCompraActual.cargarPromocionesPorMedioDePago(listaDePromos);
+		this.facturaCompraActual.procesarFactura();
+		this.ordenDeCompra = null;
 	}
 
+	public void cerrarCompra() {
+		this.agregarFactura(this.facturaCompraActual);
+		this.facturaCompraActual = null;
+	}
+	
+	public Double obtenerSubTotalCompraSinDescuentos() {
+		if (this.ordenDeCompra != null) {
+			return this.ordenDeCompra.obtenerSubtotalSinDescuentos();	
+		}
+		else {
+			throw new RuntimeException("Orden de Compra no existe o ya fue procesada");
+		}
+	}
+	
+	public Double obtenerSubTotalCompraConDescuentos() {
+		if (this.ordenDeCompra != null) {
+			return this.ordenDeCompra.obtenerSubtotalConDescuentos();	
+		}
+		else {
+			throw new RuntimeException("Orden de Compra no existe o ya fue procesada");
+		}
+	}
+	
 	public Double obtenerTotalCompraSinDescuentos() {
-		return this.ordenDeCompra.obtenerSubtotalSinDescuentos();
+		return this.facturaCompraActual.getMontoTotalSinDescuentos();
 	}
 	
-	public Double visualizarSubTotalCompraConDescuentos() {
-		return this.ordenDeCompra.obtenerSubtotalConDescuentos();
+	public Double obtenerTotalCompraConDescuentos() {
+		return this.facturaCompraActual.getMontoTotalConDescuentos();
 	}
 	
+	
+	/* Política tomada: Monto en caja por cada medio de pago se toma como
+	 * la cantidad de dinero total (con descuentos) abonados por cada medio 
+	 * de pago
+	 */
 	public Double visualizarMontoEnCajaPorMedioDePago(MedioPago medioDePago) {
-		// TODO: Esto o bien es como está implementado, o es el dinero descontado
-		// de las facturas debido al descuento provisto por la tarjeta
 		Double total = 0.0;
 		for (Factura factura : this.listaDeFacturas) {
 			if (factura.getMedioDePago() == medioDePago) {
