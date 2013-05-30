@@ -88,9 +88,4 @@ public class Producto implements IProducto {
 		return this.registroProducto.equals(registro);
 	}
 
-	@Override
-	public void borrarDescuentos() {
-		this.porcentajeDescuento = 0.0;	
-	}
-
 }
