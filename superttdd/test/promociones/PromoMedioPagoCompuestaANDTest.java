@@ -24,7 +24,7 @@ public class PromoMedioPagoCompuestaANDTest {
 	private static final String NOMBRE_MARCA_DISTINTA_TEST = "marcaDistintaTest";
 	private static final double PRECIO_PRODUCTO = 10.0;
 	private static final double DESCUENTO_OFERTA = 5.0;
-	private static final MedioPago MEDIO_PAGO_PROMO = MedioPago.TARJETA;
+	private static final MedioPago MEDIO_PAGO_PROMO = MedioPago.TARJETA_XYZ;
 	private List<Oferta> ofertas;
 	private List<IProducto> productos;
 	private MarcaProducto marca;

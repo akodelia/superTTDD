@@ -47,7 +47,7 @@ public class PromoMedioPagoSimpleTest {
 	
 	@Test
 	public void PromoMedioPagoSimpleNoAplicaDescuentoParaCompraConDistintoMedioPago() {
-		promoMedioPagoSimple=new PromoMedioPagoSimple(MedioPago.TARJETA, DESCUENTO_PROMO);		
+		promoMedioPagoSimple=new PromoMedioPagoSimple(MedioPago.TARJETA_XYZ, DESCUENTO_PROMO);		
 		promoMedioPagoSimple.aplicarPromo(productos, MEDIO_PAGO_FACTURA);
 		verify(mockProd, times(0)).addPorcentajeDescuento(DESCUENTO_PROMO);
 	}

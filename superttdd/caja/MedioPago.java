@@ -2,5 +2,6 @@ package superttdd.caja;
 
 public enum MedioPago {
 	EFECTIVO,
-	TARJETA;
+	TARJETA,
+	TARJETA_XYZ;
 }
