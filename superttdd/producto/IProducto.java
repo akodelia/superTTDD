@@ -1,6 +1,9 @@
 package superttdd.producto;
 
 public interface IProducto {
+	
+	public static final Double PORCENTAJE_MAX = 100.0;
+	
 	/*
 	 * indica si el producto es de la categoria pasada por parametro
 	 */
