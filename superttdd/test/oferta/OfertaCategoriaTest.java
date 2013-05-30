@@ -25,13 +25,15 @@ public class OfertaCategoriaTest {
 	OfertaCategoria oferta;
 	MarcaProducto marca;
 	List<IProducto> productos;
-
+	Double porcentajeDescuento;
+	
 	@Before
 	public void setUp() {
 		categoria = new CategoriaProducto("Farmacia");
 		otraCategoria = new CategoriaProducto("Almacén");
 		marca = new MarcaProducto("Marca");
-		oferta = new OfertaCategoria(categoria, 15.0);
+		porcentajeDescuento = 15.0;
+		oferta = new OfertaCategoria(categoria, porcentajeDescuento);
 		productos = new ArrayList<IProducto>();
 	}
 
@@ -43,7 +45,7 @@ public class OfertaCategoriaTest {
 
 		oferta.aplicarOferta(productos);
 		
-		verify(mockProd, times(1)).addPorcentajeDescuento(anyDouble());
+		verify(mockProd, times(1)).addPorcentajeDescuento(porcentajeDescuento);
 	}
 
 	@Test

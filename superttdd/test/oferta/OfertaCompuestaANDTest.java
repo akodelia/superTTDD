@@ -1,10 +1,10 @@
 package superttdd.test.oferta;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Matchers.anyDouble;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Matchers.anyDouble;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,56 +61,96 @@ public class OfertaCompuestaANDTest {
 	}	
 	
 	@Test 
-	public void ofertaMarcaANDCategoria() {
-		prepararEscenarioMarcaANDCategoria();
+	public void aplicarOfertaMarcaANDCategoria() {
+		prepararAplicarMarcaANDCategoria();
 
 		oferta.aplicarOferta(productos);
 		
 		for(IProducto prod: prodsEspiados ) {
-			verify(prod, times(1)).addPorcentajeDescuento(anyDouble());
+			verify(prod, times(1)).addPorcentajeDescuento(porcentajeDescuento);
 		}
-		
 	}
 
 	@Test 
-	public void ofertaCategoriaANDProducto() {
-		prepararEscenarioCategoriaANDProducto();
+	public void aplicarOCategoriaANDProducto() {
+		prepararAplicarCategoriaANDProducto();
 		oferta.aplicarOferta(productos);
 		
 		for(IProducto prod: prodsEspiados ) {
-			verify(prod, times(1)).addPorcentajeDescuento(anyDouble());
+			verify(prod, times(1)).addPorcentajeDescuento(porcentajeDescuento);
 		}
 	}
 	
 	@Test 
-	public void ofertaCategoriaANDProductoANDMarcaANDDiaOferta() {
-		prepararEscenarioCategoriaANDProductoANDMarcaANDDiaOferta();
+	public void aplicarOfertaCategoriaANDProductoANDMarcaANDDiaOferta() {
+		prepararAplicarCategoriaANDProductoANDMarcaANDDiaOferta();
 		oferta.aplicarOferta(productos);
 		
 		for(IProducto prod: prodsEspiados ) {
-			verify(prod, times(1)).addPorcentajeDescuento(anyDouble());
+			verify(prod, times(1)).addPorcentajeDescuento(porcentajeDescuento);
 		}
 	}
 	
 	
 	@Test 
-	public void ofertaMarcaANDConjProds() {
-		prepararEscenarioMarcaANDConjProds();
+	public void aplicarOfertaMarcaANDConjProds() {
+		prepararAplicarMarcaANDConjProds();
 		oferta.aplicarOferta(productos);
 		assertEquals(precioFinal, productos.get(0).getPrecioFinal()); 
 	}
 
+	@Test 
+	public void noAplicarOfertaMarcaANDCategoria() {
+		prepararNOAplicarMarcaANDCategoria();
+
+		oferta.aplicarOferta(productos);
+		
+		for(IProducto prod: prodsEspiados ) {
+			verify(prod, times(0)).addPorcentajeDescuento(anyDouble());
+		}
+	}
+
+	@Test 
+	public void noAplicarOCategoriaANDProducto() {
+		prepararNOAplicarCategoriaANDProducto();
+		oferta.aplicarOferta(productos);
+		
+		for(IProducto prod: prodsEspiados ) {
+			verify(prod, times(0)).addPorcentajeDescuento(anyDouble());
+		}
+	}
 	
-	private void prepararEscenarioMarcaANDCategoria() {
+	@Test 
+	public void noAplicarOfertaCategoriaANDProductoANDMarcaANDDiaOferta() {
+		prepararNOAplicarCategoriaANDProductoANDMarcaANDDiaOferta();
+		oferta.aplicarOferta(productos);
+		
+		for(IProducto prod: prodsEspiados ) {
+			verify(prod, times(0)).addPorcentajeDescuento(anyDouble());
+		}
+	}
+	
+	
+	@Test 
+	public void noAplicarOfertaMarcaANDConjProds() {
+		prepararNOAplicarMarcaANDConjProds();
+		oferta.aplicarOferta(productos);
+		for(IProducto prod: prodsEspiados ) {
+			verify(prod, times(0)).addPorcentajeDescuento(anyDouble());
+		} 
+	}
+
+	private void prepararAplicarMarcaANDCategoria() {
 		ofertas.add(new OfertaMarca(new MarcaProducto(MARCA1), 0.0));
 		ofertas.add(new OfertaCategoria(new CategoriaProducto(CATEGORIA1), 0.0));
-		oferta = new OfertaCompuestaAND(ofertas, 25.0);
+		porcentajeDescuento = 25.0;
+		oferta = new OfertaCompuestaAND(ofertas, porcentajeDescuento);
 		
 		productos.add(spy(new Producto(regProd1)));
 		prodsEspiados.addAll(productos);
 	}
 	
-	private void prepararEscenarioCategoriaANDProducto() {
+	private void prepararAplicarCategoriaANDProducto() {
 		ofertas.add(new OfertaCategoria(new CategoriaProducto(CATEGORIA3), 0.0));
 		ofertas.add(new OfertaProducto(regProd3, 0.0));
 		
@@ -120,7 +160,7 @@ public class OfertaCompuestaANDTest {
 		productos.add(new Producto(regProd3));
 	}
 	
-	private void prepararEscenarioMarcaANDConjProds() {
+	private void prepararAplicarMarcaANDConjProds() {
 		List<RegistroProducto> registros = new ArrayList<RegistroProducto>();
 		registros.add(regProd1);
 		registros.add(regProd1);
@@ -132,16 +172,70 @@ public class OfertaCompuestaANDTest {
 				
 		productos.add(new Producto(regProd1));
 		productos.add(new Producto(regProd1));
-		
+
 		Double precioBaseTotal = 0.0;
 		for(IProducto producto: productos) {
 			precioBaseTotal += producto.getPrecioBase();
 		}
-		
+
 		precioFinal = precioBaseTotal - precioBaseTotal * oferta.getPorcentajeDescuento() / 100.0; 
 	}
 	
-	private void prepararEscenarioCategoriaANDProductoANDMarcaANDDiaOferta() {
+	private void prepararAplicarCategoriaANDProductoANDMarcaANDDiaOferta() {
+		List<DiaSemana> diaSemana = new ArrayList<DiaSemana>();
+		diaSemana.add(DiaSemana.HOY);
+		ofertas.add(new OfertaCategoria(new CategoriaProducto(CATEGORIA3), 0.0));
+		ofertas.add(new OfertaDia(0.0, diaSemana));
+		ofertas.add(new OfertaMarca(new MarcaProducto(MARCA3), 0.0));
+		ofertas.add(new OfertaProducto(regProd3, 0.0));
+		
+		porcentajeDescuento = 50.0;
+		oferta = new OfertaCompuestaAND(ofertas, porcentajeDescuento);
+
+		productos.add(new Producto(regProd3));
+	}
+	
+	private void prepararNOAplicarMarcaANDCategoria() {
+		ofertas.add(new OfertaMarca(new MarcaProducto(MARCA1), 0.0));
+		ofertas.add(new OfertaCategoria(new CategoriaProducto(CATEGORIA1), 0.0));
+		oferta = new OfertaCompuestaAND(ofertas, 25.0);
+		
+		productos.add(spy(new Producto(regProd2)));
+		prodsEspiados.addAll(productos);
+	}
+	
+	private void prepararNOAplicarCategoriaANDProducto() {
+		ofertas.add(new OfertaCategoria(new CategoriaProducto(CATEGORIA3), 0.0));
+		ofertas.add(new OfertaProducto(regProd3, 0.0));
+		
+		porcentajeDescuento = 50.0;
+		oferta = new OfertaCompuestaAND(ofertas, porcentajeDescuento);
+
+		productos.add(new Producto(regProd1));
+	}
+	
+	private void prepararNOAplicarMarcaANDConjProds() {
+		List<RegistroProducto> registros = new ArrayList<RegistroProducto>();
+		registros.add(regProd1);
+		registros.add(regProd1);
+		
+		ofertas.add(new OfertaMarca(new MarcaProducto(MARCA1), 0.0));
+		ofertas.add(new OfertaConjuntoProds(registros, 0.0));
+		
+		oferta = new OfertaCompuestaAND(ofertas, 25.0);
+				
+		productos.add(new Producto(regProd2));
+		productos.add(new Producto(regProd1));
+
+		Double precioBaseTotal = 0.0;
+		for(IProducto producto: productos) {
+			precioBaseTotal += producto.getPrecioBase();
+		}
+
+		precioFinal = precioBaseTotal - precioBaseTotal * oferta.getPorcentajeDescuento() / 100.0; 
+	}
+	
+	private void prepararNOAplicarCategoriaANDProductoANDMarcaANDDiaOferta() {
 		List<DiaSemana> diaSemana = new ArrayList<DiaSemana>();
 		diaSemana.add(DiaSemana.HOY);
 		ofertas.add(new OfertaCategoria(new CategoriaProducto(CATEGORIA3), 0.0));
@@ -154,4 +248,6 @@ public class OfertaCompuestaANDTest {
 
 		productos.add(new Producto(regProd3));
 	}	
+
 }
+
