@@ -78,4 +78,10 @@ public class Producto implements IProducto {
 		return this.registroProducto.equals(registro);
 	}
 
+	@Override
+	public void borrarDescuentos() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

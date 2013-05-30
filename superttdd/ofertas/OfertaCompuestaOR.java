@@ -16,19 +16,19 @@ public class OfertaCompuestaOR extends Oferta {
 
 	@Override
 	public void aplicarOferta(List<IProducto> productos) {
-		List<IProducto> productos_que_aplican = obtenerProductosQueAplican(productos);
+		List<IProducto> productos_que_aplican = filtrarProductos(productos);
 		for(IProducto producto : productos_que_aplican) {
 			producto.addPorcentajeDescuento(this.porcentajeDescuento);
 		}
 	}
 
 	@Override
-	public List<IProducto> obtenerProductosQueAplican(List<IProducto> productos) {
+	public List<IProducto> filtrarProductos(List<IProducto> productos) {
 		ArrayList<IProducto> productos_que_aplican = new ArrayList<IProducto>();
 		List<IProducto> productos_que_aplican_oferta;
 		for (Oferta oferta : ofertas) {
 			productos_que_aplican_oferta = oferta
-					.obtenerProductosQueAplican(productos);
+					.filtrarProductos(productos);
 			agregarSinDuplicados(productos_que_aplican_oferta,
 					productos_que_aplican);
 		}

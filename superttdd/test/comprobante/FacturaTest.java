@@ -41,15 +41,11 @@ public class FacturaTest {
 
 	@Before
 	public void setUp() throws Exception {
-		/* Creo los mocks a utilizar */
-		
 		// TODO: Esto debería ser un Mock, pero no sé como hacer un Mock tan complejo :S
 		mockPromoSimple = new PromoMedioPagoSimple(MedioPago.TARJETA, 20.0);
 		listaPromociones = new ArrayList<PromoMedioPago>();
 		listaPromociones.add(mockPromoSimple);
 		
-		// Mock Productos
-		//ofertaProducto= new OfertaProducto(registro_oferta, porcentajeDescuento);
 		RegistroProducto registro1 = new RegistroProducto(mock(CategoriaProducto.class), mock(MarcaProducto.class), NOMBRE_PRODUCTO_1, PRECIO_BASE_PRODUCTO_1 );
 		RegistroProducto registro2 = new RegistroProducto(mock(CategoriaProducto.class), mock(MarcaProducto.class), NOMBRE_PRODUCTO_2, PRECIO_BASE_PRODUCTO_2 );
 		mockProd1 = spy(new Producto(registro1));

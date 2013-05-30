@@ -29,9 +29,6 @@ public class OrdenDeCompra {
 	public void aplicarOfertas() {	
 		
 		for (IProducto producto: this.listaDeProductos) {
-			// Esto no sé si está bien, pero antes de aplicarse las ofertas, deberían 
-			// borrarse ofertas previamente aplicadas para que una oferta no esté
-			// dos veces aplicadas al mismo producto
 			producto.addPorcentajeDescuento(0.0);
 		}
 		

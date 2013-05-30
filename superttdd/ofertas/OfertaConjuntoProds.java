@@ -75,7 +75,7 @@ public class OfertaConjuntoProds extends Oferta {
 	}
 
 	@Override
-	public List<IProducto> obtenerProductosQueAplican(List<IProducto> productos) {
+	public List<IProducto> filtrarProductos(List<IProducto> productos) {
 		List<IProducto> prodsAplican = new ArrayList<IProducto>();
 		
 		//productos que coinciden con un registro de la oferta
