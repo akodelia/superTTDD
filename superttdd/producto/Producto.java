@@ -1,10 +1,10 @@
 package superttdd.producto;
 
 public class Producto implements IProducto {
+	
 	private RegistroProducto registroProducto;
 
 	private Double porcentajeDescuento;
-	private final Double PORCENTAJE_MAX = 100.0;
 	
 	public Producto(RegistroProducto registroProducto) {
 		this.registroProducto = registroProducto;
