@@ -40,6 +40,7 @@ public class OrdenDeCompra {
 	
 	public void aplicarOfertas() {	
 		this.borrarDescuentosEnListaDeProductos();
+
 		
 		for (Oferta oferta: this.listaDeOfertas) {
 			oferta.aplicarOferta(this.listaDeProductos);
