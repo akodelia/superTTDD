@@ -28,9 +28,9 @@ public class OrdenDeCompra {
 	
 	public void aplicarOfertas() {	
 		
-		for (IProducto producto: this.listaDeProductos) {
-			producto.addPorcentajeDescuento(0.0);
-		}
+//		for (IProducto producto: this.listaDeProductos) {
+//			producto.addPorcentajeDescuento(0.0);
+//		}
 		
 		for (Oferta oferta: this.listaDeOfertas) {
 			oferta.aplicarOferta(this.listaDeProductos);

@@ -47,24 +47,27 @@ public class PruebaIntegracion1 {
 	private OrdenDeCompra ordenDeCompra;
 	ArrayList<Producto> productos;
 	ArrayList<PromoMedioPago> promos;
+	ArrayList<Oferta> ofertas;
 	
 	
 	@Before
 	public void setUp() throws Exception {
+		RegistroProducto registroCocaCola = crearRegistroCocaCola();
+		RegistroProducto registroCepillo = crearRegistroCepillo();
+		RegistroProducto registroMaceta = crearRegistroMaceta();
+		
 		//---ofertas---\\
-		ArrayList<Oferta> ofertas = new ArrayList<Oferta>();
+		ofertas = new ArrayList<Oferta>();
 		//oferta coca lleve 2 pague 1
 		ArrayList<RegistroProducto> registro_productos = new ArrayList<RegistroProducto>();
+		registro_productos.add(registroCocaCola);
+		registro_productos.add(registroCocaCola);
 		Double desc2x1 = 50.0;
 		OfertaConjuntoProds oferta2x1Coca = new OfertaConjuntoProds(registro_productos, desc2x1);
 		ofertas.add(oferta2x1Coca);
 		
 		//--productos--\\
 		productos = new ArrayList<Producto>();
-		
-		RegistroProducto registroCocaCola = crearRegistroCocaCola();
-		RegistroProducto registroCepillo = crearRegistroCepillo();
-		RegistroProducto registroMaceta = crearRegistroMaceta();
 		
 		Producto cocaCola1 = new Producto(registroCocaCola); 
 		Producto cocaCola2 = new Producto(registroCocaCola); 
@@ -100,6 +103,7 @@ public class PruebaIntegracion1 {
 		for(Producto producto: productos) {
 			ordenDeCompra.agregarProducto(producto);
 		}
+		ordenDeCompra.aplicarOfertas();
 		ordenDeCompra.cerrarOrdenDeCompra();
 		Factura factura = ordenDeCompra.generarFactura(MedioPago.TARJETA_XYZ, 25);
 		factura.cargarPromocionesPorMedioDePago(promos);
