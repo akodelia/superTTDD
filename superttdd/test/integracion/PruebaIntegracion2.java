@@ -96,8 +96,9 @@ public class PruebaIntegracion2 {
 		realizarCompra();
 		
 		caja.confirmarCompra(MEDIO_PAGO_PROMO);
+		Double montoFinal = caja.obtenerTotalCompraConDescuentos();
+		caja.cerrarCompra();
 		
-		Double montoFinal = caja.visualizarMontoEnCajaPorMedioDePago(MEDIO_PAGO_PROMO);
 		
 		caja.cerrarCaja();
 		
