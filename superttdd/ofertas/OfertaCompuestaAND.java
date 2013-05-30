@@ -16,17 +16,17 @@ public class OfertaCompuestaAND extends Oferta {
 
 	@Override
 	public void aplicarOferta(List<IProducto> productos) {
-		List<IProducto> prodsAplican = this.obtenerProductosQueAplican(productos);
+		List<IProducto> prodsAplican = this.filtrarProductos(productos);
 		for(IProducto producto: prodsAplican) {
 			producto.addPorcentajeDescuento(porcentajeDescuento);
 		}
 	}
 
 	@Override
-	public List<IProducto> obtenerProductosQueAplican(List<IProducto> productos) {
+	public List<IProducto> filtrarProductos(List<IProducto> productos) {
 		List<IProducto> prodsAplican = new ArrayList<IProducto>();
 		for(Oferta oferta: ofertas) {
-			prodsAplican = oferta.obtenerProductosQueAplican(productos);
+			prodsAplican = oferta.filtrarProductos(productos);
 		}
 		return prodsAplican;
 	}

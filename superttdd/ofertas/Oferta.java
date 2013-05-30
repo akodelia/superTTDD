@@ -17,6 +17,6 @@ public abstract class Oferta {
 		return this.porcentajeDescuento;
 	}	
 
-	public abstract List<IProducto> obtenerProductosQueAplican(List<IProducto> productos);
+	public abstract List<IProducto> filtrarProductos(List<IProducto> productos);
 
 }

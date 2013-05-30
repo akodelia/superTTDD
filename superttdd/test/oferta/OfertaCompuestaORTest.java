@@ -47,7 +47,7 @@ public class OfertaCompuestaORTest {
 	@Test
 	public void OfertaCompuestaORAplicaDescuentoATodosLosProductos() {
 		ofertaCompuesta.aplicarOferta(productos);
-		List<IProducto> productos_que_aplican = ofertaCompuesta.obtenerProductosQueAplican(productos);
+		List<IProducto> productos_que_aplican = ofertaCompuesta.filtrarProductos(productos);
 		for(IProducto producto : productos_que_aplican) {
 			verify(producto, times(1)).addPorcentajeDescuento(DESCUENTO_OF_COMPUESTA_OR);
 		}

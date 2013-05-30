@@ -63,4 +63,10 @@ public class ProductoCombo implements IProducto {
 		}
 		return sumatoria;
 	}
+
+	@Override
+	public void borrarDescuentos() {
+		// TODO Auto-generated method stub
+		
+	}
 }

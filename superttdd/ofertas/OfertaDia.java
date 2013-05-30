@@ -3,8 +3,8 @@ package superttdd.ofertas;
 import java.util.Calendar;
 import java.util.List;
 
+import superttdd.caja.DiaSemana;
 import superttdd.producto.IProducto;
-import superttdd.test.oferta.DiaSemana;
 
 public class OfertaDia extends Oferta {
 
@@ -17,7 +17,7 @@ public class OfertaDia extends Oferta {
 
 	@Override
 	public void aplicarOferta(List<IProducto> productos) {
-		List<IProducto> prodsAplican = this.obtenerProductosQueAplican(productos);
+		List<IProducto> prodsAplican = this.filtrarProductos(productos);
 		if(hoyEsDiaDePromo()) {
 			for(IProducto producto: prodsAplican) {
 				producto.addPorcentajeDescuento(porcentajeDescuento);
@@ -26,7 +26,7 @@ public class OfertaDia extends Oferta {
 	}
 
 	@Override
-	public List<IProducto> obtenerProductosQueAplican(List<IProducto> productos) {
+	public List<IProducto> filtrarProductos(List<IProducto> productos) {
 		return productos;
 	}
 

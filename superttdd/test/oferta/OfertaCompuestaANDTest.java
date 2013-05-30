@@ -12,6 +12,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import superttdd.caja.DiaSemana;
 import superttdd.ofertas.Oferta;
 import superttdd.ofertas.OfertaCategoria;
 import superttdd.ofertas.OfertaCompuestaAND;
@@ -82,7 +83,7 @@ public class OfertaCompuestaANDTest {
 	
 	@Test 
 	public void ofertaCategoriaANDProductoANDMarcaANDDiaOferta() {
-		prepararEscenarioCategoriaANDProducto();
+		prepararEscenarioCategoriaANDProductoANDMarcaANDDiaOferta();
 		oferta.aplicarOferta(productos);
 		
 		for(IProducto prod: prodsEspiados ) {
@@ -141,7 +142,7 @@ public class OfertaCompuestaANDTest {
 	
 	private void prepararEscenarioCategoriaANDProductoANDMarcaANDDiaOferta() {
 		List<DiaSemana> diaSemana = new ArrayList<DiaSemana>();
-		diaSemana.add(DiaSemana.TODAY);
+		diaSemana.add(DiaSemana.HOY);
 		ofertas.add(new OfertaCategoria(new CategoriaProducto(CATEGORIA3), 0.0));
 		ofertas.add(new OfertaDia(0.0, diaSemana));
 		ofertas.add(new OfertaMarca(new MarcaProducto(MARCA3), 0.0));

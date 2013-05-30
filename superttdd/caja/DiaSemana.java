@@ -1,11 +1,11 @@
-package superttdd.test.oferta;
+package superttdd.caja;
 
 import java.util.Calendar;
 
 public enum DiaSemana {
 	
- 	SUNDAY(0), MONDAY(1), TUESDAY(2), WEDNESDAY(3),
-    THURSDAY(4), FRIDAY(5), SATURDAY(6), TODAY(Calendar.DAY_OF_WEEK); 
+ 	DOMINGO(0), LUNES(1), MARTES(2), MIERCOLES(3),
+    JUEVES(4), VIERNES(5), SABADO(6), HOY(Calendar.DAY_OF_WEEK); 
 	
 	private int dia;
 	

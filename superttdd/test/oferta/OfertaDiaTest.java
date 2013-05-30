@@ -1,6 +1,5 @@
 package superttdd.test.oferta;
 
-import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.anyDouble;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
@@ -11,8 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
-import org.mockito.ArgumentCaptor;
 
+import superttdd.caja.DiaSemana;
 import superttdd.ofertas.OfertaDia;
 import superttdd.producto.CategoriaProducto;
 import superttdd.producto.IProducto;
@@ -30,30 +29,23 @@ public class OfertaDiaTest {
 	@Test
 	public void hoyHayOferta() {
 		prepararOfertaParaHoy();
-		ArgumentCaptor<Double> argCaptor = ArgumentCaptor.forClass(Double.class);
 		oferta.aplicarOferta(productos);
-		
-		verify(producto, times(1)).addPorcentajeDescuento(argCaptor.capture());
-
-		assertEquals(porcentajeDescuento, argCaptor.getValue());
-
+		verify(producto, times(1)).addPorcentajeDescuento(porcentajeDescuento);
 	}
 
 	@Test
 	public void hoyNOHayOferta() {
 		prepararEscenarioParaQueNoHayaOfertaHoy();
-		ArgumentCaptor<Double> argCaptor = ArgumentCaptor.forClass(Double.class);
 		oferta.aplicarOferta(productos);
-		
 		verify(producto, times(0)).addPorcentajeDescuento(anyDouble());
 	}
 	
 	private void prepararOfertaParaHoy() {
 		productos = new ArrayList<IProducto>();
 		List<DiaSemana> diasOferta = new ArrayList<DiaSemana>();
-		diasOferta.add(DiaSemana.TODAY);
-		diasOferta.add(DiaSemana.FRIDAY);
-		diasOferta.add(DiaSemana.MONDAY);
+		diasOferta.add(DiaSemana.HOY);
+		diasOferta.add(DiaSemana.VIERNES);
+		diasOferta.add(DiaSemana.LUNES);
 		
 		porcentajeDescuento = 10.0;
 		
@@ -67,11 +59,11 @@ public class OfertaDiaTest {
 		productos = new ArrayList<IProducto>();
 		List<DiaSemana> diasOferta = new ArrayList<DiaSemana>();
 		
-		if(DiaSemana.TODAY.equals(DiaSemana.SATURDAY) ) {
-			diasOferta.add(DiaSemana.SUNDAY);
-			diasOferta.add(DiaSemana.MONDAY);
+		if(DiaSemana.HOY.equals(DiaSemana.SABADO) ) {
+			diasOferta.add(DiaSemana.DOMINGO);
+			diasOferta.add(DiaSemana.LUNES);
 		} else {
-			diasOferta.add(DiaSemana.SATURDAY);
+			diasOferta.add(DiaSemana.SABADO);
 		}
 		
 		porcentajeDescuento = 10.0;
