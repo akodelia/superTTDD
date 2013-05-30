@@ -80,8 +80,7 @@ public class Producto implements IProducto {
 
 	@Override
 	public void borrarDescuentos() {
-		// TODO Auto-generated method stub
-		
+		this.porcentajeDescuento = 0.0;	
 	}
 
 }
