@@ -6,7 +6,6 @@ import superttdd.comprobante.OrdenDeCompra;
 import superttdd.ofertas.Oferta;
 import superttdd.producto.Producto;
 import superttdd.promociones.PromoMedioPago;
-//import superttdd.producto.CategoriaProducto;
 
 public class Caja {
 
@@ -28,6 +27,7 @@ public class Caja {
 		facturaCompraActual = null;
 		listaDeOfertas = new ArrayList<Oferta>();
 		listaDePromos = new ArrayList<PromoMedioPago>();
+		listaDeFacturas = new ArrayList<Factura>();
 		contadorNumerosDeFactura = 0;
 	}
 	
@@ -59,6 +59,7 @@ public class Caja {
 	
 	public void agregarProducto(Producto producto) {
 		ordenDeCompra.agregarProducto(producto);
+		ordenDeCompra.aplicarOfertas();
 	}
 	
 	public void confirmarCompra(MedioPago medioDePago) {
