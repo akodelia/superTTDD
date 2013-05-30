@@ -65,8 +65,5 @@ public class ProductoCombo implements IProducto {
 	}
 
 	@Override
-	public void borrarDescuentos() {
-		// TODO Auto-generated method stub
-		
-	}
+	public void borrarDescuentos() {}
 }
