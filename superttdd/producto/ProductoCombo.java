@@ -12,8 +12,12 @@ public class ProductoCombo implements IProducto {
 	}
 	
 	public IProducto clonar() {
-		// Nadie utiliza el clonar de esta clase, por eso no se la implementa.
-		return null;
+		List<IProducto> productos_clonados = new ArrayList<IProducto>();
+		for(IProducto producto : productos) {
+			productos_clonados.add(producto.clonar());
+		}
+		IProducto producto_copia = new ProductoCombo(productos_clonados);
+		return producto_copia;
 	}
 
 	@Override
@@ -68,7 +72,4 @@ public class ProductoCombo implements IProducto {
 		}
 		return sumatoria;
 	}
-
-	@Override
-	public void borrarDescuentos() {}
 }

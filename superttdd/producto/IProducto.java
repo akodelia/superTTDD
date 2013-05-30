@@ -38,10 +38,4 @@ public interface IProducto {
 	 */
 	public String getNombre();
 	
-	/**
-	 *  Borra todos los descuentos que se le aplicaron al producto
-	 *  
-	 * */
-	public void borrarDescuentos(); 
-	
 }
