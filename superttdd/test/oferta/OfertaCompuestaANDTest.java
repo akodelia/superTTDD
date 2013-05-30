@@ -69,7 +69,6 @@ public class OfertaCompuestaANDTest {
 		for(IProducto prod: prodsEspiados ) {
 			verify(prod, times(1)).addPorcentajeDescuento(anyDouble());
 		}
-		
 	}
 
 	@Test 
@@ -132,12 +131,12 @@ public class OfertaCompuestaANDTest {
 				
 		productos.add(new Producto(regProd1));
 		productos.add(new Producto(regProd1));
-		
+
 		Double precioBaseTotal = 0.0;
 		for(IProducto producto: productos) {
 			precioBaseTotal += producto.getPrecioBase();
 		}
-		
+
 		precioFinal = precioBaseTotal - precioBaseTotal * oferta.getPorcentajeDescuento() / 100.0; 
 	}
 	
