@@ -68,7 +68,7 @@ public class OfertaCompuestaANDTest {
 		
 		for(IProducto prod: prodsEspiados ) {
 			verify(prod, times(1)).addPorcentajeDescuento(anyDouble());
-		}		
+		}
 	}
 
 	@Test 
