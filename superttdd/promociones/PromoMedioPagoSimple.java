@@ -7,11 +7,8 @@ import superttdd.producto.IProducto;
 
 public class PromoMedioPagoSimple extends PromoMedioPago{
 	
-	private Double descuento;
-	
 	public PromoMedioPagoSimple(MedioPago medioPago, Double descuento){
-		super(medioPago);
-		this.descuento = descuento;
+		super(medioPago, descuento);
 	}
 
 	@Override

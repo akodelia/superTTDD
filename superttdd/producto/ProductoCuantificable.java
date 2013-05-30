@@ -60,11 +60,6 @@ public class ProductoCuantificable implements IProducto {
 	public String getNombre() {
 		return registro.getNombre();
 	}
-
-	@Override
-	public void borrarDescuentos() {
-		porcentajeDescuento = 0.0;
-	}
 	
 	private Boolean porcentajeMaximoSuperado() {
 		if(this.porcentajeDescuento >= PORCENTAJE_MAX) {
