@@ -79,17 +79,14 @@ public class OfertaConjuntoProds extends Oferta {
 	@Override
 	public List<IProducto> obtenerProductosQueAplican(List<IProducto> productos) {
 		Boolean hubo_coincidencias = true;
-		List<IProducto> copia_productos_aux=new ArrayList<IProducto>(productos);
+		//List<IProducto> copia_productos_aux=new ArrayList<IProducto>(productos);
 		List<IProducto> prodsAplican = new ArrayList<IProducto>();
 
 		// productos que coinciden con un registro de la oferta
 		List<IProducto> productos_encontrados = new ArrayList<IProducto>();
 
 		// copia de los registros de la oferta
-		List<RegistroProducto> copia_registros = new ArrayList<RegistroProducto>(
-				registro_productos);
-		copia_registros = new ArrayList<RegistroProducto>(
-				registro_productos);
+		List<RegistroProducto> copia_registros = new ArrayList<RegistroProducto>(registro_productos);
 
 		while (hubo_coincidencias) {
 			
@@ -99,7 +96,7 @@ public class OfertaConjuntoProds extends Oferta {
 			 * encontrados y saca ese registro de la lista copia de registros
 			 */
 			for (RegistroProducto registro : registro_productos) {
-				for (IProducto producto : copia_productos_aux) {
+				for (IProducto producto : productos) {
 					if (producto.validarRegistroProducto(registro)) {
 						if (copia_registros.contains(registro)) {
 							productos_encontrados.add(producto);
@@ -114,10 +111,10 @@ public class OfertaConjuntoProds extends Oferta {
 				hubo_coincidencias = false;
 			} else {
 				for(IProducto producto : productos_encontrados) {
-					copia_productos_aux.remove(producto);
+					productos.remove(producto);
 				}
 				ProductoCombo combo = new ProductoCombo(productos_encontrados);
-				copia_productos_aux.add(combo);
+				productos.add(combo);
 				prodsAplican.add(combo);
 			}
 			productos_encontrados.clear();
