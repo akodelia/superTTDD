@@ -5,10 +5,20 @@ public class Producto implements IProducto {
 	private RegistroProducto registroProducto;
 
 	private Double porcentajeDescuento;
+
+	private Producto(Producto unProducto) {
+		this.registroProducto = unProducto.registroProducto;
+		this.porcentajeDescuento = unProducto.porcentajeDescuento;
+	}
 	
 	public Producto(RegistroProducto registroProducto) {
 		this.registroProducto = registroProducto;
 		this.porcentajeDescuento = 0.0;
+	}
+	
+	
+	public IProducto clonar() {
+		return new Producto(this);
 	}
 	
 	public CategoriaProducto getCategoriaProducto() {
