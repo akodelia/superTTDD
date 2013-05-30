@@ -10,6 +10,11 @@ public class ProductoCombo implements IProducto {
 		this.productos=new ArrayList<IProducto>();
 		this.productos.addAll(productos);
 	}
+	
+	public IProducto clonar() {
+		// Nadie utiliza el clonar de esta clase, por eso no se la implementa.
+		return null;
+	}
 
 	@Override
 	public boolean validarCategoria(CategoriaProducto categoria) {

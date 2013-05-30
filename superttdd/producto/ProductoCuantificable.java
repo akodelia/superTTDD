@@ -6,10 +6,19 @@ public class ProductoCuantificable implements IProducto {
 	private Double porcentajeDescuento;
 	Double cantidad;
 	
+	private ProductoCuantificable(ProductoCuantificable unProducto) {
+		this.registro = unProducto.registro;
+		this.cantidad = unProducto.cantidad;
+	}
+	
 	public ProductoCuantificable(RegistroProducto registro, Double cantidad) {
 		this.registro = registro;
 		this.porcentajeDescuento = 0.0;
 		this.cantidad = cantidad;
+	}
+	
+	public IProducto clonar() {
+		return new ProductoCuantificable(this);
 	}
 	
 	@Override
