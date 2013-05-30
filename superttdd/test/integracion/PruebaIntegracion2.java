@@ -133,7 +133,7 @@ public class PruebaIntegracion2 {
 		
 		OfertaDia ofertaDia = new OfertaDia(DESCUENTO_TD, diasSemana);
 		ofertasPromo.add(ofertaDia);
-		promosDelDia.add(new PromoMedioPagoCompuestaAND(MEDIO_PAGO_PROMO, ofertasPromo));
+		promosDelDia.add(new PromoMedioPagoCompuestaAND(MEDIO_PAGO_PROMO, ofertasPromo, DESCUENTO_TD));
 	}
 	
 	private void realizarCompra() {
