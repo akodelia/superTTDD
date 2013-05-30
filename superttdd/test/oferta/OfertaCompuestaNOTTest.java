@@ -74,7 +74,7 @@ public class OfertaCompuestaNOTTest {
 	}
 	
 	@Test
-	public void NolicaAProductoQueAplicaOferta_UnaOferta() {
+	public void NoAplicaAProductoQueAplicaOferta_UnaOferta() {
 		MarcaProducto marca = new MarcaProducto(MARCA_PRODUCTO);
 		OfertaMarca ofertaMarca = new OfertaMarca(marca,20.0);
 		ofertas.add(ofertaMarca);
