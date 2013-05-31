@@ -50,9 +50,13 @@ public class ProductoTest {
 	
 	@Test
 	public void precioFinalConSumaDescuentoTotalSuperiorAlMaximo() {
-		producto.addPorcentajeDescuento(80.0);
-		producto.addPorcentajeDescuento(30.0);
-		Double precioFinalEsperado = 0.0;
+		Double primerDescuento = 80.0;
+		Double segundoDescuento = 30.0;
+		Double precioFinalEsperado = producto.getPrecioBase() * (100.0 - primerDescuento) / 100.0;
+		precioFinalEsperado = precioFinalEsperado * (100.0 - segundoDescuento) / 100.0;
+		
+		producto.addPorcentajeDescuento(primerDescuento);
+		producto.addPorcentajeDescuento(segundoDescuento);
 		
 		assertEquals(precioFinalEsperado, producto.getPrecioFinal());
 	}
@@ -61,8 +65,8 @@ public class ProductoTest {
 	public void precioFinalConMasDeUnDescuentoMenorAlMax() {
 		Double primerDesc = 40.0;
 		Double segundoDesc = 25.5;
-		Double montoDescuento = producto.getPrecioBase() * (primerDesc + segundoDesc) / 100;  
-		Double precioFinalEsperado = producto.getPrecioBase() - montoDescuento;
+		Double precioFinalEsperado  = producto.getPrecioBase() * (100.0 - primerDesc ) / 100;  
+		precioFinalEsperado = precioFinalEsperado * (100.0 - segundoDesc ) / 100;
 		
 		
 		producto.addPorcentajeDescuento(primerDesc);

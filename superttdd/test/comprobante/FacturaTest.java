@@ -98,7 +98,7 @@ public class FacturaTest {
 		Factura factura = new Factura(0, MedioPago.TARJETA, listaDeProductos);
 		factura.cargarPromocionesPorMedioDePago(listaPromociones);
 		factura.procesarFactura();
-		Double totalEsperado = 10 * 0.7 + 20 * 0.8;
+		Double totalEsperado = 9 * 0.8 + 20 * 0.8;
 		
 		assertEquals(totalEsperado, factura.getMontoTotalConDescuentos());
 	}

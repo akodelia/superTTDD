@@ -26,7 +26,7 @@ public class OfertaCompuestaAND extends Oferta {
 	public List<IProducto> filtrarProductos(List<IProducto> productos) {
 		List<IProducto> prodsAplican = new ArrayList<IProducto>();
 		for(IProducto producto: productos) {
-			prodsAplican.add(producto.clonar());
+			prodsAplican.add(producto);
 		}
 
 		for(Oferta oferta: ofertas) {

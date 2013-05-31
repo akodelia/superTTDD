@@ -1,10 +1,9 @@
 package superttdd.test.oferta;
 
-import static org.junit.Assert.assertEquals;
+import static org.mockito.Matchers.anyDouble;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Matchers.anyDouble;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -137,9 +136,9 @@ public class OfertaCompuestaANDTest {
 		ofertas.add(new OfertaCategoria(new CategoriaProducto(CATEGORIA1), 0.0));
 		porcentajeDescuento = 25.0;
 		oferta = new OfertaCompuestaAND(ofertas, porcentajeDescuento);
-		
-		productos.add(spy(new Producto(regProd1)));
-		prodsEspiados.addAll(productos);
+		Producto spyProd = spy(new Producto(regProd1));
+		productos.add(spyProd);
+		prodsEspiados.add(spyProd);
 	}
 	
 	private void prepararAplicarCategoriaANDProducto() {
