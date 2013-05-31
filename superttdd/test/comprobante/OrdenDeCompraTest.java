@@ -143,7 +143,7 @@ public class OrdenDeCompraTest {
 	public void VerSubtotalProductosConDescuentosEnOrdenConOfertasAplicadas() {
 		OrdenDeCompra orden = crearOrdenConProductosConOfertas();
 		orden.aplicarOfertas();
-		Double valorEsperado = 67.5;
+		Double valorEsperado = 70.68;
 		
 		assertEquals(valorEsperado, orden.obtenerSubtotalConDescuentos());
 		
@@ -152,7 +152,7 @@ public class OrdenDeCompraTest {
 	@Test
 	public void VerSubtotalConDescuentosLuegoDeHaberAplicadoMasDeUnaVezLasOfertas() {
 		OrdenDeCompra orden = crearOrdenConProductosConOfertas();
-		Double valorEsperado = 67.5;
+		Double valorEsperado = 70.68;
 		
 		orden.aplicarOfertas();
 		assertEquals(valorEsperado, orden.obtenerSubtotalConDescuentos());
