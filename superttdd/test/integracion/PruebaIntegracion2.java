@@ -145,7 +145,7 @@ public class PruebaIntegracion2 {
 		List<RegistroProducto> conjProd3 = new ArrayList<RegistroProducto>();
 		conjProd3.add(registroVino);
 		conjProd3.add(registroVino);
-		OfertaConjuntoProds ofertaConjProd3 = new OfertaConjuntoProds(conjProd1, 0.0);
+		OfertaConjuntoProds ofertaConjProd3 = new OfertaConjuntoProds(conjProd3, 0.0);
 		
 		List<Oferta> ofertasOR = new ArrayList<Oferta>();		
 		ofertasOR.add(ofertaConjProd1);
