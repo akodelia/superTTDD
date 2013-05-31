@@ -5,15 +5,19 @@ public class Producto implements IProducto {
 	private RegistroProducto registroProducto;
 
 	private Double porcentajeDescuento;
+	
+	private Double precioActual;
 
 	private Producto(Producto unProducto) {
 		this.registroProducto = unProducto.registroProducto;
 		this.porcentajeDescuento = unProducto.porcentajeDescuento;
+		this.precioActual=unProducto.precioActual;
 	}
 	
 	public Producto(RegistroProducto registroProducto) {
 		this.registroProducto = registroProducto;
 		this.porcentajeDescuento = 0.0;
+		this.precioActual=registroProducto.getPrecio();
 	}
 	
 	public IProducto clonar() {
@@ -33,10 +37,12 @@ public class Producto implements IProducto {
 	}
 	@Override
 	public void addPorcentajeDescuento(Double porcentajeDescuento) {
-		this.porcentajeDescuento += porcentajeDescuento ;
-		if(porcentajeMaximoSuperado()) {
-			this.porcentajeDescuento = PORCENTAJE_MAX;
-		}
+		Double descuento = this.precioActual*(porcentajeDescuento)/100.0;
+		this.precioActual-=descuento;
+//		this.porcentajeDescuento += porcentajeDescuento ;
+//		if(porcentajeMaximoSuperado()) {
+//			this.porcentajeDescuento = PORCENTAJE_MAX;
+//		}
 	}
 
 	private Boolean porcentajeMaximoSuperado() {
@@ -57,9 +63,10 @@ public class Producto implements IProducto {
 
 	@Override
 	public Double getPrecioFinal() {
-		Double descuento = registroProducto.getPrecio() * porcentajeDescuento / 100;
-		
-		return (registroProducto.getPrecio() - descuento);
+//		Double descuento = registroProducto.getPrecio() * porcentajeDescuento / 100;
+//		
+//		return (registroProducto.getPrecio() - descuento);
+		return precioActual;
 	}
 	
 	public RegistroProducto getRegistroProducto() {
