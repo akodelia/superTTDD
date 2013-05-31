@@ -39,7 +39,7 @@ public class Producto implements IProducto {
 	@Override
 	public void addPorcentajeDescuento(Double porcentajeDescuento) {
 		Double descuento = this.precioActual * (porcentajeDescuento) / 100.0;
-		if (descuento < precioActual) {
+		if (descuento <= precioActual) {
 			this.precioActual -= descuento;
 		}
 		// this.porcentajeDescuento += porcentajeDescuento ;
