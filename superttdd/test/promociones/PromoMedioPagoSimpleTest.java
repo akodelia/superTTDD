@@ -23,7 +23,7 @@ import superttdd.promociones.PromoMedioPagoSimple;
 public class PromoMedioPagoSimpleTest {
 	
 	private static final double PRECIO_PRODUCTO = 10.0;
-	private static final double DESCUENTO_PROMO = 5.0;
+	private static final double DESCUENTO_PROMO = 10.0;
 	private static final MedioPago MEDIO_PAGO_FACTURA = MedioPago.EFECTIVO;
 	private PromoMedioPagoSimple promoMedioPagoSimple;
 	Producto mockProd;
@@ -51,5 +51,13 @@ public class PromoMedioPagoSimpleTest {
 		promoMedioPagoSimple.aplicarPromo(productos, MEDIO_PAGO_FACTURA);
 		verify(mockProd, times(0)).addPorcentajeDescuento(DESCUENTO_PROMO);
 	}
+	
+	@Test
+	public void PromoMedioPagoSimpleAplicaDescuentoJubilado() {
+		promoMedioPagoSimple=new PromoMedioPagoSimple(MedioPago.JUBILADO, DESCUENTO_PROMO);		
+		promoMedioPagoSimple.aplicarPromo(productos, MedioPago.JUBILADO);		
+		verify(mockProd, times(1)).addPorcentajeDescuento(DESCUENTO_PROMO);
+	}
+
 
 }

@@ -9,7 +9,7 @@ import superttdd.producto.Producto;
 public class OrdenDeCompra {
 	
 	private ArrayList<IProducto> listaDeProductos;
-	private ArrayList<IProducto> copiaListaDeProductos;
+	private ArrayList<Producto> copiaListaDeProductos;
 	private ArrayList<Oferta> listaDeOfertas;
 	private EstadoOrdenDeCompra estado;
 	
@@ -29,7 +29,7 @@ public class OrdenDeCompra {
 	public OrdenDeCompra(ArrayList<Oferta> listadoDeOfertas) {
 		this.listaDeOfertas = listadoDeOfertas;
 		this.listaDeProductos = new ArrayList<IProducto>();
-		this.copiaListaDeProductos = new ArrayList<IProducto>();
+		this.copiaListaDeProductos = new ArrayList<Producto>();
 		this.estado = EstadoOrdenDeCompra.CERRADA;
 	}
 
@@ -40,7 +40,6 @@ public class OrdenDeCompra {
 	
 	public void aplicarOfertas() {	
 		this.borrarDescuentosEnListaDeProductos();
-
 		
 		for (Oferta oferta: this.listaDeOfertas) {
 			oferta.aplicarOferta(this.listaDeProductos);
@@ -93,10 +92,18 @@ public class OrdenDeCompra {
 	
 	public Factura generarFactura(MedioPago medioDePago, long numeroDeFactura) {
 		if (esValidoCrearFactura()) {
+			actualizarVentas();
 			return new Factura(numeroDeFactura, medioDePago, this.listaDeProductos);	
 		}
 		else {
 			throw new RuntimeException("La orden de compra no fue cerrada o no hay productos para armar la factura");
 		}
 	}
+	
+	private void actualizarVentas() {
+		for(Producto producto: copiaListaDeProductos) {
+			producto.getRegistroProducto().agregarVenta();
+		}
+	}
+	
 }

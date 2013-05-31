@@ -25,9 +25,14 @@ public class OfertaCompuestaAND extends Oferta {
 	@Override
 	public List<IProducto> filtrarProductos(List<IProducto> productos) {
 		List<IProducto> prodsAplican = new ArrayList<IProducto>();
-		for(Oferta oferta: ofertas) {
-			prodsAplican = oferta.filtrarProductos(productos);
+		for(IProducto producto: productos) {
+			prodsAplican.add(producto.clonar());
 		}
+
+		for(Oferta oferta: ofertas) {
+			prodsAplican = oferta.filtrarProductos(prodsAplican);
+		}
+		
 		return prodsAplican;
 	}
 

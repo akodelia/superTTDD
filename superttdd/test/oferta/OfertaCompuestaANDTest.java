@@ -91,14 +91,6 @@ public class OfertaCompuestaANDTest {
 		}
 	}
 	
-	
-	@Test 
-	public void aplicarOfertaMarcaANDConjProds() {
-		prepararAplicarMarcaANDConjProds();
-		oferta.aplicarOferta(productos);
-		assertEquals(precioFinal, productos.get(0).getPrecioFinal()); 
-	}
-
 	@Test 
 	public void noAplicarOfertaMarcaANDCategoria() {
 		prepararNOAplicarMarcaANDCategoria();

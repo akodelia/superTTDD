@@ -12,11 +12,9 @@ import superttdd.caja.Caja;
 import superttdd.caja.DiaSemana;
 import superttdd.caja.MedioPago;
 import superttdd.ofertas.Oferta;
-import superttdd.ofertas.OfertaCompuestaAND;
-import superttdd.ofertas.OfertaCompuestaNOT;
+import superttdd.ofertas.OfertaCompuestaOR;
 import superttdd.ofertas.OfertaConjuntoProds;
 import superttdd.ofertas.OfertaDia;
-import superttdd.ofertas.OfertaMarca;
 import superttdd.producto.CategoriaProducto;
 import superttdd.producto.MarcaProducto;
 import superttdd.producto.Producto;
@@ -50,11 +48,12 @@ public class PruebaIntegracion2 {
 	private String CATEGORIA_VINO = "Vinoteca";
 	private String MARCA_EXCEPTO = "Chandon";
 	private Double PRECIO_VINO = 100.0;
+	private Double PRECIO_VINO2 = 200.0;
 	private Double PRECIO_CHANDON = 75.0;
 	private Double PRECIO_CEPILLO_DIENTES = 3.0;
 	private Double PRECIO_MACETA = 10.0;
 	private Double DESCUENTO_VINO = 75.0;
-	private Double DESCUENTO_TD = 75.0;
+	private Double DESCUENTO_TD = 10.0;
 	private MedioPago MEDIO_PAGO_PROMO = MedioPago.TARJETA_DEBITO;
 
 	Caja caja;
@@ -64,6 +63,7 @@ public class PruebaIntegracion2 {
 	Double precioFinalEsperado;
 	
 	RegistroProducto registroVino;
+	RegistroProducto registroVino2;
 	RegistroProducto registroChandon;
 	RegistroProducto registroMaceta;
 	RegistroProducto registroCepilloDientes;
@@ -74,15 +74,15 @@ public class PruebaIntegracion2 {
 		ofertasDelDia = new ArrayList<Oferta>();
 		promosDelDia = new ArrayList<PromoMedioPago>();
 		registroVino = new RegistroProducto(new CategoriaProducto(CATEGORIA_VINO), new MarcaProducto("Las moras"), "Vino", PRECIO_VINO);
+		registroVino2 = new RegistroProducto(new CategoriaProducto(CATEGORIA_VINO), new MarcaProducto("Trapiche"), "Vino", PRECIO_VINO2);
 		registroChandon = new RegistroProducto(new CategoriaProducto(CATEGORIA_VINO), new MarcaProducto(MARCA_EXCEPTO), "Vino", PRECIO_CHANDON);
 		registroMaceta = new RegistroProducto(new CategoriaProducto("Jardinería"), new MarcaProducto("Jardín Feliz"), "Maceta", PRECIO_MACETA);
 		registroCepilloDientes = new RegistroProducto(new CategoriaProducto("Perfumería"),
 											new MarcaProducto("Colgate"), "Cepillo de dientes", PRECIO_CEPILLO_DIENTES);
-		calcularPrecioFinalEsperado();
 	}
 	
 	@Test 
-	public void pruebaIntegracion2() {
+	public void pruebaIntegracion2SinDesc() {
 		caja.abrirCaja();
 		
 		crearOfertasDelDia();
@@ -96,34 +96,63 @@ public class PruebaIntegracion2 {
 		realizarCompra();
 		
 		caja.confirmarCompra(MEDIO_PAGO_PROMO);
+		Double montoFinal = caja.obtenerTotalCompraSinDescuentos();
+		caja.cerrarCompra();
 		
-		Double montoFinal = caja.visualizarMontoEnCajaPorMedioDePago(MEDIO_PAGO_PROMO);
 		
 		caja.cerrarCaja();
 		
+		calcularPrecioFinalEsperadoSinDescuento();
+		assertEquals(precioFinalEsperado, montoFinal);
+	}
+	
+	@Test 
+	public void pruebaIntegracion2ConDesc() {
+		caja.abrirCaja();
+		
+		crearOfertasDelDia();
+		crearPromosMedioDePagoDelDia();
+		
+		caja.cargarOfertas(ofertasDelDia);
+		caja.cargarPromocionesDeMedioDePago(promosDelDia);
+		
+		caja.iniciarCompra();
+		
+		realizarCompra();
+		
+		caja.confirmarCompra(MEDIO_PAGO_PROMO);
+		Double montoFinal = caja.obtenerTotalCompraConDescuentos();
+		caja.cerrarCompra();
+		
+		
+		caja.cerrarCaja();
+		
+		calcularPrecioFinalEsperadoConDescuento();
 		assertEquals(precioFinalEsperado, montoFinal);
 	}
 	
 	private void crearOfertasDelDia() {
-		List<RegistroProducto> registrosConjProd = new ArrayList<RegistroProducto>();
-		registrosConjProd.add(registroVino);
-		registrosConjProd.add(registroVino);
-		OfertaConjuntoProds ofertaConjProd = new OfertaConjuntoProds(registrosConjProd, 0.0);
-	
+		List<RegistroProducto> conjProd1 = new ArrayList<RegistroProducto>();
+		conjProd1.add(registroVino);
+		conjProd1.add(registroVino2);
+		OfertaConjuntoProds ofertaConjProd1 = new OfertaConjuntoProds(conjProd1, 0.0);
 
-		List<RegistroProducto> registrosNOT = new ArrayList<RegistroProducto>();
-		registrosNOT.add(registroChandon);
+		List<RegistroProducto> conjProd2 = new ArrayList<RegistroProducto>();
+		conjProd2.add(registroVino2);
+		conjProd2.add(registroVino2);
+		OfertaConjuntoProds ofertaConjProd2 = new OfertaConjuntoProds(conjProd2, 0.0);
+
+		List<RegistroProducto> conjProd3 = new ArrayList<RegistroProducto>();
+		conjProd3.add(registroVino);
+		conjProd3.add(registroVino);
+		OfertaConjuntoProds ofertaConjProd3 = new OfertaConjuntoProds(conjProd1, 0.0);
 		
-		OfertaMarca ofertaMarca = new OfertaMarca(new MarcaProducto(MARCA_EXCEPTO), 0.0);
-		List<Oferta> ofertasNOT = new ArrayList<Oferta>();
-		ofertasNOT.add(ofertaMarca);
-		OfertaCompuestaNOT ofertaNOT = new OfertaCompuestaNOT(ofertasNOT, 0.0);
+		List<Oferta> ofertasOR = new ArrayList<Oferta>();		
+		ofertasOR.add(ofertaConjProd1);
+		ofertasOR.add(ofertaConjProd2);
+		ofertasOR.add(ofertaConjProd3);
 		
-		List<Oferta> ofertasAND = new ArrayList<Oferta>();		
-		ofertasAND.add(ofertaConjProd);
-		ofertasAND.add(ofertaNOT);
-		
-		ofertasDelDia.add(new OfertaCompuestaAND(ofertasAND, DESCUENTO_VINO / 2));
+		ofertasDelDia.add(new OfertaCompuestaOR(ofertasOR, DESCUENTO_VINO / 2.0));
 	}
 	
 	private void crearPromosMedioDePagoDelDia() {
@@ -146,7 +175,7 @@ public class PruebaIntegracion2 {
 		
 	}
 	
-	private void calcularPrecioFinalEsperado() {
+	private void calcularPrecioFinalEsperadoConDescuento() {
 //		(100+25 Pesos (2 vinos X) + 75*2 pesos de Chandon 3 pesos (cepillo) + 10 pesos (maceta)) * 0.90 (descuento tarjeta)
 		
 		Double descuentoVino = PRECIO_VINO * DESCUENTO_VINO / 100.0;
@@ -159,5 +188,17 @@ public class PruebaIntegracion2 {
 		
 		Double descuentoTD = precioFinalEsperado * DESCUENTO_TD / 100.0;
 		precioFinalEsperado = precioFinalEsperado - descuentoTD;
+	}
+	
+	private void calcularPrecioFinalEsperadoSinDescuento() {
+//		(100+25 Pesos (2 vinos X) + 75*2 pesos de Chandon 3 pesos (cepillo) + 10 pesos (maceta)) * 0.90 (descuento tarjeta)
+		
+		Double descuentoVino = PRECIO_VINO * DESCUENTO_VINO / 100.0;
+		
+		precioFinalEsperado = 2 * PRECIO_VINO;
+		precioFinalEsperado += (PRECIO_CHANDON * 2);
+		precioFinalEsperado += PRECIO_CEPILLO_DIENTES;
+		precioFinalEsperado += PRECIO_MACETA;
+		
 	}
 }

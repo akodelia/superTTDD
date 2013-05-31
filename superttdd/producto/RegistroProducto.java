@@ -5,6 +5,7 @@ public class RegistroProducto {
 	private Double precio;
 	private CategoriaProducto categoria;
 	private MarcaProducto marca;
+	private Integer cantidadVendida;
 
 	public RegistroProducto(CategoriaProducto categoria, MarcaProducto marca,
 			String nombre, Double precio) {
@@ -12,6 +13,7 @@ public class RegistroProducto {
 		this.categoria = (categoria != null)? categoria: new CategoriaProducto("");
 		this.nombre = nombre;
 		this.precio = precio;
+		this.cantidadVendida = 0;
 	}
 
 	public CategoriaProducto getCategoria() {
@@ -45,6 +47,14 @@ public class RegistroProducto {
 				&& (this.marca.sonIguales(registro.marca) )
 				&& (this.nombre == registro.nombre)
 				&& (this.precio == registro.precio);
+	}
+
+	public Integer getCantidadVendida() {
+		return cantidadVendida;
+	}
+
+	public void agregarVenta() {
+		this.cantidadVendida++;
 	}
 
 }

@@ -16,7 +16,6 @@ public class Producto implements IProducto {
 		this.porcentajeDescuento = 0.0;
 	}
 	
-	
 	public IProducto clonar() {
 		return new Producto(this);
 	}
@@ -63,7 +62,7 @@ public class Producto implements IProducto {
 		return (registroProducto.getPrecio() - descuento);
 	}
 	
-	protected RegistroProducto getRegistroProducto() {
+	public RegistroProducto getRegistroProducto() {
 		return registroProducto;
 	}
 

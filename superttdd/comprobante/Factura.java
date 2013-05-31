@@ -44,6 +44,13 @@ public class Factura {
 		this.listaDePromociones = new ArrayList<PromoMedioPago>();
 	}
 	
+	public Factura(Factura unaFactura) {
+		this.numeroDeFactura = unaFactura.numeroDeFactura;
+		this.medioDePago = unaFactura.medioDePago;
+		this.montoTotalConDescuentos = unaFactura.montoTotalConDescuentos;
+		this.montoTotalSinDescuentos = unaFactura.montoTotalSinDescuentos;
+	}
+	
 	public void cargarPromocionesPorMedioDePago(ArrayList<PromoMedioPago> listadoDePromos) {
 		for (PromoMedioPago promo : listadoDePromos ) {
 			this.listaDePromociones.add(promo);
