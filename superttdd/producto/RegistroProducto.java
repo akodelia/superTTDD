@@ -1,11 +1,11 @@
 package superttdd.producto;
 
-public class RegistroProducto {
+public class RegistroProducto implements Comparable<RegistroProducto> {
 	private String nombre;
 	private Double precio;
 	private CategoriaProducto categoria;
 	private MarcaProducto marca;
-	private Integer cantidadVendida;
+	private long cantidadVendida;
 
 	public RegistroProducto(CategoriaProducto categoria, MarcaProducto marca,
 			String nombre, Double precio) {
@@ -49,12 +49,33 @@ public class RegistroProducto {
 				&& (this.precio == registro.precio);
 	}
 
-	public Integer getCantidadVendida() {
-		return cantidadVendida;
+	public long getCantidadVendida() {
+		return this.cantidadVendida;
+	}
+	
+	public void resetearCantidadVendida() {
+		this.cantidadVendida = 0;
 	}
 
-	public void agregarVenta() {
+	public void incrementarCantidadVendida() {
 		this.cantidadVendida++;
 	}
+
+	@Override
+	public int compareTo(RegistroProducto unRegistro) {
+		// Comparador para listar a los productos de forma descendente
+		if (this.cantidadVendida < unRegistro.getCantidadVendida()) {
+			return 1;
+		}
+		else if (this.cantidadVendida > unRegistro.getCantidadVendida()) {
+			return -1;
+		}
+		else {
+			return 0;
+		}
+		
+		
+	}
+	
 
 }
