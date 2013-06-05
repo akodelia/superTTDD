@@ -15,7 +15,8 @@ public class PromoMedioPagoSimple extends PromoMedioPago{
 	@Override
 	public void aplicarDescuento(Factura factura) {
 		if(esMedioPagoPromo(factura.getMedioDePago())) {
-			factura.aplicarDescuentoFactura(descuento);
+			Double monto_descuento = factura.getMontoTotalConDescuentos()*(100-descuento)/100;
+			factura.descontarMonto(monto_descuento);
 		}
 	}
 	

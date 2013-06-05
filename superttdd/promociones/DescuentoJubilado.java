@@ -4,15 +4,16 @@ import superttdd.comprobante.Factura;
 
 public class DescuentoJubilado implements DescuentoFactura{
 
-	private Double descuento;
+	private Double porcentaje_descuento;
 	
-	public DescuentoJubilado(Double descuento) {
-		this.descuento=descuento;
+	public DescuentoJubilado(Double porcentaje_descuento) {
+		this.porcentaje_descuento=porcentaje_descuento;
 	}
 	
 	@Override
 	public void aplicarDescuento(Factura factura) {
-		factura.aplicarDescuentoFactura(descuento);		
+		Double monto_descuento=factura.getMontoTotalConDescuentos()*((100-porcentaje_descuento)/100);
+		factura.descontarMonto(monto_descuento);	
 	}
 	
 }

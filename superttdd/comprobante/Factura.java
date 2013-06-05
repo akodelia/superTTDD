@@ -5,6 +5,7 @@ import java.util.List;
 
 import superttdd.caja.MedioPago;
 import superttdd.producto.IProducto;
+import superttdd.promociones.DescuentoFactura;
 import superttdd.promociones.PromoMedioPago;
 
 
@@ -15,7 +16,8 @@ public class Factura {
 	private MedioPago medioDePago;
 	// private Date fecha;
 	private List<IProducto> listaDeProductos;
-	private ArrayList<PromoMedioPago> listaDePromociones;
+	private ArrayList<PromoMedioPago> listaDePromocionesMedioPago;
+	private List<DescuentoFactura> listaDescuentosFactura;
 		
 	private void generarMontoTotalSinDescuentos() {
 		this.montoTotalSinDescuentos = 0.0;
@@ -33,36 +35,60 @@ public class Factura {
 	
 	// Por el momento implemento esto sólo para la promo simple
 	private void aplicarDescuentoMedioDePago() {
-		for (PromoMedioPago promo: listaDePromociones) {
+		for (PromoMedioPago promo: listaDePromocionesMedioPago) {
 			promo.aplicarDescuento(this);
 		}
 	}
 	
+	public void addDescuentoFactura(DescuentoFactura descuento) {
+		this.listaDescuentosFactura.add(descuento);
+	}
+	
+	private void aplicarDescuentosFactura() {
+		for(DescuentoFactura descuento: listaDescuentosFactura) {
+			descuento.aplicarDescuento(this);
+		}
+	}
+	
 	public Factura(long numeroDeFactura, MedioPago medioDePago, List<IProducto> listaDeProductos) {
+		this.montoTotalSinDescuentos = 0.0;
+		this.montoTotalConDescuentos=0.0;
 		this.numeroDeFactura = numeroDeFactura;
 		this.medioDePago = medioDePago;
 		this.listaDeProductos = listaDeProductos;	
-		this.listaDePromociones = new ArrayList<PromoMedioPago>();
+		this.listaDePromocionesMedioPago = new ArrayList<PromoMedioPago>();
+		this.listaDescuentosFactura=new ArrayList<DescuentoFactura>();
 	}
 	
 	public Factura(Factura unaFactura) {
+		this.montoTotalSinDescuentos = 0.0;
+		this.montoTotalConDescuentos=0.0;
 		this.numeroDeFactura = unaFactura.numeroDeFactura;
 		this.medioDePago = unaFactura.medioDePago;
 		this.montoTotalConDescuentos = unaFactura.montoTotalConDescuentos;
 		this.montoTotalSinDescuentos = unaFactura.montoTotalSinDescuentos;
 	}
 	
+	public void descontarMonto(Double monto){
+		this.montoTotalConDescuentos-=monto;
+	}
+	
 	public void cargarPromocionesPorMedioDePago(ArrayList<PromoMedioPago> listadoDePromos) {
 		for (PromoMedioPago promo : listadoDePromos ) {
-			this.listaDePromociones.add(promo);
+			this.listaDePromocionesMedioPago.add(promo);
 		}
 	}
 	
 	// No es el menor nombre para este método, pensar en uno mejor
 	public void procesarFactura() {
-		this.aplicarDescuentoMedioDePago();
 		this.generarMontoTotalConDescuentos();
+		descontarMontosDescuentosFactura();
 		this.generarMontoTotalSinDescuentos();
+	}
+
+	private void descontarMontosDescuentosFactura() {
+		this.aplicarDescuentoMedioDePago();
+		this.aplicarDescuentosFactura();
 	}
 	
 	public long getNumeroDeFactura() {
@@ -81,11 +107,6 @@ public class Factura {
 		return this.medioDePago;
 	}
 	
-	public void aplicarDescuentoFactura(Double descuento){
-		for(IProducto producto: listaDeProductos) {
-			producto.addPorcentajeDescuento(descuento);
-		}
-	}
 	
 	public List<IProducto> getListaProductos() {
 		return listaDeProductos;

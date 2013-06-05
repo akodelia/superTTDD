@@ -156,7 +156,7 @@ public class PruebaIntegracion2 {
 	}
 	
 	private void crearPromosMedioDePagoDelDia() {
-		List<Oferta> ofertasPromo = new ArrayList<Oferta>();
+		List<OfertaDia> ofertasPromo = new ArrayList<OfertaDia>();
 		List<DiaSemana> diasSemana = new ArrayList<DiaSemana>();
 		diasSemana.add(DiaSemana.LUNES);
 		

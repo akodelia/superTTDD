@@ -5,6 +5,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+import static org.mockito.Matchers.anyDouble;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,30 +45,30 @@ public class PromoMedioPagoSimpleTest {
 	public void PromoMedioPagoSimpleAplicaDescuentoParaCompraConMismoMedioPago() {
 		promoMedioPagoSimple=new PromoMedioPagoSimple(MedioPago.EFECTIVO, DESCUENTO_PROMO);	
 		
-		Factura factura = new Factura(1, MEDIO_PAGO_FACTURA, productos); 
-		
-		promoMedioPagoSimple.aplicarDescuento(factura);		
-		verify(mockProd, times(1)).addPorcentajeDescuento(DESCUENTO_PROMO);
+		Factura factura = spy(new Factura(1, MEDIO_PAGO_FACTURA, productos)); 
+
+		promoMedioPagoSimple.aplicarDescuento(factura);
+		verify(factura, times(1)).descontarMonto(anyDouble());
 	}
 	
 	@Test
 	public void PromoMedioPagoSimpleNoAplicaDescuentoParaCompraConDistintoMedioPago() {
 		promoMedioPagoSimple=new PromoMedioPagoSimple(MedioPago.TARJETA_XYZ, DESCUENTO_PROMO);
 		
-		Factura factura = new Factura(1, MEDIO_PAGO_FACTURA, productos); 
+		Factura factura = spy(new Factura(1, MEDIO_PAGO_FACTURA, productos)); 
 		
 		promoMedioPagoSimple.aplicarDescuento(factura);
-		verify(mockProd, times(0)).addPorcentajeDescuento(DESCUENTO_PROMO);
+		verify(factura, times(0)).descontarMonto(anyDouble());
 	}
 	
 	@Test
 	public void PromoMedioPagoSimpleAplicaDescuentoJubilado() {
 		promoMedioPagoSimple=new PromoMedioPagoSimple(MedioPago.JUBILADO, DESCUENTO_PROMO);		
 		
-		Factura factura = new Factura(1, MedioPago.JUBILADO, productos); 
+		Factura factura = spy(new Factura(1, MedioPago.JUBILADO, productos)); 
 	
 		promoMedioPagoSimple.aplicarDescuento(factura);		
-		verify(mockProd, times(1)).addPorcentajeDescuento(DESCUENTO_PROMO);
+		verify(factura, times(1)).descontarMonto(anyDouble());
 	}
 
 

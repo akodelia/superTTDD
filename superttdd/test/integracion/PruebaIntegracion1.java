@@ -81,7 +81,7 @@ public class PruebaIntegracion1 {
 		
 		//--promos medio pago--\\
 		promos = new ArrayList<PromoMedioPago>();
-		ArrayList<Oferta> ofertas_promo = new ArrayList<Oferta>();
+		ArrayList<OfertaDia> ofertas_promo = new ArrayList<OfertaDia>();
 		OfertaDia ofertaDia = crearOfertaDia();
 		ofertas_promo.add(ofertaDia);
 		PromoMedioPago promoXYZ = new PromoMedioPagoCompuestaAND(MedioPago.TARJETA_XYZ,ofertas_promo, DESCUENTO_TARJETA);
