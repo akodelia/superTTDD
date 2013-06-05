@@ -13,7 +13,6 @@ public class Factura {
 	private long numeroDeFactura;
 	private Double montoTotalSinDescuentos;
 	private Double montoTotalConDescuentos;
-	private Double totalDescuentoMedioPago;
 	private MedioPago medioDePago;
 	// private Date fecha;
 	private List<IProducto> listaDeProductos;
@@ -42,8 +41,10 @@ public class Factura {
 		}
 	}
 
-	public void addDescuentoFactura(DescuentoFactura descuento) {
-		this.listaDescuentosFactura.add(descuento);
+	public void agregarDescuentosFactura(List<DescuentoFactura> descuentos) {
+		if (descuentos != null) {
+			this.listaDescuentosFactura = descuentos;
+		}
 	}
 
 	private void aplicarDescuentosFactura() {

@@ -21,6 +21,7 @@ public class Caja {
 	private Factura facturaCompraActual;
 	private long contadorNumerosDeFactura;
 	private List<PromoCuponFuturo> cuponesFuturos;
+	private List<DescuentoFactura> descuentosFactura;
 
 	private void agregarFactura(Factura unaFactura) {
 		this.listaDeFacturas.add(unaFactura);
@@ -33,6 +34,7 @@ public class Caja {
 		listaDeOfertas = new ArrayList<Oferta>();
 		listaDePromos = new ArrayList<PromoMedioPago>();
 		listaDeFacturas = new ArrayList<Factura>();
+		descuentosFactura = new ArrayList<DescuentoFactura>();
 		contadorNumerosDeFactura = 0;
 		cuponesFuturos = new ArrayList<PromoCuponFuturo>();
 	}
@@ -70,6 +72,7 @@ public class Caja {
 		this.facturaCompraActual = this.ordenDeCompra.generarFactura(
 				medioDePago, ++contadorNumerosDeFactura);
 		this.facturaCompraActual.cargarPromocionesPorMedioDePago(listaDePromos);
+		this.facturaCompraActual.agregarDescuentosFactura(descuentosFactura);
 		this.facturaCompraActual.procesarFactura();
 		this.ordenDeCompra = null;
 	}
@@ -140,9 +143,7 @@ public class Caja {
 	}
 
 	public void agregarDescuentoFactura(DescuentoFactura descuento) {
-		if (hayFacturaCompra()) {
-			descuento.aplicarDescuento(facturaCompraActual);
-		}
+		this.descuentosFactura.add(descuento);
 	}
 
 	private Boolean hayFacturaCompra() {

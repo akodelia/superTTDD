@@ -20,7 +20,7 @@ public class DescuentoJubilado implements DescuentoFactura {
 	public void aplicarDescuento(Factura factura) {
 		if (esValidoDescuento()) {
 			Double monto_descuento = factura.getMontoTotalConDescuentos()
-					* ((100 - porcentaje_descuento) / 100);
+					* (porcentaje_descuento / 100);
 			factura.descontarMonto(monto_descuento);
 		}
 	}

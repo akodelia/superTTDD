@@ -80,8 +80,9 @@ public class PruebaIntegracion6 {
 			caja.agregarProducto(new Producto(regProd));
 		}
 		
-		caja.confirmarCompra(MedioPago.EFECTIVO);
 		caja.agregarDescuentoFactura(cuponDescuento);
+		caja.confirmarCompra(MedioPago.EFECTIVO);
+		
 		
 		Double montoFinal = caja.obtenerTotalCompraConDescuentos();
 		
@@ -95,7 +96,7 @@ public class PruebaIntegracion6 {
 	}
 	
 	private void calcularPrecioFinalEsperadoConDescuento() {
-		Double descuentoMax = PRECIO_PROD * PRODS_A_COMPRAR * (100.0 - LIMITE_MAX_DESCUENTO)/100.0;
+		Double descuentoMax = PRECIO_PROD * PRODS_A_COMPRAR * (LIMITE_MAX_DESCUENTO)/100.0;
 		Double descAplicar =  (MONTO_CUPON <= descuentoMax)? MONTO_CUPON : descuentoMax;
 		precioFinalEsperado = PRECIO_PROD * PRODS_A_COMPRAR - descAplicar;
 	}

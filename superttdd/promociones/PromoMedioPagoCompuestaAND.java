@@ -22,7 +22,7 @@ public class PromoMedioPagoCompuestaAND extends PromoMedioPago {
 	public void aplicarDescuento(Factura factura) {
 		if (esMedioPagoPromo(factura.getMedioDePago())) {
 			if (EsDiaPromo()) {
-				Double monto_descuento=factura.getMontoTotalConDescuentos()*(100-descuento)/100;
+				Double monto_descuento=factura.getMontoTotalConDescuentos()*(descuento/100);
 				factura.descontarMonto(monto_descuento);
 			}
 		}
