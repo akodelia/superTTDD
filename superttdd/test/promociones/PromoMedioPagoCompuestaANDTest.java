@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import superttdd.caja.MedioPago;
+import superttdd.comprobante.Factura;
 import superttdd.ofertas.Oferta;
 import superttdd.ofertas.OfertaMarca;
 import superttdd.producto.CategoriaProducto;
@@ -48,7 +49,8 @@ public class PromoMedioPagoCompuestaANDTest {
 		
 		promoCompuestaAND = new PromoMedioPagoCompuestaAND(MEDIO_PAGO_PROMO, ofertas, DESCUENTO_OFERTA);
 		
-		promoCompuestaAND.aplicarPromo(productos,MEDIO_PAGO_PROMO);
+		Factura factura = new Factura(1, MEDIO_PAGO_PROMO, productos);
+		promoCompuestaAND.aplicarDescuento(factura);
 		
 		verify(productos.get(0), times(1)).addPorcentajeDescuento(DESCUENTO_OFERTA);
 	}
@@ -61,7 +63,8 @@ public class PromoMedioPagoCompuestaANDTest {
 		
 		promoCompuestaAND = new PromoMedioPagoCompuestaAND(MEDIO_PAGO_PROMO, ofertas, DESCUENTO_OFERTA);
 		
-		promoCompuestaAND.aplicarPromo(productos, MedioPago.EFECTIVO);
+		Factura factura = new Factura(1, MedioPago.EFECTIVO, productos);
+		promoCompuestaAND.aplicarDescuento(factura);
 		
 		verify(productos.get(0), times(0)).addPorcentajeDescuento(DESCUENTO_OFERTA);
 	}
@@ -75,8 +78,8 @@ public class PromoMedioPagoCompuestaANDTest {
 		productos.add(producto);
 		
 		promoCompuestaAND = new PromoMedioPagoCompuestaAND(MEDIO_PAGO_PROMO, ofertas, DESCUENTO_OFERTA);
-		
-		promoCompuestaAND.aplicarPromo(productos, MEDIO_PAGO_PROMO);
+		Factura factura = new Factura(1, MEDIO_PAGO_PROMO, productos);
+		promoCompuestaAND.aplicarDescuento(factura);
 		
 		verify(productos.get(0), times(0)).addPorcentajeDescuento(DESCUENTO_OFERTA);
 	}

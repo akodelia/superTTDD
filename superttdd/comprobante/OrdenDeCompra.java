@@ -102,7 +102,7 @@ public class OrdenDeCompra {
 	
 	private void actualizarVentas() {
 		for(Producto producto: copiaListaDeProductos) {
-			producto.getRegistroProducto().agregarVenta();
+			//producto.getRegistroProducto().agregarVenta();
 		}
 	}
 	

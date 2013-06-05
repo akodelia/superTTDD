@@ -4,6 +4,7 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +13,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import superttdd.caja.MedioPago;
+import superttdd.comprobante.Factura;
 import superttdd.producto.CategoriaProducto;
 import superttdd.producto.IProducto;
 import superttdd.producto.MarcaProducto;
@@ -40,22 +42,31 @@ public class PromoMedioPagoSimpleTest {
 
 	@Test
 	public void PromoMedioPagoSimpleAplicaDescuentoParaCompraConMismoMedioPago() {
-		promoMedioPagoSimple=new PromoMedioPagoSimple(MedioPago.EFECTIVO, DESCUENTO_PROMO);		
-		promoMedioPagoSimple.aplicarPromo(productos, MEDIO_PAGO_FACTURA);		
+		promoMedioPagoSimple=new PromoMedioPagoSimple(MedioPago.EFECTIVO, DESCUENTO_PROMO);	
+		
+		Factura factura = new Factura(1, MEDIO_PAGO_FACTURA, productos); 
+		
+		promoMedioPagoSimple.aplicarDescuento(factura);		
 		verify(mockProd, times(1)).addPorcentajeDescuento(DESCUENTO_PROMO);
 	}
 	
 	@Test
 	public void PromoMedioPagoSimpleNoAplicaDescuentoParaCompraConDistintoMedioPago() {
-		promoMedioPagoSimple=new PromoMedioPagoSimple(MedioPago.TARJETA_XYZ, DESCUENTO_PROMO);		
-		promoMedioPagoSimple.aplicarPromo(productos, MEDIO_PAGO_FACTURA);
+		promoMedioPagoSimple=new PromoMedioPagoSimple(MedioPago.TARJETA_XYZ, DESCUENTO_PROMO);
+		
+		Factura factura = new Factura(1, MEDIO_PAGO_FACTURA, productos); 
+		
+		promoMedioPagoSimple.aplicarDescuento(factura);
 		verify(mockProd, times(0)).addPorcentajeDescuento(DESCUENTO_PROMO);
 	}
 	
 	@Test
 	public void PromoMedioPagoSimpleAplicaDescuentoJubilado() {
 		promoMedioPagoSimple=new PromoMedioPagoSimple(MedioPago.JUBILADO, DESCUENTO_PROMO);		
-		promoMedioPagoSimple.aplicarPromo(productos, MedioPago.JUBILADO);		
+		
+		Factura factura = new Factura(1, MedioPago.JUBILADO, productos); 
+	
+		promoMedioPagoSimple.aplicarDescuento(factura);		
 		verify(mockProd, times(1)).addPorcentajeDescuento(DESCUENTO_PROMO);
 	}
 

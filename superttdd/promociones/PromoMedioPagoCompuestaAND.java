@@ -3,6 +3,7 @@ package superttdd.promociones;
 import java.util.List;
 
 import superttdd.caja.MedioPago;
+import superttdd.comprobante.Factura;
 import superttdd.ofertas.Oferta;
 import superttdd.producto.IProducto;
 
@@ -17,8 +18,9 @@ public class PromoMedioPagoCompuestaAND extends PromoMedioPago {
 	}
 
 	@Override
-	public void aplicarPromo(List<IProducto> productos, MedioPago medioPagoCompra) {
-		if (esMedioPagoPromo(medioPagoCompra)) {
+	public void aplicarDescuento(Factura factura) {
+		List<IProducto> productos = factura.getListaProductos();
+		if (esMedioPagoPromo(factura.getMedioDePago())) {
 			for (Oferta oferta : ofertas) {
 				productos = oferta.filtrarProductos(productos);	
 			}
@@ -27,6 +29,7 @@ public class PromoMedioPagoCompuestaAND extends PromoMedioPago {
 				producto.addPorcentajeDescuento(descuento);
 			}
 		}
+		
 	}
 
 }

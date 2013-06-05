@@ -1,5 +1,6 @@
 package superttdd.comprobante;
 import java.util.ArrayList;
+import java.util.List;
 // import java.util.Date;
 
 import superttdd.caja.MedioPago;
@@ -13,7 +14,7 @@ public class Factura {
 	private Double montoTotalConDescuentos;
 	private MedioPago medioDePago;
 	// private Date fecha;
-	private ArrayList<IProducto> listaDeProductos;
+	private List<IProducto> listaDeProductos;
 	private ArrayList<PromoMedioPago> listaDePromociones;
 		
 	private void generarMontoTotalSinDescuentos() {
@@ -33,11 +34,11 @@ public class Factura {
 	// Por el momento implemento esto sólo para la promo simple
 	private void aplicarDescuentoMedioDePago() {
 		for (PromoMedioPago promo: listaDePromociones) {
-			promo.aplicarPromo(listaDeProductos, medioDePago);
+			promo.aplicarDescuento(this);
 		}
 	}
 	
-	public Factura(long numeroDeFactura, MedioPago medioDePago, ArrayList<IProducto> listaDeProductos) {
+	public Factura(long numeroDeFactura, MedioPago medioDePago, List<IProducto> listaDeProductos) {
 		this.numeroDeFactura = numeroDeFactura;
 		this.medioDePago = medioDePago;
 		this.listaDeProductos = listaDeProductos;	
@@ -79,6 +80,17 @@ public class Factura {
 	public MedioPago getMedioDePago() {
 		return this.medioDePago;
 	}
+	
+	public void aplicarDescuentoFactura(Double descuento){
+		for(IProducto producto: listaDeProductos) {
+			producto.addPorcentajeDescuento(descuento);
+		}
+	}
+	
+	public List<IProducto> getListaProductos() {
+		return listaDeProductos;
+	}
+	
 }
 	
 	
