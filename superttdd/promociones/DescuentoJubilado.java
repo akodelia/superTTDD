@@ -4,22 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import superttdd.comprobante.Factura;
-import superttdd.ofertas.Oferta;
 import superttdd.ofertas.OfertaDia;
 
 public class DescuentoJubilado implements DescuentoFactura {
 
 	private Double porcentaje_descuento;
-	private List<OfertaDia> ofertas_dia_filtro;
+	private OfertaDia oferta_dia_filtro;
 
-	public DescuentoJubilado(Double porcentaje_descuento,
-			List<OfertaDia> ofertas_dias_filtro) {
+	public DescuentoJubilado(Double porcentaje_descuento, OfertaDia oferta_dia) {
 		this.porcentaje_descuento = porcentaje_descuento;
-		if (ofertas_dias_filtro != null) {
-			this.ofertas_dia_filtro = ofertas_dias_filtro;
-		} else {
-			this.ofertas_dia_filtro = new ArrayList<OfertaDia>();
-		}
+		this.oferta_dia_filtro = oferta_dia;
 	}
 
 	@Override
@@ -32,10 +26,8 @@ public class DescuentoJubilado implements DescuentoFactura {
 	}
 
 	private boolean esValidoDescuento() {
-		for (OfertaDia oferta : ofertas_dia_filtro) {
-			if (oferta.hoyEsDiaDePromo()) {
-				return true;
-			}
+		if (oferta_dia_filtro.hoyEsDiaDePromo()) {
+			return true;
 		}
 		return false;
 	}
