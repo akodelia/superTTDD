@@ -72,17 +72,11 @@ public class PruebaIntegracion5 {
 		
 		/* - Se realiza una venta de: 3 cocas + 2 sprites + 1 maceta. */
 		caja.agregarProducto(new Producto(registroCoca));
-		registroCoca.incrementarCantidadVendida();
 		caja.agregarProducto(new Producto(registroCoca));
-		registroCoca.incrementarCantidadVendida();
 		caja.agregarProducto(new Producto(registroCoca));
-		registroCoca.incrementarCantidadVendida();
 		caja.agregarProducto(new Producto(registroSprite));
-		registroSprite.incrementarCantidadVendida();
 		caja.agregarProducto(new Producto(registroSprite));
-		registroSprite.incrementarCantidadVendida();
 		caja.agregarProducto(new Producto(registroMaceta));
-		registroMaceta.incrementarCantidadVendida();
 
 		caja.confirmarCompra(MEDIO_PAGO_PROMO);		
 		
@@ -106,23 +100,14 @@ public class PruebaIntegracion5 {
 		caja.iniciarCompra();
 		
 		caja.agregarProducto(new Producto(registroCoca));
-		registroCoca.incrementarCantidadVendida();
 		caja.agregarProducto(new Producto(registroSprite));
-		registroSprite.incrementarCantidadVendida();
 		caja.agregarProducto(new Producto(registroSprite));
-		registroSprite.incrementarCantidadVendida();
 		caja.agregarProducto(new Producto(registroSprite));
-		registroSprite.incrementarCantidadVendida();
 		caja.agregarProducto(new Producto(registroSprite));
-		registroSprite.incrementarCantidadVendida();
 		caja.agregarProducto(new Producto(registroMaceta));
-		registroMaceta.incrementarCantidadVendida();
 		caja.agregarProducto(new Producto(registroMaceta));
-		registroMaceta.incrementarCantidadVendida();
 		caja.agregarProducto(new Producto(registroMaceta));
-		registroMaceta.incrementarCantidadVendida();
 		caja.agregarProducto(new Producto(registroMaceta));
-		registroMaceta.incrementarCantidadVendida();
 		
 		caja.confirmarCompra(MEDIO_PAGO_PROMO);
 		

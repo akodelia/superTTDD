@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 
-import superttdd.caja.MedioPago;
 import superttdd.producto.CategoriaProducto;
 import superttdd.producto.Inventario;
 import superttdd.producto.MarcaProducto;
@@ -17,7 +16,6 @@ public class InventarioTest {
 	
 	
 	private String CATEGORIA_GASEOSAS = "Gaseosa";
-	private String CATEGORIA_JARDINERIA = "Jardineria";
 	private String MARCA_GASEOSA = "Coca-Cola";
 	private Double PRECIO_SPRITE = 10.0;
 	private Double PRECIO_COCA = 12.0;
@@ -57,12 +55,12 @@ public class InventarioTest {
 		RegistroProducto unRegistroCoca= Inventario.getInstance().obtenerRegistroProducto(
 		new MarcaProducto(MARCA_GASEOSA), new CategoriaProducto(CATEGORIA_GASEOSAS), "Sprite");
 		
-		unRegistroSprite.incrementarCantidadVendida();
-		unRegistroSprite.incrementarCantidadVendida();
-		unRegistroSprite.incrementarCantidadVendida();
+		unRegistroSprite.agregarVenta();
+		unRegistroSprite.agregarVenta();
+		unRegistroSprite.agregarVenta();
 		
-		unRegistroCoca.incrementarCantidadVendida();
-		unRegistroCoca.incrementarCantidadVendida();
+		unRegistroCoca.agregarVenta();
+		unRegistroCoca.agregarVenta();
 		
 		ArrayList<RegistroProducto> ranking = Inventario.getInstance().obtenerRankingDeProductos();
 		assertEquals("Sprite", ranking.get(0).getNombre());
