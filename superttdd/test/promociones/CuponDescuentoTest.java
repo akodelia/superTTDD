@@ -11,7 +11,7 @@ import org.junit.Test;
 import superttdd.comprobante.Factura;
 import superttdd.promociones.CuponDescuento;
 
-public class PromoCuponDescuentoTest {
+public class CuponDescuentoTest {
 	
 	private static Double MONTO_CUPON = 10.0;
 	private static Double LIMITE_MAX_DESC = 25.0;
