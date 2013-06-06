@@ -100,6 +100,14 @@ public class Caja {
 		}
 	}
 
+	
+	public Double obtenerMontoCuponDescuento() {
+		if(hayFacturaCompra()) {
+			return facturaCompraActual.obtenerMontoCuponFuturo();
+		}
+		return 0.0;
+	}
+	
 	public Double obtenerTotalCompraSinDescuentos() {
 		return this.facturaCompraActual.getMontoTotalSinDescuentos();
 	}
