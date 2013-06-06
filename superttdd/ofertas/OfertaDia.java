@@ -30,7 +30,7 @@ public class OfertaDia extends Oferta {
 		return productos;
 	}
 
-	private Boolean hoyEsDiaDePromo() {
+	public Boolean hoyEsDiaDePromo() {
 		int nroDiaHoy = Calendar.DAY_OF_WEEK;
 		Boolean enPromo = false;
 		for(DiaSemana diaSem: diasSemana) {

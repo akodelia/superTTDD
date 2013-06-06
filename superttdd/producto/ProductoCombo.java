@@ -72,4 +72,15 @@ public class ProductoCombo implements IProducto {
 		}
 		return sumatoria;
 	}
+	
+	@Override
+	public boolean equals(Object o){
+		ProductoCombo productoCombo = (ProductoCombo)o;
+		for(IProducto p: productos) {
+			if(!productoCombo.productos.contains(p)){
+				return false;
+			}
+		}
+		return true;
+	}
 }

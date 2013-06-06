@@ -1,14 +1,17 @@
 package superttdd.comprobante;
 import java.util.ArrayList;
+import java.util.List;
 
 import superttdd.caja.MedioPago;
 import superttdd.ofertas.Oferta;
 import superttdd.producto.IProducto;
 import superttdd.producto.Producto;
+import superttdd.promociones.PromoCuponFuturo;
 
 public class OrdenDeCompra {
 	
 	private ArrayList<IProducto> listaDeProductos;
+	private List<PromoCuponFuturo> cuponesFuturos;
 	private ArrayList<Producto> copiaListaDeProductos;
 	private ArrayList<Oferta> listaDeOfertas;
 	private EstadoOrdenDeCompra estado;
@@ -26,8 +29,9 @@ public class OrdenDeCompra {
 		
 	}
 	
-	public OrdenDeCompra(ArrayList<Oferta> listadoDeOfertas) {
-		this.listaDeOfertas = listadoDeOfertas;
+	public OrdenDeCompra(ArrayList<Oferta> listadoDeOfertas, List<PromoCuponFuturo> cuponesFuturos) {
+		this.cuponesFuturos = cuponesFuturos;
+ 		this.listaDeOfertas = listadoDeOfertas;
 		this.listaDeProductos = new ArrayList<IProducto>();
 		this.copiaListaDeProductos = new ArrayList<Producto>();
 		this.estado = EstadoOrdenDeCompra.CERRADA;
@@ -93,11 +97,22 @@ public class OrdenDeCompra {
 	public Factura generarFactura(MedioPago medioDePago, long numeroDeFactura) {
 		if (esValidoCrearFactura()) {
 			actualizarVentas();
-			return new Factura(numeroDeFactura, medioDePago, this.listaDeProductos);	
+			Double montoCuponDescuento = this.generarCuponDescuento();
+			Factura factura = new Factura(numeroDeFactura, medioDePago, this.listaDeProductos); 
+			factura.ingresarMontoCuponFuturo(montoCuponDescuento);
+			return factura;
 		}
 		else {
 			throw new RuntimeException("La orden de compra no fue cerrada o no hay productos para armar la factura");
 		}
+	}
+	
+	public Double generarCuponDescuento() {
+		Double montoCupon = 0.0;
+		for (PromoCuponFuturo cupon: cuponesFuturos ) {
+			montoCupon += cupon.obtenerDescuento(listaDeProductos);
+		}
+		return montoCupon;
 	}
 	
 	private void actualizarVentas() {

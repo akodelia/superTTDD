@@ -1,11 +1,14 @@
 package superttdd.caja;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import superttdd.comprobante.Factura;
 import superttdd.comprobante.OrdenDeCompra;
 import superttdd.ofertas.Oferta;
 import superttdd.producto.Producto;
+import superttdd.promociones.DescuentoFactura;
+import superttdd.promociones.PromoCuponFuturo;
 import superttdd.promociones.PromoMedioPago;
 
 public class Caja {
@@ -17,6 +20,8 @@ public class Caja {
 	private ArrayList<PromoMedioPago> listaDePromos;
 	private Factura facturaCompraActual;
 	private long contadorNumerosDeFactura;
+	private List<PromoCuponFuturo> cuponesFuturos;
+	private List<DescuentoFactura> descuentosFactura;
 
 	private void agregarFactura(Factura unaFactura) {
 		this.listaDeFacturas.add(unaFactura);
@@ -29,7 +34,9 @@ public class Caja {
 		listaDeOfertas = new ArrayList<Oferta>();
 		listaDePromos = new ArrayList<PromoMedioPago>();
 		listaDeFacturas = new ArrayList<Factura>();
+		descuentosFactura = new ArrayList<DescuentoFactura>();
 		contadorNumerosDeFactura = 0;
+		cuponesFuturos = new ArrayList<PromoCuponFuturo>();
 	}
 
 	public void abrirCaja() {
@@ -50,7 +57,7 @@ public class Caja {
 
 	public void iniciarCompra() {
 		if (estadoCaja == EstadoCaja.ABIERTA && ordenDeCompra == null) {
-			this.ordenDeCompra = new OrdenDeCompra(this.listaDeOfertas);
+			this.ordenDeCompra = new OrdenDeCompra(this.listaDeOfertas, this.cuponesFuturos);
 		}
 		this.ordenDeCompra.abrirOrdenDeCompra();
 	}
@@ -65,6 +72,7 @@ public class Caja {
 		this.facturaCompraActual = this.ordenDeCompra.generarFactura(
 				medioDePago, ++contadorNumerosDeFactura);
 		this.facturaCompraActual.cargarPromocionesPorMedioDePago(listaDePromos);
+		this.facturaCompraActual.agregarDescuentosFactura(descuentosFactura);
 		this.facturaCompraActual.procesarFactura();
 		this.ordenDeCompra = null;
 	}
@@ -126,4 +134,20 @@ public class Caja {
 			this.listaDePromos.add(promocion);
 		}
 	}
+
+	public void cargarDescuentosCuponesFuturos(
+			List<PromoCuponFuturo> cuponesFuturos) {
+		for (PromoCuponFuturo cupon : cuponesFuturos) {
+			this.cuponesFuturos.add(cupon);
+		}
+	}
+
+	public void agregarDescuentoFactura(DescuentoFactura descuento) {
+		this.descuentosFactura.add(descuento);
+	}
+
+	private Boolean hayFacturaCompra() {
+		return facturaCompraActual != null;
+	}
+
 }
