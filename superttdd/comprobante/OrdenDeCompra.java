@@ -106,7 +106,7 @@ public class OrdenDeCompra {
 			throw new RuntimeException("La orden de compra no fue cerrada o no hay productos para armar la factura");
 		}
 	}
-	
+
 	public Double generarCuponDescuento() {
 		Double montoCupon = 0.0;
 		for (PromoCuponFuturo cupon: cuponesFuturos ) {
@@ -117,7 +117,7 @@ public class OrdenDeCompra {
 	
 	private void actualizarVentas() {
 		for(Producto producto: copiaListaDeProductos) {
-			producto.getRegistroProducto().agregarVenta();
+//			producto.getRegistroProducto().agregarVenta();
 		}
 	}
 	

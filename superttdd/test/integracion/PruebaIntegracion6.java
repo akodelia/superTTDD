@@ -1,7 +1,6 @@
 package superttdd.test.integracion;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.mock;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,20 +48,22 @@ public class PruebaIntegracion6 {
 	private static Double LIMITE_MAX_DESCUENTO = 20.0;
 	private static Double MONTO_CUPON = 10.0;
 	private static Double PRECIO_PROD = 1.0;
-	
+	private static Double MONTO_ESPERADO_CUPON = 5.0;
 	private static Integer PRODS_A_COMPRAR = 10;
+	
+	private static String CATEGORIA_PRODUCTO = "Almacen";
+	private static String MARCA_PRODUCTO = "Coca Cola";
 	
 	@Before
 	public void setUp() {
 		caja = new Caja();
 		cuponDescuento = new PromoCuponDescuento(MONTO_CUPON, LIMITE_MAX_DESCUENTO);
-		regProd = new RegistroProducto(mock(CategoriaProducto.class), mock(MarcaProducto.class), "Coca cola", PRECIO_PROD);
+		regProd = new RegistroProducto(new CategoriaProducto(CATEGORIA_PRODUCTO), new MarcaProducto(MARCA_PRODUCTO), "Coca cola", PRECIO_PROD);
 		List<RegistroProducto> productosOferta = new ArrayList<RegistroProducto>(); 
 		productosOferta.add(regProd);
 		productosOferta.add(regProd);
 		OfertaConjuntoProds ofertaCuponFuturo = new OfertaConjuntoProds(productosOferta, 50.0);
 		cuponFuturo = new PromoCuponFuturo(ofertaCuponFuturo);
-		
 		cuponesFuturos = new ArrayList<PromoCuponFuturo>();
 		cuponesFuturos.add(cuponFuturo);
 	}
@@ -85,13 +86,14 @@ public class PruebaIntegracion6 {
 		
 		
 		Double montoFinal = caja.obtenerTotalCompraConDescuentos();
-		
+		Double montoCupon = caja.obtenerMontoCuponDescuento();
 		caja.cerrarCompra();
 		
 		caja.cerrarCaja();
 		
 		calcularPrecioFinalEsperadoConDescuento();
 		assertEquals(precioFinalEsperado, montoFinal);
+		assertEquals(MONTO_ESPERADO_CUPON , montoCupon );
 		
 	}
 	

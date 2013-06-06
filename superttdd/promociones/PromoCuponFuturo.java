@@ -1,7 +1,9 @@
 package superttdd.promociones;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import sun.nio.ch.SocketOpts.IP;
 import superttdd.ofertas.Oferta;
 import superttdd.producto.IProducto;
 
@@ -12,13 +14,13 @@ public class PromoCuponFuturo {
 		this.oferta=oferta;
 	}
 	
-	public Double obtenerDescuento(ArrayList<IProducto> productos) {
+	public Double obtenerDescuento(List<IProducto> productos) {
 		ArrayList<IProducto> productos_copia = clonarProductos(productos);
 		oferta.aplicarOferta(productos_copia);
 		return calcularDescuento(productos_copia);
 	}
 	
-	private ArrayList<IProducto> clonarProductos(ArrayList<IProducto> productos) {
+	private ArrayList<IProducto> clonarProductos(List<IProducto> productos) {
 		ArrayList<IProducto> productos_copia = new ArrayList<IProducto>();
 		for(IProducto producto : productos){
 			productos_copia.add(producto.clonar());
@@ -26,10 +28,10 @@ public class PromoCuponFuturo {
 		return productos_copia;
 	}
 	
-	private Double calcularDescuento(ArrayList<IProducto> productos){
+	private Double calcularDescuento(List<IProducto> productos){
 		Double descuento = 0.0;
-		for(IProducto producto : productos ){
-			descuento += producto.getPrecioFinal();
+		for(IProducto producto : productos ) {
+			descuento += (producto.getPrecioBase() - producto.getPrecioFinal());
 		}
 		return descuento;
 	}
