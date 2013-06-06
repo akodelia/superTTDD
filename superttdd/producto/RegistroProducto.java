@@ -57,7 +57,7 @@ public class RegistroProducto implements Comparable<RegistroProducto> {
 		this.cantidadVendida = 0;
 	}
 
-	public void incrementarCantidadVendida() {
+	public void agregarVenta() {
 		this.cantidadVendida++;
 	}
 
