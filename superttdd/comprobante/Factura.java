@@ -102,6 +102,11 @@ public class Factura {
 		montoCuponFuturo = monto;
 	}
 	
+	public Double obtenerMontoCuponFuturo() {
+		return this.montoCuponFuturo;
+	}	
+	
+	
 	public long getNumeroDeFactura() {
 		return this.numeroDeFactura;
 	}
