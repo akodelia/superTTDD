@@ -34,6 +34,6 @@ public class PromoCuponFuturoTest {
 	
 	@Test
 	public void seGeneraCuponFuturo() {
-		
+			
 	}
 }

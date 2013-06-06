@@ -55,7 +55,7 @@ public class Caja {
 
 	public void iniciarCompra() {
 		if (estadoCaja == EstadoCaja.ABIERTA && ordenDeCompra == null) {
-			this.ordenDeCompra = new OrdenDeCompra(this.listaDeOfertas);
+			this.ordenDeCompra = new OrdenDeCompra(this.listaDeOfertas, this.cuponesFuturos);
 		}
 		this.ordenDeCompra.abrirOrdenDeCompra();
 	}

@@ -15,6 +15,8 @@ public class Factura {
 	private Double montoTotalConDescuentos;
 	private Double totalDescuentoMedioPago;
 	private MedioPago medioDePago;
+	private Double montoCuponFuturo;
+	
 	// private Date fecha;
 	private List<IProducto> listaDeProductos;
 	private ArrayList<PromoMedioPago> listaDePromocionesMedioPago;
@@ -95,6 +97,10 @@ public class Factura {
 		this.aplicarDescuentosFactura();
 	}
 
+	public void ingresarMontoCuponFuturo(Double monto) {
+		montoCuponFuturo = monto;
+	}
+	
 	public long getNumeroDeFactura() {
 		return this.numeroDeFactura;
 	}

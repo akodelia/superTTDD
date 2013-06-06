@@ -18,8 +18,8 @@ public class PromoCuponDescuento implements DescuentoFactura {
 	
 	private Double calcularDescuento(Double monto) {
 		Double porcentajeDescuento = (montoDescuento/monto);
-		if(porcentajeDescuento > this.porcentajeMaximo) {
-			return (montoDescuento * this.porcentajeMaximo);
+		if(porcentajeDescuento > this.porcentajeMaximo ) {
+			return (monto * this.porcentajeMaximo);
 		}
 		return montoDescuento; 
 	}
