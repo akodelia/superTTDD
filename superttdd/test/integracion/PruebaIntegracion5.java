@@ -78,13 +78,7 @@ public class PruebaIntegracion5 {
 		caja.agregarProducto(new Producto(registroSprite));
 		caja.agregarProducto(new Producto(registroMaceta));
 
-		caja.confirmarCompra(MEDIO_PAGO_PROMO);		
-		
-		// Calculo el precio total con descuentos de la compra
-		precioFinalEsperado += (PRECIO_COCA *3  + PRECIO_SPRITE *2 + PRECIO_MACETA);
-		precioFinalEsperado -= (PRECIO_SPRITE * DESCUENTO_PROMO/100);
-		//assertEquals(precioFinalEsperado, caja.obtenerTotalCompraConDescuentos());
-		
+		caja.confirmarCompra(MEDIO_PAGO_PROMO);	
 		caja.cerrarCompra();
 		
 		ArrayList<RegistroProducto> ranking = Inventario.getInstance().obtenerRankingDeProductos();
@@ -110,13 +104,6 @@ public class PruebaIntegracion5 {
 		caja.agregarProducto(new Producto(registroMaceta));
 		
 		caja.confirmarCompra(MEDIO_PAGO_PROMO);
-		
-		// Calculo el precio total con descuentos de la compra
-		precioFinalEsperado = 0.0;
-		precioFinalEsperado += (PRECIO_COCA *1  + PRECIO_SPRITE*4 + PRECIO_MACETA*4);
-		precioFinalEsperado -= (PRECIO_SPRITE * DESCUENTO_PROMO/100);
-		//assertEquals(precioFinalEsperado, caja.obtenerTotalCompraConDescuentos());
-
 		caja.cerrarCompra();
 		
 		caja.cerrarCaja();
@@ -131,7 +118,6 @@ public class PruebaIntegracion5 {
 	}
 
 	private void crearOfertasDelDia() {
-		// Se crea una oferta de Conjunto de Productos
 		ArrayList<RegistroProducto> registros_oferta = new ArrayList<RegistroProducto>();
 		registros_oferta.add(registroCoca);
 		registros_oferta.add(registroSprite);
