@@ -88,14 +88,14 @@ public class OrdenDeCompraTest {
 
 	@Test(expected=RuntimeException.class)
 	public void AbrirOrdenDeCompraCuandoLaMismaYaFueAbierta() throws RuntimeException {
-		OrdenDeCompra orden = new OrdenDeCompra(null);
+		OrdenDeCompra orden = new OrdenDeCompra(null, null);
 		orden.abrirOrdenDeCompra();
 		orden.abrirOrdenDeCompra();
 	}
 	
 	@Test(expected=RuntimeException.class)
 	public void CerrarOrdenDeCompraCuandoLaMismaEstabaCerrada() throws RuntimeException {
-		OrdenDeCompra orden = new OrdenDeCompra(null);
+		OrdenDeCompra orden = new OrdenDeCompra(null, null);
 		
 		orden.abrirOrdenDeCompra();
 		orden.cerrarOrdenDeCompra();
@@ -104,7 +104,7 @@ public class OrdenDeCompraTest {
 	}
 	
 	private OrdenDeCompra crearOrdenConProductosSinOfertas() {
-		OrdenDeCompra orden = new OrdenDeCompra(null);
+		OrdenDeCompra orden = new OrdenDeCompra(null, null);
 		orden.agregarProducto(producto1);
 		orden.agregarProducto(producto2);
 		orden.agregarProducto(producto3);
@@ -114,7 +114,7 @@ public class OrdenDeCompraTest {
 	}
 	
 	private OrdenDeCompra crearOrdenConProductosConOfertas() {
-		OrdenDeCompra orden = new OrdenDeCompra(listaDeOfertas);
+		OrdenDeCompra orden = new OrdenDeCompra(listaDeOfertas, null);
 		orden.agregarProducto(producto1);
 		orden.agregarProducto(producto2);
 		orden.agregarProducto(producto3);

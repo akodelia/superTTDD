@@ -1,6 +1,8 @@
 package superttdd.promociones;
 
-public class PromoCuponDescuento {
+import superttdd.comprobante.Factura;
+
+public class PromoCuponDescuento implements DescuentoFactura {
 	
 	Double montoDescuento;
 	Double porcentajeMaximo;
@@ -16,9 +18,16 @@ public class PromoCuponDescuento {
 	
 	private Double calcularDescuento(Double monto) {
 		Double porcentajeDescuento = (montoDescuento/monto);
-		if(porcentajeDescuento > this.porcentajeMaximo) {
-			return (montoDescuento * this.porcentajeMaximo);
+		if(porcentajeDescuento > this.porcentajeMaximo ) {
+			return (monto * this.porcentajeMaximo);
 		}
 		return montoDescuento; 
+	}
+
+	@Override
+	public void aplicarDescuento(Factura factura) {
+		Double monto = factura.getMontoTotalConDescuentos();
+		Double montoConDesc = this.calcularDescuento(monto);
+		factura.descontarMonto(montoConDesc);
 	}
 }

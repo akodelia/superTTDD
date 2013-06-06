@@ -44,7 +44,6 @@ public class PruebaIntegracion1 {
 	 * con tarjeta XYZ.
 	 */
 
-	private OrdenDeCompra ordenDeCompra;
 	ArrayList<Producto> productos;
 	ArrayList<PromoMedioPago> promos;
 	ArrayList<Oferta> ofertas;
@@ -81,13 +80,11 @@ public class PruebaIntegracion1 {
 		
 		//--promos medio pago--\\
 		promos = new ArrayList<PromoMedioPago>();
-		ArrayList<Oferta> ofertas_promo = new ArrayList<Oferta>();
+		ArrayList<OfertaDia> ofertas_promo = new ArrayList<OfertaDia>();
 		OfertaDia ofertaDia = crearOfertaDia();
 		ofertas_promo.add(ofertaDia);
 		PromoMedioPago promoXYZ = new PromoMedioPagoCompuestaAND(MedioPago.TARJETA_XYZ,ofertas_promo, DESCUENTO_TARJETA);
 		promos.add(promoXYZ);
-		//--Orden De Compra--\\
-		ordenDeCompra = new OrdenDeCompra(ofertas);
 		
 	}
 
@@ -137,7 +134,6 @@ public class PruebaIntegracion1 {
 		caja.cerrarCaja();
 	
 		Double total_sin_descuento=2*PRECIO_COCA_COLA+PRECIO_CEPILLO+PRECIO_MACETA;
-		Double aux=PRECIO_COCA_COLA+PRECIO_CEPILLO+PRECIO_MACETA;
 		Assert.assertEquals(total_sin_descuento,total_obtenido);
 		
 	}

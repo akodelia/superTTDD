@@ -6,7 +6,7 @@ import superttdd.caja.MedioPago;
 import superttdd.producto.IProducto;
 
 
-public abstract class PromoMedioPago {
+public abstract class PromoMedioPago implements DescuentoFactura {
 	MedioPago medioPago;
 	Double descuento;
 	
@@ -18,6 +18,4 @@ public abstract class PromoMedioPago {
 	public boolean esMedioPagoPromo(MedioPago medioPagoCompra) {
 		return this.medioPago==medioPagoCompra;
 	}
-	
-	public abstract void aplicarPromo(List<IProducto> productos, MedioPago medioPagoCompra);
 }

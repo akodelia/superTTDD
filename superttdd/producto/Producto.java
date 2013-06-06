@@ -98,5 +98,12 @@ public class Producto implements IProducto {
 	public boolean validarRegistroProducto(RegistroProducto registro) {
 		return this.registroProducto.equals(registro);
 	}
+	
+	@Override
+	public boolean equals(Object o) {
+		Producto producto = (Producto)o;
+		return (producto.porcentajeDescuento==this.porcentajeDescuento) && 
+				(producto.registroProducto.equals(this.registroProducto));
+	}
 
 }
