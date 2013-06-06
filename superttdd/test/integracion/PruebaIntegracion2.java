@@ -158,7 +158,7 @@ public class PruebaIntegracion2 {
 	private void crearPromosMedioDePagoDelDia() {
 		List<OfertaDia> ofertasPromo = new ArrayList<OfertaDia>();
 		List<DiaSemana> diasSemana = new ArrayList<DiaSemana>();
-		diasSemana.add(DiaSemana.LUNES);
+		diasSemana.add(DiaSemana.HOY);
 		
 		OfertaDia ofertaDia = new OfertaDia(DESCUENTO_TD, diasSemana);
 		ofertasPromo.add(ofertaDia);

@@ -46,7 +46,7 @@ public class pruebaIntegracion4 {
 	}
 
 	@Test
-	public void pruebaIntegracion4() {
+	public void pruebaIntegracion_4() {
 		Caja caja = new Caja();
 		caja.abrirCaja();
 		for (DescuentoFactura descuento : descuentos_factura) {
