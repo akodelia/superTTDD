@@ -2,12 +2,12 @@ package superttdd.promociones;
 
 import superttdd.comprobante.Factura;
 
-public class PromoCuponDescuento implements DescuentoFactura {
+public class CuponDescuento implements DescuentoFactura {
 	
 	Double montoDescuento;
 	Double porcentajeMaximo;
 	
-	public PromoCuponDescuento(Double montoDescuento, Double porcentajeMaximo) {
+	public CuponDescuento(Double montoDescuento, Double porcentajeMaximo) {
 		this.montoDescuento = montoDescuento;
 		this.porcentajeMaximo = porcentajeMaximo / 100.0;
 	}

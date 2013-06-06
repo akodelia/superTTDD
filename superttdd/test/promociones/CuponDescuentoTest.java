@@ -9,20 +9,20 @@ import org.junit.Before;
 import org.junit.Test;
 
 import superttdd.comprobante.Factura;
-import superttdd.promociones.PromoCuponDescuento;
+import superttdd.promociones.CuponDescuento;
 
-public class PromoCuponDescuentoTest {
+public class CuponDescuentoTest {
 	
 	private static Double MONTO_CUPON = 10.0;
 	private static Double LIMITE_MAX_DESC = 25.0;
 
 	
-	private PromoCuponDescuento cuponDescuento;
+	private CuponDescuento cuponDescuento;
 	private Factura factura;
 	
 	@Before
 	public void setUp() {
-		cuponDescuento = new PromoCuponDescuento(MONTO_CUPON, LIMITE_MAX_DESC);
+		cuponDescuento = new CuponDescuento(MONTO_CUPON, LIMITE_MAX_DESC);
 		factura = mock(Factura.class);
 	}
 	

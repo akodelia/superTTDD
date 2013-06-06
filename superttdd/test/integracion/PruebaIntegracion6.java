@@ -15,7 +15,7 @@ import superttdd.producto.CategoriaProducto;
 import superttdd.producto.MarcaProducto;
 import superttdd.producto.Producto;
 import superttdd.producto.RegistroProducto;
-import superttdd.promociones.PromoCuponDescuento;
+import superttdd.promociones.CuponDescuento;
 import superttdd.promociones.PromoCuponFuturo;
 
 public class PruebaIntegracion6 {
@@ -39,7 +39,7 @@ public class PruebaIntegracion6 {
 		- Se genera un Bono de descuento para próxima compra de $5 (por el 2x1 de 10 cocas)
 	 * */
 
-	private PromoCuponDescuento cuponDescuento;
+	private CuponDescuento cuponDescuento;
 	private PromoCuponFuturo cuponFuturo;
 	private RegistroProducto regProd;
 	private Caja caja;
@@ -57,7 +57,7 @@ public class PruebaIntegracion6 {
 	@Before
 	public void setUp() {
 		caja = new Caja();
-		cuponDescuento = new PromoCuponDescuento(MONTO_CUPON, LIMITE_MAX_DESCUENTO);
+		cuponDescuento = new CuponDescuento(MONTO_CUPON, LIMITE_MAX_DESCUENTO);
 		regProd = new RegistroProducto(new CategoriaProducto(CATEGORIA_PRODUCTO), new MarcaProducto(MARCA_PRODUCTO), "Coca cola", PRECIO_PROD);
 		List<RegistroProducto> productosOferta = new ArrayList<RegistroProducto>(); 
 		productosOferta.add(regProd);
